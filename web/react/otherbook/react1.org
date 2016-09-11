@@ -1,0 +1,42 @@
+* Declarative style
+- React uses it
+- No way to change variable.
+- Once a value of a variable, there is no changing it 
+- Examples of it are found in HTML and XML
+- Declarative programming is about how the end result supposed to be (Give it certain specs, and it gets the desired output)
+
+* Imperative Style
+- Opposite of Declarative
+- Normally coding uses imperative
+- Imperative is what system must do. (Have to do it step by step)
+
+* Component Hierarchy
+- Allows developers to change functionality independently, while adhering to the the separation of concerns principle.
+- Separation of Concerns Principle -- Breaking code into chunks based on different tasks
+- Components have parents and children hence hierarchy
+
+Two Kinds of Compenents
++ HTML Tags (h1, h2, p)
++ Custom components(need to start with UPPERCASE letter) ex. Comment, CommentBox, Comment Form
+
+Two Kind of React Components
++ Smart: Store data, or have events and states that capture user interaction. Can contain dumb components
++ Dumb: have little or no states and rendered by smart components
+
+* React Advantages and Features
+** Simple
+- Due to the components
+** JSX
+- reads code better
+- better syntax than regular JS
+** Unidirectional
+- allows for server-side rendering
+- code readablity
+- debugging
+** Strong Support
+- Supported by FaceBook and Instagram 
+- Tested by a big company unlike other frameworks
+** Virtual DOM 
+- cross-platform convention to represent elements/objects of the web page.
+- Manipulating DOM allows developers to modify webpage without re-rendering the entire thing
+
