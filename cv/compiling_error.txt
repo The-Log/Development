@@ -1,0 +1,60 @@
+/home/ankurm/Development/cv/heapMin.cpp:6:16: error: invalid use of non-static data member ‘minHeap::size’
+   int miniHeap[size];
+                ^
+/home/ankurm/Development/cv/heapMin.cpp:5:7: note: declared here
+   int size;
+       ^
+/home/ankurm/Development/cv/heapMin.cpp:7:13: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+   int pos = 0;
+             ^
+/home/ankurm/Development/cv/heapMin.cpp:58:1: error: expected ‘;’ after struct definition
+ }
+ ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘void minHeap::makeHeap(int*)’:
+/home/ankurm/Development/cv/heapMin.cpp:9:14: error: request for member ‘size’ in ‘listA’, which is of non-class type ‘int*’
+     if(listA.size() > 0){
+              ^
+/home/ankurm/Development/cv/heapMin.cpp:10:14: error: ‘i’ was not declared in this scope
+         for (i = 0; i < listA.size(); i++) {
+              ^
+/home/ankurm/Development/cv/heapMin.cpp:10:31: error: request for member ‘size’ in ‘listA’, which is of non-class type ‘int*’
+         for (i = 0; i < listA.size(); i++) {
+                               ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘void minHeap::insert(int)’:
+/home/ankurm/Development/cv/heapMin.cpp:17:7: error: ‘miniHeap’ was not declared in this scope
+       miniHeap[pos + 1] = x;
+       ^
+/home/ankurm/Development/cv/heapMin.cpp:21:7: error: ‘miniHeap’ was not declared in this scope
+       miniHeap[pos] = x;
+       ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘void minHeap::bubleUp()’:
+/home/ankurm/Development/cv/heapMin.cpp:27:5: error: ‘p1’ was not declared in this scope
+     p1 = pos;
+     ^
+/home/ankurm/Development/cv/heapMin.cpp:28:21: error: ‘miniHeap’ was not declared in this scope
+     while(p1 > 0 && miniHeap[p1/2] > miniHeap[p1]){
+                     ^
+/home/ankurm/Development/cv/heapMin.cpp:29:7: error: ‘y’ was not declared in this scope
+       y = miniHeap[p1];
+       ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘void minHeap::sinkDown(int)’:
+/home/ankurm/Development/cv/heapMin.cpp:35:13: error: ‘miniHeap’ was not declared in this scope
+     int a = miniHeap[k];
+             ^
+/home/ankurm/Development/cv/heapMin.cpp:35:22: error: ‘k’ was not declared in this scope
+     int a = miniHeap[k];
+                      ^
+/home/ankurm/Development/cv/heapMin.cpp:36:5: error: ‘smallest’ was not declared in this scope
+     smallest = k;
+     ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘void minHeap::swap(int, int)’:
+/home/ankurm/Development/cv/heapMin.cpp:46:5: error: ‘temp’ was not declared in this scope
+     temp = miniHeap[x];
+     ^
+/home/ankurm/Development/cv/heapMin.cpp:46:12: error: ‘miniHeap’ was not declared in this scope
+     temp = miniHeap[x];
+            ^
+/home/ankurm/Development/cv/heapMin.cpp: In member function ‘int minHeap::extractMin()’:
+/home/ankurm/Development/cv/heapMin.cpp:51:19: error: ‘miniHeap’ was not declared in this scope
+     int minimum = miniHeap[1];
+                   ^
