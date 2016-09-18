@@ -105,7 +105,7 @@ def search():
     while(True):
         if(len(frontier) == 0):
             return None
-        current = frontier.pop()
+        current = frontier.popleft()
         if(current.display() ==  goal.display()):
             return current.get_path()
         current.get_children(frontier)
