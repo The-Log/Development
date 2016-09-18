@@ -31,5 +31,5 @@ int main(){
 
     //Exercise 1.6
     //Not Legal, as it needs std::cout before the second and third lines to run properly.
-    return 0;
+    //
 };

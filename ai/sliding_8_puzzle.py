@@ -1,11 +1,10 @@
-import numpy as np
 from collections import deque
-
+import copy
 class sliding_puzzle():
     def __init__(self):
         self.size = 2
-        self.puzzle = np.array([[2,1,4],[5,6,8],[4,7, None]])
-        self.solution = np.array([[1,2,3],[4,5,6],[7,8, None]])
+        self.puzzle = [[2,1,4],[5,6,8],[4,7, None]]
+        self.solution = [[1,2,3],[4,5,6],[7,8, None]]
         self.empty_row = 2
         self.empty_col = 2
     def get_puzzle(self):
@@ -13,7 +12,7 @@ class sliding_puzzle():
     def shift_up(self):
         if(self.empty_row - 1 < 0):
             return None
-        s = np.copy(self.puzzle)
+        s = copy.deap(self.puzzle)
         temp = s[self.empty_row][self.empty_col]
         s[self.empty_row][self.empty_col] = s[self.empty_row - 1][self.empty_col]
         s[self.empty_row - 1][self.empty_col] = temp
