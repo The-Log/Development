@@ -1,5 +1,6 @@
 import copy
 from collections import deque
+from time import time
 visited = set()
 class node():
     def __init__(self, parent = None, puzzle = [[6,4,5],[2,7,3],[8,1,None]], depth = 0 ):
@@ -87,15 +88,16 @@ class node():
         print("I got here!")
         path = []
         while(self != None):
-            path.append(self.puzzle)
+            path.append(self)
             self = self.parent
+        path.reverse()
         return path
 
     def __str__(self):
         if(self.puzzle == None):
             return ""
         return str(self.puzzle)
-
+st = time()
 sp = node()
 goal = node(None,[[1,2,3],[4,5,6],[7,8, None]])
 
@@ -110,4 +112,7 @@ def search():
             return current.get_path()
         current.get_children(frontier)
 
-print(search())
+listA = search()
+for i in listA:
+    print(i.display())
+print("Time it took: " + str(time() - st))
