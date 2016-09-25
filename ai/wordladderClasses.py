@@ -14,7 +14,6 @@ open_file.close()
 visited = set()
 alphabet = list(string.ascii_lowercase)
 
-
 start = 'Garden' #raw_input("Give me a six letter word! ")
 end = 'easier'   #raw_input("Another six letter word! ")
 
