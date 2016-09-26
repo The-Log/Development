@@ -2,9 +2,10 @@ import string
 import heapq
 from collections import deque
 from time import time
+
 st = time()
 
-open_file = open("words.txt", "r")
+open_file = open("words_06.txt", "r")
 dictionary = set()
 
 for w in open_file:
@@ -68,11 +69,14 @@ def search(start_node):
         frontier.extend(lA)
         heapq.heapify(frontier)
 
+
 start_node = node(None, start, end, 0)
+start = time()
 listA = search(start_node)
+end = time()
 
 print("Path: ")
 for i in listA:
     print(i)
 print("")
-print("Time it took: " + str(time() - st))
+print("Time it took: " + str(end - start))
