@@ -1,28 +1,33 @@
 import string
+import heapq
 from collections import deque
 from time import time
 st = time()
 
 open_file = open("words.txt", "r")
-dictionary = []
+dictionary = set()
 
 for w in open_file:
     w = w.rstrip("\n")
-    dictionary.append(w)
+    dictionary.add(w)
 open_file.close()
-
 visited = set()
 alphabet = list(string.ascii_lowercase)
 
-start = 'Garden' #raw_input("Give me a six letter word! ")
-end = 'easier'   #raw_input("Another six letter word! ")
+start = input("Give me a six letter word! ")
+end = input("Another six letter word! ")
 
 class node():
-    def __init__(self, parent = None, word = "Garden", depth = 0, cost=0 ):
+    def __init__(self, parent = None, word = "Garden", goal="easier", depth = 0):
         self.parent = parent
+        self.goal = goal
         self.word = word.lower()
         self.depth = depth
-        self.cost = cost
+        self.cost = 0
+        for i in range(len(word)):
+            if self.word[i] != self.goal[i]:
+                self.cost = self.cost + 1
+
     def get_children(self):
         children = []
         parent = self
@@ -33,7 +38,7 @@ class node():
                 w = "".join(s)
                 if(w in dictionary and w not in visited):
                     visited.add(w)
-                    children.append(node(parent, w, self.depth + 1))
+                    children.append(node(parent, w, self.goal, self.depth + 1 ))
         return children
 
     def get_path(self):
@@ -47,20 +52,23 @@ class node():
     def __str__(self):
         return str(self.word)
 
+    def __lt__(self,other):
+        return self.cost < other.cost
 
 def search(start_node):
-    frontier = deque()
+    frontier = []
     frontier.append(start_node)
     while(True):
         if(len(frontier) == 0):
             return None
-        current = frontier.popleft()
+        current = heapq.heappop(frontier)
         if(str(current) ==  end.lower()):
             return current.get_path()
         lA = current.get_children()
         frontier.extend(lA)
+        heapq.heapify(frontier)
 
-start_node = node(None, start, 0, 0)
+start_node = node(None, start, end, 0)
 listA = search(start_node)
 
 print("Path: ")
