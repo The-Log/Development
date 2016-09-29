@@ -26,7 +26,8 @@ int main() {
   istringstream iss(line);
   int size = 0; iss >> size;
   Matrix pm = Matrix(4,4);
-  pm = setProjectionMatrix(0.1, 100,pm);
+  pm = setProjectionMatrix(0.1, 100, pm);
+  pm.display();
   vector<Matrix> arr;
   arr.reserve(size);
   int i = 0; int j = 0;
