@@ -41,7 +41,6 @@ int main() {
         m(0,j+2) =c;
         m(0,j+3) = 1;
         arr.push_back(m);
-        cout << a << " " << b << " " << c << " 1" << endl;
         ++i;
     }
     myFile.close();
@@ -50,7 +49,9 @@ int main() {
     cout << "Unable to open file";
     return 0;
   }
-  for (unsigned i=0; i<arr.size(); i++)
-    arr.at(i) * pm;
+  for (unsigned i=0; i<arr.size(); i++){
+     arr.at(i) = arr.at(i) * pm ;
+     arr.at(i).display();
+  }
   return 0;
 }

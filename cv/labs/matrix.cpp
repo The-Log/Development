@@ -11,10 +11,12 @@ public:
 
     inline double& operator()(int x, int y) { return p[x][y]; }
 
+    Matrix& operator=(const Matrix&);
     Matrix& operator+=(const Matrix&);
     Matrix& operator-=(const Matrix&);
     Matrix& operator*=(const Matrix&);
     Matrix& operator*=(double);
+    void display();
 
 private:
     int r, c;
@@ -37,31 +39,6 @@ Matrix::Matrix() : r(1), c(1){
     p[0][0] = 0;
 }
 
-//Matrix& Matrix:: operator =(const Matrix& m)
-//{
-//    if (this == &m) {
-//        return *this;
-//    }
-//
-//    if (r != m.r || c != m.c) {
-//        for (int i = 0; i < r; ++i) {
-//            delete[] p[i];
-//        }
-//        delete[] p;
-//
-//        r = m.r;
-//        c = m.c;
-//        allocate();
-//    }
-//
-//    for (int i = 0; i < r; ++i) {
-//        for (int j = 0; j < c; ++j) {
-//            p[i][j] = m.p[i][j];
-//        }
-//    }
-//    return *this;
-//}
-
 Matrix::~Matrix(){
     for (int i = 0; i < r; ++i) {
         delete[] p[i];
@@ -77,6 +54,33 @@ Matrix::Matrix(const Matrix& m) : r(m.r), c(m.c) {
         }
     }
 }
+
+
+Matrix& Matrix::operator=(const Matrix& m)
+{
+   if (this == &m) {
+       return *this;
+   }
+
+   if (r != m.r || c != m.c) {
+       for (int i = 0; i < r; ++i) {
+           delete[] p[i];
+       }
+       delete[] p;
+
+       r = m.r;
+       c = m.c;
+       allocate();
+   }
+
+   for (int i = 0; i < r; ++i) {
+       for (int j = 0; j < c; ++j) {
+           p[i][j] = m.p[i][j];
+       }
+   }
+   return *this;
+}
+
 Matrix& Matrix::operator+=(const Matrix& m){
     for (int i = 0; i < r; ++i) {
         for (int j = 0; j < c; ++j) {
@@ -112,6 +116,16 @@ Matrix& Matrix::operator*=(const Matrix & m) {
         }
     }
     return (*this = temp);
+}
+
+void Matrix::display(){
+  for (int i = 0; i < r; i++) {
+    for(int j=0; j < c; j++){
+      std::cout << p[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
 }
 
 void Matrix::allocate()
