@@ -1,26 +1,56 @@
 #include <iostream>
-#include<fstream>
+#include <fstream>
 #include <sstream>
-#include <matrix.cpp>
+#include "matrix.cpp"
+#include <math.h>
+#include <vector>
+
 using namespace std;
 
+void setProjectionMatrix(const float &near, const float &far, Matrix m)
+{
+    float scale = 1 / tan(90 * 0.5 * 3.14 / 180);
+    m(0,0) = scale;
+    m(1,1) = scale;
+    m(2,2) = -far / (far - near);
+    m(3,2) = -far * near / (far - near);
+    m(2,3) = -1;
+    m(3,3) = 0;
+}
+
 int main() {
-    string line;
-    ifstream myFile ("coordinates.txt");
-    int a,b,c;
-    if (myFile.is_open())
+  string line;
+  ifstream myFile ("/Users/ankurM/Development/cv/labs/coordinates.txt");
+  getline (myFile,line);
+  istringstream iss(line);
+  int size = 0; iss >> size;
+  Matrix pm = Matrix(4,4);
+  setProjectionMatrix(0.1, 100,pm);
+  vector<Matrix> arr;
+  arr.reserve(size);
+  int i = 0; int j = 0;
+  if (myFile.is_open())
+  {
+    while (getline (myFile,line) )
     {
-        while (getline (myFile,line) )
-        {
-            istringstream iss(line);
-            iss >> a >> b >> c;
-            cout << a << " " << b << " " << c << endl;
-
-        }
-        myFile.close();
+        Matrix m = Matrix(1, 4);
+        int a, b, c;
+        istringstream iss(line);
+        iss >> a >> b >> c;
+        m(0,j+1) =b;
+        m(0,j+2) =c;
+        m(0,j+3) = 1;
+        arr.push_back(m);
+        cout << a << " " << b << " " << c << " 1" << endl;
+        ++i;
     }
-
-    else cout << "Unable to open file";
-
+    myFile.close();
+  }
+  else{
+    cout << "Unable to open file";
     return 0;
+  }
+  for (unsigned i=0; i<arr.size(); i++)
+    arr.at(i) * pm;
+  return 0;
 }

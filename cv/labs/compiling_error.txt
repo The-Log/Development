@@ -1,0 +1,7 @@
+/Users/ankurM/Development/cv/labs/main.cpp:13:5: error: 'Matrix' does not refer to a value
+    Matrix m = Matrix(3, );
+    ^
+/Users/ankurM/Development/cv/labs/matrix.cpp:5:7: note: declared here
+class Matrix{
+      ^
+1 error generated.

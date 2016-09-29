@@ -118,7 +118,7 @@ void Matrix::allocate()
 {
     p = new double*[r];
     for (int i = 0; i < r; ++i) {
-        p[i] = new double[r];
+        p[i] = new double[c];
     }
 }
 
