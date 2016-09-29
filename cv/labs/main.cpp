@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void setProjectionMatrix(const float &near, const float &far, Matrix m)
+Matrix setProjectionMatrix(const float &near, const float &far, Matrix m)
 {
     float scale = 1 / tan(90 * 0.5 * 3.14 / 180);
     m(0,0) = scale;
@@ -16,6 +16,7 @@ void setProjectionMatrix(const float &near, const float &far, Matrix m)
     m(3,2) = -far * near / (far - near);
     m(2,3) = -1;
     m(3,3) = 0;
+    return m;
 }
 
 int main() {
@@ -25,7 +26,7 @@ int main() {
   istringstream iss(line);
   int size = 0; iss >> size;
   Matrix pm = Matrix(4,4);
-  setProjectionMatrix(0.1, 100,pm);
+  pm = setProjectionMatrix(0.1, 100,pm);
   vector<Matrix> arr;
   arr.reserve(size);
   int i = 0; int j = 0;
