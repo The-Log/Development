@@ -111,7 +111,10 @@ Matrix& Matrix::operator*=(const Matrix & m) {
     for (int i = 0; i < temp.r; ++i) {
         for (int j = 0; j < temp.c; ++j) {
             for (int k = 0; k < c; ++k) {
+                //temp.p[i][j] += (p[i][k] * m.p[k][j]);
                 temp.p[i][j] += (p[i][k] * m.p[k][j]);
+                int w =  -1 * p[i][c-2];
+                temp.p[i][j] = temp.p[i][j] / w;
             }
         }
     }
