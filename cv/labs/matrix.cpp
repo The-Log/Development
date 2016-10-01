@@ -2,6 +2,8 @@
 // Created by Ankur Mishra on 9/24/16.
 //
 
+#include <iostream>
+
 class Matrix{
 public:
     Matrix(int, int);

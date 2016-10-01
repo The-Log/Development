@@ -43,8 +43,8 @@ Matrix setCamera(Matrix m)
 }
 
 int main() {
-  int imageWidth = 500;
-  int imageHeight = 500;
+  int imageWidth = 640;
+  int imageHeight = 480;
   string line;
   ifstream myFile ("/Users/ankurM/Development/cv/labs/cube.txt");
   getline (myFile,line);
@@ -88,8 +88,20 @@ int main() {
     double projY = (1 - ((temp(0,1) + 1) * 0.5)) * imageHeight;
     xco.push_back(projX);
     yco.push_back(projY);
-    std::cout << projX << ", "<< projY << std::endl;
+    //cout << projX << ", "<< projY << std::endl;
   }
-
+  cout << "P5 " << imageWidth << " " << imageHeight << " 1 " << endl;
+  for (int i = 0; i < imageHeight; ++i) {
+    for (int j = 0; j < imageWidth; ++j) {
+      for (int l = 0; l < xco.size(); ++l) {
+        if(xco.at(l) == j && yco.at(l) == i){
+          cout << "0 0 0 ";
+        }
+        else
+          cout << "1 1 1 ";
+      }
+    }
+    cout << endl;
+  }
   return 0;
 }
