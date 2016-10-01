@@ -18,16 +18,29 @@ Matrix setProjectionMatrix(const float &near, const float &far, Matrix m)
     m(3,3) = 0;
     return m;
 }
+Matrix setCamera(Matrix m)
+{
+  m(0,0) = 1;
+  m(1,1) = 1;
+  m(2,2) = 1;
+  m(3,0) = 0;
+  m(3,1) = 0;
+  m(3,2) = -5;
+  m(3,3) = 1;
+  return m;
+}
 
 int main() {
   string line;
-  ifstream myFile ("/Users/ankurM/Development/cv/labs/coordinates.txt");
+  ifstream myFile ("/Users/ankurM/Development/cv/labs/cube.txt");
   getline (myFile,line);
   istringstream iss(line);
   int size = 0; iss >> size;
   Matrix pm = Matrix(4,4);
   pm = setProjectionMatrix(0.1, 100, pm);
-  pm.display();
+  Matrix shift = Matrix(4,4);
+  shift = setCamera(shift);
+  //shift.display();
   vector<Matrix> arr;
   arr.reserve(size);
   int i = 0; int j = 0;
@@ -39,9 +52,11 @@ int main() {
         int a, b, c;
         istringstream iss(line);
         iss >> a >> b >> c;
+        m(0,j) = a;
         m(0,j+1) =b;
         m(0,j+2) =c;
         m(0,j+3) = 1;
+        //m.display();
         arr.push_back(m);
         ++i;
     }
@@ -51,9 +66,12 @@ int main() {
     cout << "Unable to open file";
     return 0;
   }
-  for (unsigned i=0; i<arr.size(); i++){
-     arr.at(i) = arr.at(i) * pm ;
+  for (unsigned i = 0; i<arr.size(); i++){
+     arr.at(i) *= shift;
      arr.at(i).display();
+     arr.at(i) *= pm;
+     //arr.at(i).display();
   }
+
   return 0;
 }
