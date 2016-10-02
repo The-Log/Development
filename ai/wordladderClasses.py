@@ -15,8 +15,8 @@ open_file.close()
 visited = set()
 alphabet = list(string.ascii_lowercase)
 
-start = input("Give me a six letter word! ")
-end = input("Another six letter word! ")
+start = raw_input("Give me a six letter word! ")
+end = raw_input("Another six letter word! ")
 
 class node():
     def __init__(self, parent = None, word = "Garden", goal="easier", depth = 0):
@@ -79,4 +79,5 @@ print("Path: ")
 for i in listA:
     print(i)
 print("")
+print("It took " + str(len(listA)) + " steps")
 print("Time it took: " + str(end - start))
