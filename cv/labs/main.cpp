@@ -114,9 +114,11 @@ int main() {
     }
     myFile1.close();
   }
+  
   for (int i = 0; i < xco.size(); i++) {
     cout << xco.at(i) << ", " << yco.at(i)<< endl;
   }
-  cout << xco.size() << endl;
+
+
   return 0;
 }
