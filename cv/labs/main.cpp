@@ -4,6 +4,7 @@
 #include "matrix.cpp"
 #include <math.h>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 Matrix multPointMatrix(Matrix in, Matrix M){
@@ -90,18 +91,32 @@ int main() {
     yco.push_back(projY);
     //cout << projX << ", "<< projY << std::endl;
   }
-  cout << "P5 " << imageWidth << " " << imageHeight << " 1 " << endl;
-  for (int i = 0; i < imageHeight; ++i) {
-    for (int j = 0; j < imageWidth; ++j) {
-      for (int l = 0; l < xco.size(); ++l) {
-        if(xco.at(l) == j && yco.at(l) == i){
-          cout << "0 0 0 ";
-        }
-        else
-          cout << "1 1 1 ";
+
+  ifstream myFile1 ("/Users/ankurM/Development/cv/labs/cubeEdges.txt");
+  getline (myFile1,line);
+  istringstream iss1(line);
+  size = 0; iss1 >> size;
+  //cout << size <<  endl;
+  if (myFile1.is_open())
+  {
+    while (getline (myFile1,line) )
+    {
+      int a, b;
+      istringstream iss(line);
+      iss >> a >> b;
+      int x1 = xco.at(a); int y1 = yco.at(a);
+      int x2 = xco.at(b); int y2 = yco.at(b);
+      int steps = 2.5 * max(abs(x2-x1), abs(y2-y1)) ;
+      for(double i = 0; i < steps; ++i) {
+        xco.push_back(x1 + ((i)/(steps)*(x2-x1)));
+        yco.push_back(y1 + ((i)/(steps)*(y2-y1)));
       }
     }
-    cout << endl;
+    myFile1.close();
   }
+  for (int i = 0; i < xco.size(); i++) {
+    cout << xco.at(i) << ", " << yco.at(i)<< endl;
+  }
+  cout << xco.size() << endl;
   return 0;
 }
