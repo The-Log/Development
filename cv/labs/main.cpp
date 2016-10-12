@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -5,8 +6,10 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
+#include <set>
 
 using namespace std;
+
 Matrix multPointMatrix(Matrix in, Matrix M){
   Matrix out = Matrix(1, 4);
   out(0,0)  = in(0,0) * M(0,0) + in(0,1) * M(1,0) + in(0,2) * M(2,0) +  M(3,0);
@@ -44,10 +47,10 @@ Matrix setCamera(Matrix m)
 }
 
 int main() {
-  int imageWidth = 640;
-  int imageHeight = 480;
+  int imageWidth = 500;
+  int imageHeight = 500;
   string line;
-  ifstream myFile ("/Users/ankurM/Development/cv/labs/cube.txt");
+  ifstream myFile ("/Users/ankurM/Development/cv/labs/shapes/dodecahedron.txt");
   getline (myFile,line);
   istringstream iss(line);
   int size = 0; iss >> size;
@@ -70,7 +73,6 @@ int main() {
       m(0,j+1) =b;
       m(0,j+2) =c;
       m(0,j+3) = 1;
-      //m.display();
       arr.push_back(m);
       ++i;
     }
@@ -92,7 +94,7 @@ int main() {
     //cout << projX << ", "<< projY << std::endl;
   }
 
-  ifstream myFile1 ("/Users/ankurM/Development/cv/labs/cubeEdges.txt");
+  ifstream myFile1 ("/Users/ankurM/Development/cv/labs/shapes/dodecahedronEdges.txt");
   getline (myFile1,line);
   istringstream iss1(line);
   size = 0; iss1 >> size;
@@ -114,11 +116,24 @@ int main() {
     }
     myFile1.close();
   }
-  
+
+  set< pair<int, int> > kek;
   for (int i = 0; i < xco.size(); i++) {
-    cout << xco.at(i) << ", " << yco.at(i)<< endl;
+	  pair<int, int> p;
+	  p.first = xco.at(i);
+	  p.second = yco.at(i);
+      kek.insert(p);
   }
 
-
+  cout << "P3 " <<imageWidth<< " " <<imageHeight<<" 1" << endl;
+  for (int i = 0; i < imageWidth * 3; ++i) {
+	  for (int j = 0; j < imageHeight ; ++j) {
+		  pair<int, int> p;
+		  p.first = i;
+		  p.second = j;
+		  if (kek.find(p) != kek.end()) cout << " 1 1 1 ";
+		  else cout << " 0 0 0 ";
+	  }
+  }
   return 0;
 }
