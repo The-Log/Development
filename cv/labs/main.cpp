@@ -23,6 +23,36 @@ Matrix multPointMatrix(Matrix in, Matrix M){
 
   return out;
 }
+Matrix rmx(float angle){
+  Matrix rm = Matrix(4, 4);
+  rm(0,0) = 1;
+  rm(1,1) = cos(angle);
+  rm(1,2) = -sin(angle);
+  rm(2,1) = sin(angle);
+  rm(2,2) = cos(angle);
+  rm(3,3) = 1;
+  return rm;
+}
+Matrix rmy(float angle){
+  Matrix rm = Matrix(4, 4);
+  rm(0,0) = cos(angle);
+  rm(0,2) = sin(angle);
+  rm(1,1) = 1;
+  rm(2,0) = -sin(angle);
+  rm(2,2) = cos(angle);
+  rm(3,3) = 1;
+  return rm;
+}
+Matrix rmz(float angle){
+  Matrix rm = Matrix(4, 4);
+  rm(0,0) = cos(angle);
+  rm(0,1) = -sin(angle);
+  rm(1,0) = sin(angle);
+  rm(1,1) = cos(angle);
+  rm(2,2) = 1;
+  rm(3,3) = 1;
+  return rm;
+}
 Matrix setProjectionMatrix(const float &near, const float &far, Matrix m)
 {
   float scale = 1 / tan(90 * 0.5 * M_PI / 180);
@@ -41,7 +71,7 @@ Matrix setCamera(Matrix m)
   m(2,2) = 1;
   m(3,0) = 0;
   m(3,1) = 0;
-  m(3,2) = -5;
+  m(3,2) = -3; // zoom
   m(3,3) = 1;
   return m;
 }
@@ -50,7 +80,7 @@ int main() {
   int imageWidth = 500;
   int imageHeight = 500;
   string line;
-  ifstream myFile ("/Users/ankurM/Development/cv/labs/shapes/dodecahedron.txt");
+  ifstream myFile ("/Users/ankurM/Development/cv/labs/shapes/tetrahedron.txt");
   getline (myFile,line);
   istringstream iss(line);
   int size = 0; iss >> size;
@@ -66,7 +96,7 @@ int main() {
     while (getline (myFile,line) )
     {
       Matrix m = Matrix(1, 4);
-      int a, b, c;
+      double a, b, c;
       istringstream iss(line);
       iss >> a >> b >> c;
       m(0,j) = a;
@@ -85,7 +115,10 @@ int main() {
   vector<int> xco;
   vector<int> yco;
   for (unsigned i = 0; i<arr.size(); i++){
-    Matrix temp = multPointMatrix(arr.at(i) , shift);
+    Matrix temp = multPointMatrix(arr.at(i) , rmx(45));
+    temp = multPointMatrix(temp, rmy(45));
+    temp = multPointMatrix(temp, rmz(0));
+    temp = multPointMatrix(temp, shift);
     temp = multPointMatrix(temp , pm);
     double projX = (temp(0,0) + 1) * 0.5 * imageWidth;
     double projY = (1 - ((temp(0,1) + 1) * 0.5)) * imageHeight;
@@ -94,7 +127,7 @@ int main() {
     //cout << projX << ", "<< projY << std::endl;
   }
 
-  ifstream myFile1 ("/Users/ankurM/Development/cv/labs/shapes/dodecahedronEdges.txt");
+  ifstream myFile1 ("/Users/ankurM/Development/cv/labs/shapes/tetrahedronEdges.txt");
   getline (myFile1,line);
   istringstream iss1(line);
   size = 0; iss1 >> size;
