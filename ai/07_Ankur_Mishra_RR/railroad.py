@@ -72,12 +72,12 @@ G = graph()
 pickle.dump(G, open("graph.p", "wb"))
 
 class node():
-    def __init__(self, parent = None, node = "1700665", goal = "1701128", edges = G.nte["1700665"], depth = 0):
+    def __init__(self, parent = None, node = "1700665", goal = "1701128", depth = 0):
         self.parent = parent
         self.goal = goal
         self.node = node
         self.depth = depth
-        self.edges = edges
+        self.edges = G[self.node]
         self.lat = G.ntc[node][1]
         self.long = G.ntc[node][0]
 
