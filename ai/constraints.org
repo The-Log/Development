@@ -1,0 +1,74 @@
+* Constraint Satisfaction Problem
+- Type of search
+- Pick state with the most troublesome case
+- Pick state with fewest choices
+- Solution: Any set of values that doesn't violate the given constraints
+
+** Parts
+- state is defined by variables X with values from domain D
+- Goal Test is a set of constraints specifying allowing combinations of values
+
+** Examples
+*** Problem
++ Australia has to be colored with 3 colors that don't touch
++ Variables: All regions of Australia
++ Domain = 3 Colors
++ Constraints: Same color can't touch
+
+*** Constraint graph
+**** Binary Graph
++ Binary Constraints:
++ nodes are variables arcs show constraints
+**** Non-Binary Constraint
+ X2 X1  X0 - Carry bits
+  T  W  O
+  T  W  O
++________
+F O  U  R
++ Variables: Default Vars (F,O,U,R,T,W) + Carry bits(X_1,X_2,X_3)
++ Domains:
+Initial state = empty assignment
+successor function: assign a value to an unassigned variable  that doesn't conflict with current
+=> Fail if no legal assignments
+Goal Test
+- The current assignment is complete
+1. Same for all CSPs
+2. Every solution appears at depth n with n variables
+=> use depth first search
+3. Path is irrelevant so can also use complete state formulation
+
+Strategies
+-
+- Least constraints - choose value that gives most options
+- Adjacent to the most - choose value next to the most number of values
+- Forward checking: looking in front(children) to see what you cant chose(list of possibilities), after picking a value for the current node
+
+*** N Queens
+* States
+vars: C_1-C_8
+domain: {1-8}
+Constraints
+Cols: built in
+Rows: Ci =\= Cj
+diagonals: abs(Ci -Cj) =\= abs(i-j)
+* Data structure
+class nQueens():
+  state: vector of [1-8] or (init =  [None] * 8)
+  allowed: [{1-8}{1-8}...{1-8}]
+def assign(var, val):
+  state[val] = var
+  update constraints in self.allowed
+def get_next_var():
+    #gets next possible column / returns column that is undecided
+
+
+* Search
+- DFS search
+while(true):
+  if fridge is empty THEN Fail
+  n = fridge.pop()
+  if n.goalTest then return n
+  column = n.get_next_var()
+  for all vals in n[column].allowed
+    child = n.copy.assign(column, val)
+    fridge.push(child)
