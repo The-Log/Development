@@ -4,22 +4,26 @@ import heapq
 import copy
 from collections import deque
 import random
+
 class nQueens:
-    def __init__(self, n=8, parent=None):
+    def __init__(self, n=50, parent=None):
         self.size = n
         self.state = [None] * n
         self.choices = list(set(range(n)) for _ in xrange(n))
     def assign(self, var, value):
+        i = var
+        for j in range(self.size):
+            if(self.state[j] != None and abs(value - self.state[j]) == abs(i-j)):
+                return
         self.state[var] = value
         for n in self.choices:
             n.difference_update({value})
     def goal_test(self):
         if(None in self.state):
             return False
-        #TODO: Check if the board has a valid state
         return True
     def get_next_unassigned_var(self):
-        rand = random.randint(0,7)
+        rand = random.randint(0,self.size - 1)
         if(None not in self.state):
             return None
         if(self.state[rand] == None):
@@ -30,6 +34,7 @@ class nQueens:
         return choices[var]
     def __str__(self):
         return str(self.state)
+
 def dfs_search(start_nQueen):
     frontier = []
     frontier.append(start_nQueen)
@@ -48,7 +53,6 @@ def dfs_search(start_nQueen):
                 child.choices = [set(row) for row in current.choices]
                 child.assign(col, val)
                 if(str(child.state) not in visited):
-                    print(child)
                     frontier.append(child)
                     visited.add(str(child.state))
 n = nQueens()
