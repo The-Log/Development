@@ -4,11 +4,12 @@ import heapq
 import copy
 from collections import deque
 import random
+
 class nQueens:
     def __init__(self, n=8, parent=None):
         self.size = n
         self.state = [None] * n
-        self.choices = list(set(range(n)) for _ in range(n))
+        self.choices = list(set(range(1,n+1)) for _ in xrange(n))
     def assign(self, var, value):
         i = var
         for j in range(self.size):
@@ -22,17 +23,23 @@ class nQueens:
             return False
         return True
     def get_next_unassigned_var(self):
-        rand = random.randint(0,self.size-1)
         if(None not in self.state):
             return None
-        if(self.state[rand] == None):
-            return rand
-        else:
-            return self.get_next_unassigned_var()
+        mini = 0
+        for i in range(self.size):
+            print(str(self.choices[mini]) + " " + str(self.choices[i]))
+            if(self.state[i] == None and len(self.choices[mini]) > len(self.choices[i])):
+                mini = i
+            if(self.state[i] == None and len(self.choices[mini]) == len(self.choices[i])):
+                g = random.randint(0,10)
+                if(g > 5):
+                    mini = i
+        return mini
     def get_choices_for_var(self, var):
         return choices[var]
     def __str__(self):
         return str(self.state)
+
 def dfs_search(start_nQueen):
     frontier = []
     frontier.append(start_nQueen)
