@@ -23,7 +23,7 @@ vector<string> split(string str, char delimiter) {
 
 int main() {
   string line;
-  ifstream inFile1 ("/Users/ankurM/Development/cv/labs/edge_detection/image2.ppm");
+  ifstream inFile1 ("/Users/ankurM/Development/cv/labs/edge_detection/image.ppm");
   ofstream outFile2 ("/Users/ankurM/Development/cv/labs/edge_detection/edgy.ppm");
   getline (inFile1,line);
   outFile2 << line << " " << endl;
@@ -41,7 +41,7 @@ int main() {
       int a, b, c;
       int i = 0;
       vector<string> tokens = split(line, ' ');
-    while(i < tokens.size() - 2){
+      while(i < tokens.size() - 2){
         a = std::stoi(tokens[i]);
         i ++;
         b = std::stoi(tokens[i]);
@@ -51,7 +51,10 @@ int main() {
         int max = std::max(std::max(a,b),c);
         int min = std::min(std::min(a,b),c);
         int avg = (min + max) / 2 ;
-        outFile2 << avg << " " << avg << " " << avg << " ";
+        if(avg > 125)
+          outFile2 << 0 << " " << 0 << " " << 0 << " ";
+        else
+          outFile2 << 255 << " " << 255 << " " << 255 << " ";
       }
       outFile2 << "\n";
     }
