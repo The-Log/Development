@@ -1,5 +1,5 @@
-#
 # Ankur Mishra
+# Period 7
 # 2018amishra@tjhsst.edu
 import time
 import math
@@ -50,7 +50,7 @@ class nQueens:
     def __str__(self):
         '''returns state in string format '''
         return str(self.state)
-        
+
 def dfs_search(start_nQueen):
     ''' sets board as the initial state and returns a
 	    board containing an nQueens solution
