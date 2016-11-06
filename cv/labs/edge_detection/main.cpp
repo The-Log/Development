@@ -9,9 +9,21 @@
 
 using namespace std;
 
+vector<string> split(string str, char delimiter) {
+  vector<string> s;
+  stringstream ss(str);
+  string tok;
+
+  while(getline(ss, tok, delimiter)) {
+    s.push_back(tok);
+  }
+
+  return s;
+}
+
 int main() {
   string line;
-  ifstream inFile1 ("/Users/ankurM/Development/cv/labs/edge_detection/image.ppm");
+  ifstream inFile1 ("/Users/ankurM/Development/cv/labs/edge_detection/image2.ppm");
   ofstream outFile2 ("/Users/ankurM/Development/cv/labs/edge_detection/edgy.ppm");
   getline (inFile1,line);
   outFile2 << line << " " << endl;
@@ -27,21 +39,14 @@ int main() {
     while (getline (inFile1, line))
     {
       int a, b, c;
-      line.erase( remove( line.begin(), line.end(), ' ' ), line.end() );
-
       int i = 0;
-      while(i < line.size() - 1){
-        string s1(1, line[i]);
-        if(i == line.size() - 2)
-          std::cout << s1 << std::endl;
-        a = std::stoi(s1);
+      vector<string> tokens = split(line, ' ');
+    while(i < tokens.size() - 2){
+        a = std::stoi(tokens[i]);
         i ++;
-        string s2(1, line[i]);
-        b = std::stoi(s2);
+        b = std::stoi(tokens[i]);
         i ++;
-        string s3(1, line[i]);
-        c = std::stoi(s3);
-        //outFile2 << a << " " << b << " " << c << " ";
+        c = std::stoi(tokens[i]);
         i ++;
         int max = std::max(std::max(a,b),c);
         int min = std::min(std::min(a,b),c);
