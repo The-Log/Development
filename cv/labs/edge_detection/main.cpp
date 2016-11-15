@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <set>
 #include <string>
+#include "matrix.cpp"
 
 using namespace std;
 
@@ -23,20 +24,23 @@ vector<string> split(string str, char delimiter) {
 
 int main() {
   string line;
-  ifstream inFile1 ("/Users/ankurM/Development/cv/labs/edge_detection/image.ppm");
-  ofstream outFile2 ("/Users/ankurM/Development/cv/labs/edge_detection/edgy.ppm");
-  getline (inFile1,line);
-  outFile2 << line << " " << endl;
-  getline (inFile1,line);
+  ifstream inFile ("/Users/ankurM/Development/cv/labs/edge_detection/image2.ppm");
+  ofstream monoFile ("/Users/ankurM/Development/cv/labs/edge_detection/edgy2.ppm");
+  getline (inFile,line);
+  monoFile << line << " " << endl;
+
+  getline (inFile,line);
   istringstream iss(line);
   int imageWidth, imageHeight;
   iss >> imageWidth, imageHeight;
-  outFile2 << line << " " << endl;
-  getline (inFile1,line);
-  outFile2 << line << endl;
-  if (inFile1.is_open())
+  monoFile << line << " " << endl;
+
+  getline (inFile,line);
+  monoFile << line << endl;
+  vector<vector<int> > vect(imageHeight, vector<int>(imageWidth));
+  if (inFile.is_open())
   {
-    while (getline (inFile1, line))
+    while (getline (inFile, line))
     {
       int a, b, c;
       int i = 0;
@@ -51,12 +55,12 @@ int main() {
         int max = std::max(std::max(a,b),c);
         int min = std::min(std::min(a,b),c);
         int avg = (min + max) / 2 ;
-        if(avg > 125)
-          outFile2 << 0 << " " << 0 << " " << 0 << " ";
-        else
-          outFile2 << 255 << " " << 255 << " " << 255 << " ";
+        //if(avg < 125)
+        monoFile << avg << " " << avg << " " << avg << " ";
+        //else
+          //monoFile << 255 << " " << 255 << " " << 255 << " ";
       }
-      outFile2 << "\n";
+      monoFile << "\n";
     }
   }
   else{
