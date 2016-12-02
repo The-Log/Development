@@ -32,8 +32,11 @@ Matrix::Matrix(int rows, int cols) :r(rows),c(cols) {
     for (int i = 0; i < r; ++i) {
         for (int j = 0; j < c; ++j) {
             p[i][j] = 0;
+            std::cout << p[i][j] << " ";
         }
+        std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 Matrix::Matrix() : r(1), c(1){
@@ -125,7 +128,7 @@ Matrix& Matrix::operator*=(const Matrix & m) {
 
 void Matrix::display(){
   for (int i = 0; i < r; i++) {
-    for(int j=0; j < c; j++){
+    for(int j = 0; j < c; j++){
       std::cout << p[i][j] << " ";
     }
     std::cout << std::endl;

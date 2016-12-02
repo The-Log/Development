@@ -6,12 +6,18 @@
 
 class Matrix{
 public:
+    int r, c;
     Matrix(int, int);
     Matrix();
     ~Matrix();
     Matrix(const Matrix&);
 
-    inline double& operator()(int x, int y) { return p[x][y]; }
+    inline double& operator()(int x, int y) {
+      if(x >= r || y >= c)
+        std::cout << x << " " << y << " Out of bounds \n";
+      return p[x][y];
+
+    }
 
     Matrix& operator=(const Matrix&);
     Matrix& operator+=(const Matrix&);
@@ -21,7 +27,6 @@ public:
     void display();
 
 private:
-    int r, c;
     double **p;
     void allocate();
 
@@ -125,7 +130,7 @@ Matrix& Matrix::operator*=(const Matrix & m) {
 
 void Matrix::display(){
   for (int i = 0; i < r; i++) {
-    for(int j=0; j < c; j++){
+    for(int j = 0; j < c; j++){
       std::cout << p[i][j] << " ";
     }
     std::cout << std::endl;
