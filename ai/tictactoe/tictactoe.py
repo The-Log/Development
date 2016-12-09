@@ -65,6 +65,7 @@ class tictactoe:
 def dfs_search(start_tictactoe):
     allBoards = set()
     frontier = [start_tictactoe]
+    visited = set()
     while(True):
         if(len(frontier) == 0):
             return allBoards
@@ -73,7 +74,9 @@ def dfs_search(start_tictactoe):
             allBoards.add(current)
         children = current.get_children()
         for i in children:
-            frontier.append(i)
+            if str(i.state) not in visited:
+                frontier.append(i)
+                visited.add(str(i.state))
 
 t = tictactoe(x)
 start = time.time()
