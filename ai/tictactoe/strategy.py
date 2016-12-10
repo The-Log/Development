@@ -7,11 +7,10 @@ MIN = "O"
 TIE = "TIE"
 INF = math.inf
 
-def minimax_strategy(max_depth):
+def minimax_strategy():
     def strategy(board, player):
-        return minimax(board, player, max_depth)
+        return minimax(board, player)
     return strategy
-
 
 def human(board, player):
     move = int(input("Your move? "))
@@ -26,14 +25,14 @@ def random_strategy(board, player):
     else:
         return random_strategy(board, player)
 
-def minimax(board, player, max_depth):
+def minimax(board, player):
     if player == MAX:
-        move = max_dfs(board, player, max_depth, 0)[1]
+        move = max_dfs(board, player)[1]
     if player == MIN:
-        move = min_dfs(board, player, max_depth, 0)[1]
+        move = min_dfs(board, player)[1]
     return move
 
-def max_dfs(board, player, max_d, current_d):
+def max_dfs(board, player):
   if c.terminal_test(board) and c.winner(board) == MAX:
       return 1, None
   if c.terminal_test(board) and c.winner(board) == MIN:
@@ -43,13 +42,13 @@ def max_dfs(board, player, max_d, current_d):
   v = -INF
   move = -1
   for m in c.actions(board):
-      new_value = min_dfs(c.make_move(board, player, m), c.toggle(player), max_d, current_d + 1)[0]
+      new_value = min_dfs(c.make_move(board, player, m), c.toggle(player))[0]
       if new_value > v:
           v = new_value
           move = m
   return v, move
 
-def min_dfs(board, player, min_d, current_d):
+def min_dfs(board, player):
   if c.terminal_test(board) and c.winner(board) == MAX:
       return 1, None
   if c.terminal_test(board) and c.winner(board) == MIN:
@@ -59,7 +58,7 @@ def min_dfs(board, player, min_d, current_d):
   v = INF
   move = -1
   for m in c.actions(board):
-      new_value = max_dfs(c.make_move(board, player, m), c.toggle(player), min_d, current_d + 1)[0]
+      new_value = max_dfs(c.make_move(board, player, m), c.toggle(player))[0]
       if new_value < v:
           v = new_value
           move = m
