@@ -15,7 +15,7 @@ from core import *
 X_STRATEGY = ai.minimax_strategy(0)
 O_STRATEGY = ai.minimax_strategy(0)
 ROUNDS = 20
-SILENT = True
+SILENT = False
 
 # see core.py for constants: MAX, MIN, TIE
 
