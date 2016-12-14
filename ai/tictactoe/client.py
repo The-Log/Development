@@ -1,6 +1,7 @@
 import pickle
 import strategy as ai
 from core import *
+import time
 
 #############################################################
 # client.py
@@ -12,10 +13,10 @@ from core import *
 # Patrick White: December 2016
 ############################################################
 
-X_STRATEGY = ai.minimax_strategy()
+X_STRATEGY = ai.minimax_strategy(0)
 O_STRATEGY = ai.random_strategy
 ROUNDS = 20
-SILENT = False
+SILENT = True
 
 # see core.py for constants: MAX, MIN, TIE
 
@@ -46,19 +47,22 @@ def main():
     Selects a random starting player
     """
     j = []
+    start = time.time()
     for i in range(ROUNDS):
         try:
             game_result = play(X_STRATEGY, O_STRATEGY,
                           first=random.choice([MAX, MIN]),
                           silent=SILENT)
             j.append(game_result)
-            print("Winner: ", game_result)
+            #print("Winner: ", game_result)
         except IllegalMoveError as e:
             print(e)
             j.append("FORFEIT")
+    end = time.time()
     print("\nResults\n" + "%4s %4s %4s" % ("X", "O", "-"))
     print("-" * 15)
     print("%4i %4i %4i" % (j.count(MAX), j.count(MIN), j.count(TIE)))
+    print(end - start)
 
 
 if __name__ == "__main__":
