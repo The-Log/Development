@@ -1,2 +1,2 @@
 # Development
-All of my projects in high school.
+All of my projects during high school.
