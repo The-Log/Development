@@ -5,7 +5,7 @@ import time
 
 #############################################################
 # client.py
-# a simple othellot client
+# a simple othello client
 # plays 2 strategies against each other and keeps score
 # imports strategies from "strategies.py" as ai
 # rest of functionality is stored in core.py
