@@ -1,11 +1,10 @@
 import pickle
 import strategy as ai
 from core import *
-import time
 
 #############################################################
 # client.py
-# a simple othello client
+# a simple tic-tac-toe client
 # plays 2 strategies against each other and keeps score
 # imports strategies from "strategies.py" as ai
 # rest of functionality is stored in core.py
@@ -13,10 +12,10 @@ import time
 # Patrick White: December 2016
 ############################################################
 
-X_STRATEGY = ai.minimax_strategy(0)
-O_STRATEGY = ai.random_strategy
-ROUNDS = 20
-SILENT = True
+X_STRATEGY = ai.minimax_strategy(3)
+O_STRATEGY = ai.human
+ROUNDS = 1000
+SILENT = False
 
 # see core.py for constants: MAX, MIN, TIE
 
@@ -42,27 +41,24 @@ def play(strategy_X, strategy_O, first=MAX, silent=True):
 
 def main():
     """
-    Plays ROUNDS othello games and keeps a count of
+    Plays ROUNDS tic-tac-toe games and keeps a count of
     wins/ties. Uses strategies defined as global constants above.
     Selects a random starting player
     """
     j = []
-    start = time.time()
     for i in range(ROUNDS):
         try:
             game_result = play(X_STRATEGY, O_STRATEGY,
                           first=random.choice([MAX, MIN]),
                           silent=SILENT)
             j.append(game_result)
-            #print("Winner: ", game_result)
+            print("Winner: ", game_result)
         except IllegalMoveError as e:
             print(e)
             j.append("FORFEIT")
-    end = time.time()
     print("\nResults\n" + "%4s %4s %4s" % ("X", "O", "-"))
     print("-" * 15)
     print("%4i %4i %4i" % (j.count(MAX), j.count(MIN), j.count(TIE)))
-    print(end - start)
 
 
 if __name__ == "__main__":
