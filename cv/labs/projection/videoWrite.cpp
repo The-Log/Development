@@ -78,16 +78,12 @@ int main(int argc, char *argv[])
     for(;;) //Show the image captured in the window and repeat
     {
         inputVideo >> src;              // read
-        std::cout << "Happens" << '\n';
-        if (src.empty()){
-          std::cout << "Fuck!" << '\n';
-          break;         // check if at end
-        }
+        if (src.empty()) break;         // check if at end
+        std::cout << "Do I get here?" << '\n';
         split(src, spl);                // process - extract only the correct channel
         for (int i =0; i < 3; ++i)
             if (i != channel)
                 spl[i] = Mat::zeros(S, spl[0].type());
-       std::cout << "Never Happens" << '\n';
        merge(spl, res);
 
        //outputVideo.write(res); //save or
