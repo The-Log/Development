@@ -1,4 +1,7 @@
-from core import OthelloCore
+"""
+Base class for Othello Core
+Must be subclassed by student Othello solutions
+"""
 
 EMPTY, BLACK, WHITE, OUTER = '.', '@', 'o', '?'
 PIECES = (EMPTY, BLACK, WHITE, OUTER)
@@ -9,75 +12,88 @@ UP, DOWN, LEFT, RIGHT = -10, 10, -1, 1
 UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = -9, 11, 9, -11
 DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
 
-class my_core(OthelloCore):
-    def is_valid(self, move):
-        return move in squares()
+class OthelloCore:
+    def squares(self):
+        """List all the valid squares on the board."""
+        return [i for i in range(11, 89) if 1 <= (i % 10) <= 8]
 
-    def opponent(self, player):
-        if (player == WHITE):
-            return BLACK
-        else:
-            return WHITE
 
-    def find_bracket(self, square, player, board, direction):
-        bracket = square + direction
-        if (board[bracket] == player):
-            return None
-        enemy = opponent(player)
-        while board[bracket] == enemy:
-            bracket += direction
-        if board[bracket] not in (OUTER, EMPTY):
-            return bracket
-        else:
-            return None
-
-    def is_legal(self, move, player, board):
-        if move in legal_moves(player, bloard):
-            return True
-        else:
-            return False
-
-    def make_move(self, move, player, board):
-        board[move] = player
-        for direction in DIRECTIONS:
-            make_flips(move,player, board, direction)
+    def initial_board(self):
+        """Create a new board with the initial black and white positions filled."""
+        board = [OUTER] * 100
+        for i in self.squares():
+            board[i] = EMPTY
+        # The middle four squares should hold the initial piece positions.
+        board[44], board[45] = WHITE, BLACK
+        board[54], board[55] = BLACK, WHITE
         return board
 
+
+    def print_board(self,board):
+        """Get a string representation of the board."""
+        rep = ''
+        rep += '  %s\n' % ' '.join(map(str, list(range(1, 9))))
+        for row in range(1, 9):
+            begin, end = 10 * row + 1, 10 * row + 9
+            rep += '%d %s\n' % (row, ' '.join(board[begin:end]))
+        return rep
+
+
+    def is_valid(self, move):
+        """Is move a square on the board?"""
+        pass
+
+    def opponent(self, player):
+        """Get player's opponent piece."""
+        pass
+
+    def find_bracket(self, square, player, board, direction):
+        """
+        Find a square that forms a bracket with `square` for `player` in the given
+        `direction`.  Returns None if no such square exists.
+        Returns the index of the bracketing square if found
+        """
+        pass
+
+    def is_legal(self, move, player, board):
+        """Is this a legal move for the player?"""
+        pass
+
+    ### Making moves
+
+    # When the player makes a move, we need to update the board and flip all the
+    # bracketed pieces.
+
+    def make_move(self, move, player, board):
+        """Update the board to reflect the move by the specified player."""
+        pass
+
     def make_flips(self, move, player, board, direction):
-        bracket = find_bracket(move, player, board, direction)
-        if not bracket:
-            return
-        square = move + direction
-        while square != bracket:
-            board[square] = player
-            square += direction
+        """Flip pieces in the given direction as a result of the move by player."""
+        pass
 
     def legal_moves(self, player, board):
-        legal_moves = []
-        for i in squares():
-            legal_moves.add(lambda direction:find_bracket(i, player, board, direction))
-        return legal_moves
+        """Get a list of all legal moves for player, as a list of integers"""
+        pass
 
     def any_legal_move(self, player, board):
-        if len(legal_moves(player, board)) == 0:
-            return False
-        else:
-            return True
+        """Can player make any moves? Returns a boolean"""
+        pass
 
     def next_player(self,board, prev_player):
-        enemy = opponent(prev_player)
-        if (any_legal_move(enemy)):
-            return enemy
-        elif(any_legal_move(prev_player)):
-            return prev_player
-        return None
+        """Which player should move next?  Returns None if no legal moves exist."""
+        pass
 
-    def score(self, player, board):
-        p_s, o_s = 0, 0
-        enemy = opponent(player)
-        for square in squares():
-            if board[square] == player:
-                p_s = p_s + 1
-            elif board[square] == enemy:
-                o_s = o_s + 1
-        return p_s - o_s
+    def score(self,player, board):
+        """Compute player's score (number of player's pieces minus opponent's)."""
+        pass
+
+
+    class IllegalMoveError(Exception):
+        def __init__(self, player, move, board):
+            self.player = player
+            self.move = move
+            self.board = board
+
+        def __str__(self):
+            return '%s cannot move to square %d' % (PLAYERS[self.player], self.move)

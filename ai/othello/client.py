@@ -1,7 +1,9 @@
 import pickle
+import random
 import strategy as ai
-from core import *
 
+BLACK_STRATEGY = ai.my_core().human
+WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
 # a simple tic-tac-toe client
@@ -12,31 +14,33 @@ from core import *
 # Patrick White: December 2016
 ############################################################
 
-X_STRATEGY = ai.minimax_strategy(3)
-O_STRATEGY = ai.human
-ROUNDS = 1000
+ROUNDS = 1
 SILENT = False
 
-# see core.py for constants: MAX, MIN, TIE
+BLACK = ai.core.BLACK
+WHITE = ai.core.WHITE
 
-def play(strategy_X, strategy_O, first=MAX, silent=True):
+def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     """
-    Plays strategy_X vs. strategy_O, beginning with first
-    in one game. Returns X, O or TIE as a result (string)
+    Plays strategy_BLACK vs. strategy_WHITE, beginning with first
+    in one game. Returns @, o or TIE as a result (string)
 
     The functions make_move, next_player and terminal_test are
     implemented elsewhere (e.g. in core.py). The current implementation
     uses a 9-char string as the state, but that is not exposed at this level.
     """
-    board = start_state
+    board = ai.my_core().initial_board()
     player = first
-    current_strategy = {MAX: strategy_X, MIN: strategy_O}
+    current_strategy = {BLACK: strategy_BLACK, WHITE: strategy_WHITE}
+    print(player)
+    print(ai.my_core().print_board(board))
     while player is not None:
         move = current_strategy[player](board, player)
-        board = make_move(board, player, move)
-        player = next_player(board, player)
-        if not silent: print_board(board)
-    return terminal_test(board) # returns "X" "O" or "TIE"
+        board = ai.my_core().make_move(move, player, board)
+        player = ai.my_core().next_player(board, player)
+        print(player)
+        if not silent: print(ai.my_core().print_board(board))
+    return terminal_test(board) # returns "@" "o" or "TIE"
 
 
 def main():
@@ -48,17 +52,17 @@ def main():
     j = []
     for i in range(ROUNDS):
         try:
-            game_result = play(X_STRATEGY, O_STRATEGY,
-                          first=random.choice([MAX, MIN]),
+            game_result = play(BLACK_STRATEGY, WHITE_STRATEGY,
+                          first=random.choice([BLACK, WHITE]),
                           silent=SILENT)
             j.append(game_result)
             print("Winner: ", game_result)
-        except IllegalMoveError as e:
+        except ai.my_core.IllegalMoveError as e:
             print(e)
             j.append("FORFEIT")
-    print("\nResults\n" + "%4s %4s %4s" % ("X", "O", "-"))
+    print("\nResults\n" + "%4s %4s %4s" % ("@", "o", "-"))
     print("-" * 15)
-    print("%4i %4i %4i" % (j.count(MAX), j.count(MIN), j.count(TIE)))
+    print("%4i %4i %4i" % (j.count(BLACK), j.count(WHITE), j.count(TIE)))
 
 
 if __name__ == "__main__":
