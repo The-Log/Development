@@ -1,11 +1,19 @@
 import othello_core as core
 import random
 
+
+#############################################################
+# strategy.py
+# implements core methods to play othello
+# imports methods from "othello_core.py" as core
+#
+# Ankur Mishra: January 2017
+############################################################
+
 EMPTY, BLACK, WHITE, OUTER = '.', '@', 'o', '?'
 PIECES = (EMPTY, BLACK, WHITE, OUTER)
 PLAYERS = {BLACK: 'Black', WHITE: 'White'}
 
-# To refer to neighbor squares we can add a direction to a square.
 UP, DOWN, LEFT, RIGHT = -10, 10, -1, 1
 UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = -9, 11, 9, -11
 DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)

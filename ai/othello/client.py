@@ -6,12 +6,11 @@ BLACK_STRATEGY = ai.my_core().random_strategy
 WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
-# a simple tic-tac-toe client
+# a client to play othello
 # plays 2 strategies against each other and keeps score
 # imports strategies from "strategies.py" as ai
-# rest of functionality is stored in core.py
 #
-# Patrick White: December 2016
+# Ankur Mishra: January 2017
 ############################################################
 
 ROUNDS = 1
