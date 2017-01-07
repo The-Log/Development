@@ -104,12 +104,16 @@ class my_core(core.OthelloCore):
         pass
 
     def human(self, board, player):
-        move = int(input("Your move? "))
-        while(move not in self.legal_moves(player, board)):
-            move = int(input("Invalid move! Choose another one. "))
+        move = input("Your move? ")
+        lm = self.legal_moves(player, board)
+        while(move not in lm):
+            print(lm)
+            move = int(input("Invalid move! Choose one of these, if you need help. "))
+            print("")
         return move
 
     def random_strategy(self, board, player):
         lm = self.legal_moves(player, board)
         r = random.randint(0, len(lm) - 1)
+        print("Computer chose: " + str(lm[r]))
         return lm[r]

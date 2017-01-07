@@ -2,7 +2,7 @@ import pickle
 import random
 import strategy as ai
 
-BLACK_STRATEGY = ai.my_core().random_strategy
+BLACK_STRATEGY = ai.my_core().human
 WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
@@ -31,7 +31,6 @@ def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     board = ai.my_core().initial_board()
     player = first
     current_strategy = {BLACK: strategy_BLACK, WHITE: strategy_WHITE}
-    print(player)
     print(ai.my_core().print_board(board))
     while player is not None:
         move = current_strategy[player](board, player)
