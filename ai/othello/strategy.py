@@ -43,10 +43,8 @@ class my_core(core.OthelloCore):
             return None
 
     def is_legal(self, move, player, board):
-        if move in self.legal_moves(player, bloard):
-            return True
-        else:
-            return False
+        hasbracket = lambda direction: self.find_bracket(move, player, board, direction)
+        return board[move] == EMPTY and any(map(hasbracket, DIRECTIONS))
 
     def make_move(self, move, player, board):
         board[move] = player
@@ -64,10 +62,11 @@ class my_core(core.OthelloCore):
             square += direction
 
     def legal_moves(self, player, board):
-        legal_moves = []
-        for i in self.squares():
-            legal_moves.append(lambda direction:self.find_bracket(i, player, board, direction))
-        return legal_moves
+        lm = []
+        for s in self.squares():
+            if self.is_legal(s, player, board):
+                lm.append(s)
+        return lm
 
     def any_legal_move(self, player, board):
         if len(self.legal_moves(player, board)) == 0:
@@ -86,7 +85,7 @@ class my_core(core.OthelloCore):
     def score(self, player, board):
         p_s, o_s = 0, 0
         enemy = self.opponent(player)
-        for square in squares():
+        for square in self.squares():
             if board[square] == player:
                 p_s = p_s + 1
             elif board[square] == enemy:
@@ -97,12 +96,12 @@ class my_core(core.OthelloCore):
         pass
 
     def human(self, board, player):
-        move = int(input("Your move?"))
-        while(move in self.legal_moves(player, board)):
-            move = int(input("Your move?"))
+        move = int(input("Your move? "))
+        while(move not in self.legal_moves(player, board)):
+            move = int(input("Invalid move! Choose another one. "))
         return move
 
     def random_strategy(self, board, player):
-        l = self.legal_moves(player, board)
-        r = random.randint(0, len(l))
-        return r
+        lm = self.legal_moves(player, board)
+        r = random.randint(0, len(lm) - 1)
+        return lm[r]
