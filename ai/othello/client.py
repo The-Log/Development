@@ -22,11 +22,7 @@ WHITE = ai.core.WHITE
 def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     """
     Plays strategy_BLACK vs. strategy_WHITE, beginning with first
-    in one game. Returns @, o or TIE as a result (string)
-
-    The functions make_move, next_player and terminal_test are
-    implemented elsewhere (e.g. in core.py). The current implementation
-    uses a 9-char string as the state, but that is not exposed at this level.
+    in one game. Returns score as a result (string)
     """
     board = ai.my_core().initial_board()
     player = first
@@ -42,7 +38,7 @@ def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
 
 def main():
     """
-    Plays ROUNDS tic-tac-toe games and keeps a count of
+    Plays ROUNDS Othelo games and keeps a count of
     wins/ties. Uses strategies defined as global constants above.
     Selects a random starting player
     """

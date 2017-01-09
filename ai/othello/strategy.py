@@ -19,16 +19,6 @@ UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = -9, 11, 9, -11
 DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
 
 class my_core(core.OthelloCore):
-    def initial_board(self):
-        """Create a new board with the initial black and white positions filled."""
-        board = [OUTER] * 100
-        for i in self.squares():
-            board[i] = EMPTY
-        # The middle four squares should hold the initial piece positions.
-        board[44], board[45] = WHITE, BLACK
-        board[54], board[55] = BLACK, WHITE
-        return board
-
     def is_valid(self, move):
         return move in self.squares()
 
@@ -100,16 +90,26 @@ class my_core(core.OthelloCore):
                 o_s = o_s + 1
         return p_s - o_s
 
-    def minimax_strategy(self, max_depth):
+    def minimax_strategy(self, board, player):
+        if player == BLACK:
+            move = max_dfs(board, player)[1]
+        if player == WHITE:
+            move = min_dfs(board, player)[1]
+        return move
+
+    def max_dfs(board, player):
+        pass
+
+    def min_dfs(board, player):
         pass
 
     def human(self, board, player):
-        move = input("Your move? ")
+        move = int(input("Your move?\n"))
         lm = self.legal_moves(player, board)
         while(move not in lm):
+            print("Invalid move! Choose one of these, if you need help.")
             print(lm)
-            move = int(input("Invalid move! Choose one of these, if you need help. "))
-            print("")
+            move = int(input(""))
         return move
 
     def random_strategy(self, board, player):
