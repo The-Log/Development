@@ -2,7 +2,7 @@ import pickle
 import random
 import strategy as ai
 
-BLACK_STRATEGY = ai.my_core().human
+BLACK_STRATEGY = ai.my_core().minimax_strategy
 WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
@@ -27,7 +27,8 @@ def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     board = ai.my_core().initial_board()
     player = first
     current_strategy = {BLACK: strategy_BLACK, WHITE: strategy_WHITE}
-    print(ai.my_core().print_board(board))
+    if not silent:
+        print(ai.my_core().print_board(board))
     while player is not None:
         move = current_strategy[player](board, player)
         board = ai.my_core().make_move(move, player, board)
@@ -42,20 +43,26 @@ def main():
     wins/ties. Uses strategies defined as global constants above.
     Selects a random starting player
     """
+    points = [0,0,0]
     for i in range(ROUNDS):
         try:
             game_result = play(BLACK_STRATEGY, WHITE_STRATEGY,
-                          first=random.choice([BLACK, WHITE]),
+                          first=BLACK,
                           silent=SILENT)
             print(game_result)
             if(game_result > 0):
                 print("Black Wins!")
+                points[0] = points[0] + 1
             elif(game_result < 0):
                 print("White Wins!")
+                points[1] = points[1] + 1
             else:
                 print("Tie!")
+                points[2] = points[2] + 1
         except ai.my_core.IllegalMoveError as e:
             print(e)
+    print('[B,W,T]')
+    print(points)
 
 
 if __name__ == "__main__":

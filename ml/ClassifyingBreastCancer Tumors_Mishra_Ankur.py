@@ -1,7 +1,7 @@
 from sklearn import svm
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
-
+import random
 #############################################################
 # cancer.py
 # in theory, detects if patient has a cancerous tumor
@@ -16,15 +16,12 @@ def getData():
 	for i in input:
 		inputArray = i.split(",")
 		outputArray = [inputArray[3], inputArray[4], inputArray[10]]
-		#according to science malignant tumors aren't uniform in shape or size and grow rapidly
+		# according to science malignant tumors aren't uniform in shape or size and grow rapidly
 		exp = inputArray.pop(1)
 		x.append(outputArray)
 		y.append(exp)
 	return x,y
 
-
-x = []
-y = []
 x, y = getData()
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state=45)
 

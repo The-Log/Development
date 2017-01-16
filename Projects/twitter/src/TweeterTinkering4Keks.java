@@ -139,18 +139,9 @@ class twitterFun {
         else
             System.out.println("RIP!");
 
-        usernames.add("HillaryClinton");
-        usernames.add("theBriefing2016");
-        usernames.add("timkaine");
-        usernames.add("ElectHillary");
-        usernames.add("HFA");
+        usernames.add("hehexd");
 
-        messages.add("Corrupt, bought out, a liar, and an enabler. All characteristics of great leader! #neverhillary");
-        messages.add("The foundation and the campaign should be shutdown! #neverhillary #trump2016 #MAGA");
-        messages.add("She is definitely the \"best\" candidate! #neverhillary #trump2016 #MAGA");
-        messages.add("She is not a friend to anyone!#BreakTheFoundation #neverHillary");
-        messages.add("Perhaps you should look at yourself in mirror before talking. #neverHillary");
-        messages.add("The Clinton's are super corrupt. #BreakTheFoundation #neverHillary");
+        messages.add("I am a bot!");
 
         String username = usernames.get((int) (usernames.size() * Math.random()));
         String current = messages.get((int) (messages.size() * Math.random()));
