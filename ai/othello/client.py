@@ -2,7 +2,7 @@ import pickle
 import random
 import strategy as ai
 
-BLACK_STRATEGY = ai.my_core().minimax_strategy(5)
+BLACK_STRATEGY = ai.my_core().alphabeta_strategy(3)
 WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
@@ -13,7 +13,7 @@ WHITE_STRATEGY = ai.my_core().random_strategy
 # Ankur Mishra: January 2017
 ############################################################
 
-ROUNDS = 1
+ROUNDS = 30
 SILENT = False
 
 BLACK = ai.core.BLACK
