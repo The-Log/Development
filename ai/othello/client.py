@@ -2,7 +2,7 @@ import pickle
 import random
 import strategy as ai
 
-BLACK_STRATEGY = ai.my_core().minimax_strategy
+BLACK_STRATEGY = ai.my_core().minimax_strategy(5)
 WHITE_STRATEGY = ai.my_core().random_strategy
 #############################################################
 # client.py
@@ -51,14 +51,13 @@ def main():
                           silent=SILENT)
             print(game_result)
             if(game_result > 0):
-                print("Black Wins!")
                 points[0] = points[0] + 1
             elif(game_result < 0):
-                print("White Wins!")
                 points[1] = points[1] + 1
             else:
-                print("Tie!")
                 points[2] = points[2] + 1
+            print('[B,W,T]')
+            print(points)
         except ai.my_core.IllegalMoveError as e:
             print(e)
     print('[B,W,T]')

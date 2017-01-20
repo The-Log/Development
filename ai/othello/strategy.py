@@ -33,6 +33,9 @@ SQUARE_WEIGHTS = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
 
+MAX_VALUE = sum(map(abs, SQUARE_WEIGHTS))
+MIN_VALUE = -MAX_VALUE
+
 class my_core(core.OthelloCore):
     def is_valid(self, move):
         return move in self.squares()
@@ -56,14 +59,16 @@ class my_core(core.OthelloCore):
             return None
 
     def is_legal(self, move, player, board):
-        hasbracket = lambda direction: self.find_bracket(move, player, board, direction)
-        return board[move] == EMPTY and any(map(hasbracket, DIRECTIONS))
+        b = lambda direction: self.find_bracket(move, player, board, direction)
+        return board[move] == EMPTY and any(map(b, DIRECTIONS))
 
     def make_move(self, move, player, board):
-        board[move] = player
+        #print(player)
+        new_board = list(board)
+        new_board[int(move)] = player
         for direction in DIRECTIONS:
-            self.make_flips(move,player, board, direction)
-        return board
+            self.make_flips(move, player, new_board, direction)
+        return new_board
 
     def make_flips(self, move, player, board, direction):
         bracket = self.find_bracket(move, player, board, direction)
@@ -98,6 +103,8 @@ class my_core(core.OthelloCore):
     def score(self, player, board):
         p_s, o_s = 0, 0
         enemy = self.opponent(player)
+        if board == None:
+            print("wut?")
         for square in self.squares():
             if board[square] == player:
                 p_s = p_s + 1
@@ -105,56 +112,69 @@ class my_core(core.OthelloCore):
                 o_s = o_s + 1
         return p_s - o_s
 
-    def minimax_strategy(self, board, player):
+    def minimax_strategy(self, max_depth):
+        def strategy(board, player):
+            return self.minimax(board, player, max_depth)
+        return strategy
+
+
+    def minimax(self, board, player, depth):
         if player == BLACK:
-            move = self.max_dfs(board, player)[1]
+            move = self.min_dfs(board, player, depth)[1]
         if player == WHITE:
-            move = self.min_dfs(board, player)[1]
+            move = self.max_dfs(board, player, depth)[1]
         return move
 
-    def max_dfs(self, board, player):
-        if '.' not in board and self.winner(board, player) == WHITE:
-            return -1
-        if '.' not in board and self.winner(board, player) == BLACK:
-            return 1
-        if '.' not in board and self.winner(board, player) == None:
-            return 0
+    def max_dfs(self, board, player, depth):
+        if depth == 0:
+            return self.evaluate(board, player), None
+        if '.' not in board:
+            if self.winner(board, player) == player:
+                return MIN_VALUE * self.evaluate(board, player), None
+            if self.winner(board, player) == self.opponent(player):
+                return MAX_VALUE * self.evaluate(board, player), None
+            if self.winner(board, player) == None:
+                return 0, None
         v = -INF
-        for m in self.legal_moves(board, player):
-            new_board = self.make_move(board, player, m)
-            if (new_board, player) in DICT:
-                new_value = DICT[(new_board, player)]
+        lm = self.legal_moves(player, board)
+        move = lm[0]
+
+        for m in lm:
+            new_board = list(self.make_move(m, player, board))
+            if(self.next_player(new_board, player) == self.opponent(player)):
+                new_value = self.min_dfs(new_board, self.next_player(new_board, player), depth - 1)[0]
             else:
-                if self.any_legal_move(self.opponent(player)):
-                    new_value = self.min_dfs(new_board, self.opponent(player))[0]
-                    DICT[(new_board, player)] = new_value
-                else:
-                    new_value = self.max_dfs(new_board, player)[0]
-                    DICT[(new_board, player)] = new_value
+                lm = self.legal_moves(player, board)  
+                if len(lm) == 0:
+                    print(lm)
+                new_value = self.max_dfs(new_board, self.next_player(new_board, player), depth - 1)[0]
             if new_value > v:
-                if new_value == 1:
-                    return new_value, m
                 v = new_value
                 move = m
         return v, move
 
-    def min_dfs(self, board, player):
-        self.evaluate(board, player)
+    def min_dfs(self, board, player, depth):
+        if depth == 0:
+            return self.evaluate(board, player), None
+        if '.' not in board:
+            if self.winner(board, player) == player:
+                return MIN_VALUE * self.evaluate(board, player), None
+            if self.winner(board, player) == self.opponent(player):
+                return MAX_VALUE * self.evaluate(board, player), None
+            if self.winner(board, player) == None:
+                return 0, None
         v = INF
-        for m in self.legal_moves(board):
-            new_board = self.make_move(board, player, m)
-            if (new_board, player) in DICT:
-                new_value = DICT[(new_board, player)]
+        lm = self.legal_moves(player, board)
+        if len(lm) == 0:
+            print(lm)
+        move = lm[0]
+        for m in lm:
+            new_board = list(self.make_move(m, player, board))
+            if self.any_legal_move(self.opponent(player), new_board):
+                new_value = self.max_dfs(new_board, self.opponent(player), depth - 1)[0]
             else:
-                if self.any_legal_move(self.opponent(player)):
-                    new_value = self.max_dfs(new_board, self.opponent(player))[0]
-                    DICT[(new_board, player)] = new_value
-                else:
-                    new_value = self.min_dfs(new_board, player)[0]
-                    DICT[(new_board, player)] = new_value
+                new_value = self.min_dfs(new_board, player, depth - 1)[0]
             if new_value < v:
-                if new_value == 1:
-                    return new_value, m
                 v = new_value
                 move = m
         return v, move
@@ -167,7 +187,7 @@ class my_core(core.OthelloCore):
         #if '.' not in board and self.winner(board, player) == None:
         #    return 0
         score = 0
-        for i in len(board):
+        for i in range(len(board)):
             if board[i] == player:
                 score = score + SQUARE_WEIGHTS[i]
             elif board[i] == self.opponent(player):
@@ -175,9 +195,9 @@ class my_core(core.OthelloCore):
         return score
 
     def winner(self, board, player):
-        if self.score(board, player) > 0:
+        if self.score(player, board) > 0:
             return BLACK
-        elif self.score(board, player) < 0:
+        elif self.score(player, board) < 0:
             return WHITE
         else:
             return None
