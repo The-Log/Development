@@ -118,10 +118,7 @@ class my_core(core.OthelloCore):
         return strategy
 
     def minimax_ab(self, board, player, max_depth, b, a):
-        if player == BLACK:
-            move = self.min_dfs_ab(board, player, max_depth, b, a)[1]
-        if player == WHITE:
-            move = self.max_dfs_ab(board, player, max_depth, b, a)[1]
+        move = self.min_dfs_ab(board, player, max_depth, b, a)[1]
         return move
 
     def max_dfs_ab(self, board, player, depth, b, a):
@@ -129,9 +126,9 @@ class my_core(core.OthelloCore):
             return self.evaluate(board, player), None
         if self.any_legal_move(player, board) == False and self.any_legal_move(self.opponent(player), board) == False:
             if self.winner(board, player) == player:
-                return MIN_VALUE * self.evaluate(board, player), None
+                return INF, None
             if self.winner(board, player) == self.opponent(player):
-                return MIN_VALUE * self.evaluate(board, player), None
+                return -INF, None
             if self.winner(board, player) == None:
                 return 0, None
         v = -INF
@@ -159,9 +156,9 @@ class my_core(core.OthelloCore):
             return self.evaluate(board, player), None
         if self.any_legal_move(player, board) == False and self.any_legal_move(self.opponent(player), board) == False:
             if self.winner(board, player) == player:
-                return MAX_VALUE * self.evaluate(board, player), None
+                return -INF, None
             if self.winner(board, player) == self.opponent(player):
-                return MIN_VALUE * self.evaluate(board, player), None
+                return INF, None
             if self.winner(board, player) == None:
                 return 0, None
         v = INF
@@ -190,10 +187,7 @@ class my_core(core.OthelloCore):
         return strategy
 
     def minimax(self, board, player, depth):
-        if player == BLACK:
-            move = self.min_dfs(board, player, depth)[1]
-        if player == WHITE:
-            move = self.max_dfs(board, player, depth)[1]
+        move = self.min_dfs(board, player, depth)[1]
         return move
 
     def max_dfs(self, board, player, depth):
