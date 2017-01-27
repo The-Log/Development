@@ -101,27 +101,30 @@ class my_core(core.OthelloCore):
         return None
 
     def score(self, player, board):
-        p_s, o_s = 0, 0
-        enemy = self.opponent(player)
+        p, o = 0, 0
+        opponent = self.opponent(player)
         if board == None:
             print("wut?")
-        for square in self.squares():
-            if board[square] == player:
-                p_s = p_s + 1
-            elif board[square] == enemy:
-                o_s = o_s + 1
-        return p_s - o_s
+        for square in board:
+            if square == player:
+                p = p + 1
+            elif square == opponent:
+                o = o + 1
+        return p - o
 
     def alphabeta_strategy(self, max_depth):
         def strategy(board, player):
-            return self.minimax_ab(board, player, max_depth, INF, -INF)
+            return self.minimax_ab(board, player, max_depth, -INF, INF)
         return strategy
 
-    def minimax_ab(self, board, player, max_depth, b, a):
-        move = self.max_dfs_ab(board, player, max_depth, b, a)[1]
+    def minimax_ab(self, board, player, max_depth, a, b):
+        if (max_depth % 2 == 0):
+            move = self.max_dfs_ab(board, player, max_depth, a, b)[1]
+        if (max_depth % 2 == 1):
+            move = self.min_dfs_ab(board, player, max_depth, a, b)[1]
         return move
 
-    def max_dfs_ab(self, board, player, depth, b, a):
+    def max_dfs_ab(self, board, player, depth, a, b):
         if depth == 0:
             return self.evaluate(board, player), None
         if self.any_legal_move(player, board) == False and self.any_legal_move(self.opponent(player), board) == False:
@@ -141,10 +144,10 @@ class my_core(core.OthelloCore):
                 new_value = DICT[(str(new_board), player)]
             else:
                 if(self.next_player(new_board, player) == self.opponent(player)):
-                    new_value = self.min_dfs(new_board, self.next_player(new_board, player), depth - 1)[0]
+                    new_value = self.min_dfs_ab(new_board, self.next_player(new_board, player), depth - 1, a , b)[0]
                     DICT[(str(new_board), player)] = new_value
                 else:
-                    new_value = self.max_dfs(new_board, self.next_player(new_board, player), depth - 1)[0]
+                    new_value = self.max_dfs_ab(new_board, self.next_player(new_board, player), depth - 1, a , b)[0]
                     DICT[(str(new_board), player)] = new_value
             if new_value > v:
                 v = new_value
@@ -154,7 +157,7 @@ class my_core(core.OthelloCore):
             a = max(a,v)
         return v, move
 
-    def min_dfs_ab(self, board, player, depth, b, a):
+    def min_dfs_ab(self, board, player, depth, a, b):
         if depth == 0:
             return self.evaluate(board, player), None
         if self.any_legal_move(player, board) == False and self.any_legal_move(self.opponent(player), board) == False:
@@ -174,10 +177,10 @@ class my_core(core.OthelloCore):
                 new_value = DICT[(str(new_board), player)]
             else:
                 if self.any_legal_move(self.opponent(player), new_board):
-                    new_value = self.max_dfs(new_board, self.opponent(player), depth - 1)[0]
+                    new_value = self.max_dfs_ab(new_board, self.opponent(player), depth - 1, a, b)[0]
                     DICT[(str(new_board), player)] = new_value
                 else:
-                    new_value = self.min_dfs(new_board, player, depth - 1)[0]
+                    new_value = self.min_dfs_ab(new_board, player, depth - 1, a, b)[0]
                     DICT[(str(new_board), player)] = new_value
             if new_value < v:
                 v = new_value
@@ -193,7 +196,10 @@ class my_core(core.OthelloCore):
         return strategy
 
     def minimax(self, board, player, depth):
-        move = self.max_dfs(board, player, depth)[1]
+        if (depth % 2 == 0):
+            move = self.max_dfs(board, player, depth)[1]
+        if (depth % 2 == 1):
+            move = self.min_dfs(board, player, depth)[1]
         return move
 
     def max_dfs(self, board, player, depth):
@@ -268,9 +274,9 @@ class my_core(core.OthelloCore):
 
     def winner(self, board, player):
         if self.score(player, board) > 0:
-            return BLACK
+            return player
         elif self.score(player, board) < 0:
-            return WHITE
+            return self.opponent(player)
         else:
             return None
 
@@ -288,3 +294,5 @@ class my_core(core.OthelloCore):
         r = random.randint(0, len(lm) - 1)
         #print("Computer chose: " + str(lm[r]))
         return lm[r]
+    def get_DICT(self):
+        return DICT

@@ -1,5 +1,6 @@
 import os, signal
 import time
+import strategy as ai
 from multiprocessing import Process, Value
 time_limit = 5
 
@@ -15,7 +16,7 @@ def get_move():
 	p.start()	# start it
 	t1 = time.time()
 	move = best_move.value	# get the final best move
-    
+
     return move
 if __name__=="__main__":
 	get_move()

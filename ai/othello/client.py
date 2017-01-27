@@ -1,9 +1,9 @@
 import pickle
 import random
 import strategy as ai
-
-BLACK_STRATEGY = ai.my_core().alphabeta_strategy(4)
-WHITE_STRATEGY = ai.my_core().random_strategy
+import strat3 as ai2
+BLACK_STRATEGY = ai.my_core().random_strategy
+WHITE_STRATEGY = ai.my_core().minimax_strategy(3)
 #############################################################
 # client.py
 # a client to play othello
@@ -13,12 +13,12 @@ WHITE_STRATEGY = ai.my_core().random_strategy
 # Ankur Mishra: January 2017
 ############################################################
 
-ROUNDS = 30
-SILENT = False
+ROUNDS = 1
+SILENT = True
 
 BLACK = ai.core.BLACK
 WHITE = ai.core.WHITE
-
+DICT = {}
 def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     """
     Plays strategy_BLACK vs. strategy_WHITE, beginning with first
@@ -34,7 +34,10 @@ def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
         board = ai.my_core().make_move(move, player, board)
         player = ai.my_core().next_player(board, player)
         if not silent: print(ai.my_core().print_board(board))
+    DICT.update(ai.my_core().get_DICT())
     return ai.my_core().score(BLACK, board) # returns "@" "o" or "TIE"
+
+
 
 
 def main():
@@ -49,6 +52,7 @@ def main():
             game_result = play(BLACK_STRATEGY, WHITE_STRATEGY,
                           first=BLACK,
                           silent=SILENT)
+            pickle.dump(DICT, open("DICT.p", "wb"))
             print(game_result)
             if(game_result > 0):
                 points[0] = points[0] + 1
