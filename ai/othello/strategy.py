@@ -1,4 +1,4 @@
-import othello_core as core
+import Othello_Core as core
 import random
 import math
 
@@ -36,7 +36,7 @@ SQUARE_WEIGHTS = [
 MAX_VALUE = sum(map(abs, SQUARE_WEIGHTS))
 MIN_VALUE = -MAX_VALUE
 
-class my_core(core.OthelloCore):
+class Strategy(core.OthelloCore):
     def is_valid(self, move):
         return move in self.squares()
 
@@ -100,17 +100,13 @@ class my_core(core.OthelloCore):
             return prev_player
         return None
 
-    def score(self, player, board):
-        p, o = 0, 0
-        opponent = self.opponent(player)
-        if board == None:
-            print("wut?")
-        for square in board:
-            if square == player:
-                p = p + 1
-            elif square == opponent:
-                o = o + 1
-        return p - o
+
+    def best_strategy(self, player, board, best_move, still_running):
+        max_depth = 1
+        while(still_running.value != 0):
+            ai = self.alphabeta_strategy(max_depth)
+            best_move.value = ai(board, player)
+            max_depth = max_depth + 1
 
     def alphabeta_strategy(self, max_depth):
         def strategy(board, player):
@@ -262,6 +258,16 @@ class my_core(core.OthelloCore):
                 v = new_value
                 move = m
         return v, move
+
+    def score(self, player, board):
+        p, o = 0, 0
+        opponent = self.opponent(player)
+        for square in board:
+            if square == player:
+                p = p + 1
+            elif square == opponent:
+                o = o + 1
+        return p - o
 
     def evaluate(self, board, player):
         score = 0

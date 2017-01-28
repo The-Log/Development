@@ -1,9 +1,10 @@
 import pickle
 import random
-import strategy as ai
-import strat3 as ai2
-BLACK_STRATEGY = ai.my_core().random_strategy
-WHITE_STRATEGY = ai.my_core().minimax_strategy(3)
+import strategy as AI
+ai = AI.Strategy()
+BLACK_STRATEGY = ai.random_strategy
+WHITE_STRATEGY = ai.alphabeta_strategy(4)
+
 #############################################################
 # client.py
 # a client to play othello
@@ -13,31 +14,31 @@ WHITE_STRATEGY = ai.my_core().minimax_strategy(3)
 # Ankur Mishra: January 2017
 ############################################################
 
-ROUNDS = 1
+ROUNDS = 10
 SILENT = True
 
-BLACK = ai.core.BLACK
-WHITE = ai.core.WHITE
+BLACK = AI.core.BLACK
+WHITE = AI.core.WHITE
 DICT = {}
+pickle.dump(DICT, open("DICT.p", "wb"))
+#pickle.load("DICT.p")
 def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     """
     Plays strategy_BLACK vs. strategy_WHITE, beginning with first
     in one game. Returns score as a result (string)
     """
-    board = ai.my_core().initial_board()
+    board = ai.initial_board()
     player = first
     current_strategy = {BLACK: strategy_BLACK, WHITE: strategy_WHITE}
     if not silent:
         print(ai.my_core().print_board(board))
     while player is not None:
         move = current_strategy[player](board, player)
-        board = ai.my_core().make_move(move, player, board)
-        player = ai.my_core().next_player(board, player)
-        if not silent: print(ai.my_core().print_board(board))
-    DICT.update(ai.my_core().get_DICT())
-    return ai.my_core().score(BLACK, board) # returns "@" "o" or "TIE"
-
-
+        board = ai.make_move(move, player, board)
+        player = ai.next_player(board, player)
+        if not silent: print(ai.print_board(board))
+    DICT.update(ai.get_DICT())
+    return ai.score(BLACK, board) # returns "@" "o" or "TIE"
 
 
 def main():
@@ -62,7 +63,7 @@ def main():
                 points[2] = points[2] + 1
             print('[B,W,T]')
             print(points)
-        except ai.my_core.IllegalMoveError as e:
+        except ai.IllegalMoveError as e:
             print(e)
     print('[B,W,T]')
     print(points)
