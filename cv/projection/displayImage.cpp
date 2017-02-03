@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <opencv2/opencv.hpp>
+
+using namespace cv;
+
+int main(int argc, char** argv )
+{
+    if ( argc != 2 )
+    {
+        printf("usage: DisplayImage.out <Image_Path>\n");
+        return -1;
+    }
+
+    Mat src, gray_src;
+    src = imread( argv[1], 1 );
+
+    if ( !src.data )
+    {
+        printf("No image data \n");
+        return -1;
+    }
+
+    cvtColor( src, gray_src, CV_BGR2GRAY );
+
+    namedWindow("Display Image", WINDOW_AUTOSIZE );
+
+    imshow("Display Image", src);
+
+    waitKey(0);
+
+    return 0;
+}
