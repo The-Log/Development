@@ -70,7 +70,7 @@ def play(black_strategy, white_strategy, black_name, white_name, time_limit=60):
 
         move = best_shared.value
         print("move = ", move)
-        board = ai1.make_move(move, player, board)
+        ai1.make_move(move, player, board)
         #print(ai1.print_board(board))
         player = ai1.next_player(board, player)
 

@@ -64,11 +64,10 @@ class Strategy(core.OthelloCore):
 
     def make_move(self, move, player, board):
         #print(player)
-        new_board = list(board)
-        new_board[int(move)] = player
+        board[int(move)] = player
         for direction in DIRECTIONS:
-            self.make_flips(move, player, new_board, direction)
-        return new_board
+            self.make_flips(move, player, board, direction)
+        return board
 
     def make_flips(self, move, player, board, direction):
         bracket = self.find_bracket(move, player, board, direction)
@@ -135,7 +134,8 @@ class Strategy(core.OthelloCore):
         move = lm[0]
 
         for m in lm:
-            new_board = list(self.make_move(m, player, board))
+            new_board = list(board)
+            new_board = self.make_move(m, player, new_board)
             if (str(new_board), player) in DICT:
                 new_value = DICT[(str(new_board), player)]
             else:
@@ -168,7 +168,8 @@ class Strategy(core.OthelloCore):
         move = lm[0]
 
         for m in lm:
-            new_board = list(self.make_move(m, player, board))
+            new_board = list(board)
+            new_board = self.make_move(m, player, new_board)
             if (str(new_board), player) in DICT:
                 new_value = DICT[(str(new_board), player)]
             else:

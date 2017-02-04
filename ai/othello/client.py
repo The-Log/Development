@@ -3,7 +3,7 @@ import random
 import strategy as AI
 ai = AI.Strategy()
 BLACK_STRATEGY = ai.random_strategy
-WHITE_STRATEGY = ai.alphabeta_strategy(4)
+WHITE_STRATEGY = ai.minimax_strategy(2)
 
 #############################################################
 # client.py
@@ -15,7 +15,7 @@ WHITE_STRATEGY = ai.alphabeta_strategy(4)
 ############################################################
 
 ROUNDS = 10
-SILENT = True
+SILENT = False
 
 BLACK = AI.core.BLACK
 WHITE = AI.core.WHITE
@@ -31,9 +31,10 @@ def play(strategy_BLACK, strategy_WHITE, first=BLACK, silent=True):
     player = first
     current_strategy = {BLACK: strategy_BLACK, WHITE: strategy_WHITE}
     if not silent:
-        print(ai.my_core().print_board(board))
+        print(ai.print_board(board))
     while player is not None:
         move = current_strategy[player](board, player)
+        print(move)
         board = ai.make_move(move, player, board)
         player = ai.next_player(board, player)
         if not silent: print(ai.print_board(board))
