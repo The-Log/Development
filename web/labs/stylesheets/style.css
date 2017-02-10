@@ -1,0 +1,18 @@
+body {
+  background-color: #424242;
+  color: white;
+  font-family: 'Nunito Sans', sans-serif;
+  margin: 0 0 0 0;
+  text-align: center;
+}
+h2 {
+  text-decoration: underline;
+}
+a {
+  color: aqua;
+  text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
