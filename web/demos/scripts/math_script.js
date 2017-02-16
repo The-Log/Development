@@ -4,6 +4,6 @@ function clicked() {
   var second = document.getElementById("second");
   var v1 = first.value;
   var v2 = second.value;
-   var product = v1 * v2;
+  var product = v1 * v2;
   document.getElementById("outputDiv").innerHTML = product;
 }

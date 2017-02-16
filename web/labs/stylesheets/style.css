@@ -27,10 +27,29 @@ a:hover {
 
 .content {
   background-color:#3F51B5;
-  padding: 4em 2em 4em;
+  padding: 1em 2em 2em;
 }
 
 .footer {
   background-color:black;
   padding: 1em 1em 1em;
+}
+
+button{
+  color: lime;
+  background-color: black;
+  font-size: 12px;
+  border-color: lime;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+.table{
+  text-align: center;
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <script type="text/javascript" src = '../scripts/quiz.js'></script>
+  <title>Lab01 - Quiz Game</title>
+</head>
+  <body>
+    <div class = "intro">
+      <h1>Quiz Game</h1>
+      <h2>Name the top 10 richest people in the world before the clock stops!</h2>
+    </div>
+    <div class="content">
+      <h2 id = "timer" style="color:lime">120 secs</h2>
+      <button onclick="counter = setInterval(timer, 1000);">Start</button>
+      <button onclick="clearTimeout(counter);">Pause</button>
+      <button onclick="reset()">Reset</button>
+      <div style="padding: 1em" id = "input">
+        <input>
+      </div>
+      <div class="table">
+        <table align = center>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Name</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Bill Gates</td>
+            <td>6</td>
+            <td>Mark Zuckerberg</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Amancio Ortega</td>
+            <td>7</td>
+            <td>Larry Ellison</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Warren Buffet</td>
+            <td>8</td>
+            <td>Micheal Bloomberg</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Carlos Slim</td>
+            <td>9</td>
+            <td>Charles Koch</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Jeff Bezos</td>
+            <td>10</td>
+            <td>David Koch</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="footer">
+      <p>This site is maintained by <a href="https://github.com/the-log">The-Log.</a> </p>
+    </div>
+  </body>
+</html>
