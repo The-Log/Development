@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Trials of Loading a Page</title>
+  <script>
+    window.onload=function(){
+      var princesses = ["Snow White", "Cinderalla", "Pocahontas",
+"        Jasmine", "Belle", "Ariel", "Mulan"];
+      console.log("Page loaded");
+      document.getElementById("div2Change").innerHTML = "YOLO";
+      var pDiv = document.getElementById("princesses")
+      for (var k=0; k < princesses.length; k++){
+        var newDiv = document.createElement("div");
+        newDiv.innerHTML = princesses[k];
+        newDiv.id = "princesses" + k;
+        pDiv.appendChild(newDiv);
+      }
+     }
+  </script>
+</head>
+<body>
+  <div id = "div2Change"></div>
+  <div id = "princesses"></div>
+
+</body>
+</html>

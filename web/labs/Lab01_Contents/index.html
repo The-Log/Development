@@ -8,18 +8,18 @@
   <script type="text/javascript" src = '../scripts/quiz.js'></script>
   <title>Lab01 - Quiz Game</title>
 </head>
-  <body>
+  <body onload= "disableText()">
     <div class = "intro">
       <h1>Quiz Game</h1>
-      <h2>Name the top 10 richest people in the world before the clock stops!</h2>
+      <h2>Name the top 20 richest people in the world before the clock stops!</h2>
     </div>
     <div class="content">
-      <h2 id = "timer" style="color:lime">120 secs</h2>
-      <button onclick="counter = setInterval(timer, 1000);">Start</button>
-      <button onclick="clearTimeout(counter);">Pause</button>
+      <h2 id = "timer" style="color:lime">240 secs</h2>
+      <button onclick="startTimer()">Start</button>
+      <button onclick="pause()">Pause</button>
       <button onclick="reset()">Reset</button>
-      <div style="padding: 1em" id = "input">
-        <input>
+      <div style="padding: 1em" id = "inputDiv">
+        <input id = "input" onkeyup="check()">
       </div>
       <div class="table">
         <table align = center>
@@ -28,36 +28,60 @@
             <th>Name</th>
             <th>Rank</th>
             <th>Name</th>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Name</th>
           </tr>
           <tr>
             <td>1</td>
-            <td>Bill Gates</td>
+            <td id = "rich1"></td>
             <td>6</td>
-            <td>Mark Zuckerberg</td>
+            <td id = "rich6"></td>
+            <td>11</td>
+            <td id = "rich11"></td>
+            <td>16</td>
+            <td id = "rich16"></td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Amancio Ortega</td>
+            <td id = "rich2"></td>
             <td>7</td>
-            <td>Larry Ellison</td>
+            <td id = "rich7"></td>
+            <td>12</td>
+            <td id = "rich12"></td>
+            <td>17</td>
+            <td id = "rich17"></td>
           </tr>
           <tr>
             <td>3</td>
-            <td>Warren Buffet</td>
+            <td id = "rich3"></td>
             <td>8</td>
-            <td>Micheal Bloomberg</td>
+            <td id = "rich8"></td>
+            <td>13</td>
+            <td id = "rich13"></td>
+            <td>18</td>
+            <td id = "rich18"></td>
           </tr>
           <tr>
             <td>4</td>
-            <td>Carlos Slim</td>
+            <td id = "rich4"></td>
             <td>9</td>
-            <td>Charles Koch</td>
+            <td id = "rich9"></td>
+            <td>14</td>
+            <td id = "rich14"></td>
+            <td>19</td>
+            <td id = "rich19"></td>
           </tr>
           <tr>
             <td>5</td>
-            <td>Jeff Bezos</td>
+            <td id = "rich5"></td>
             <td>10</td>
-            <td>David Koch</td>
+            <td id = "rich10"></td>
+            <td>15</td>
+            <td id = "rich15"></td>
+            <td>20</td>
+            <td id = "rich20"></td>
           </tr>
         </table>
       </div>
