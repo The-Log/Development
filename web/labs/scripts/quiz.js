@@ -14,13 +14,18 @@ function startTimer(){
 function decrementTime()
 {
   time = time-1;
+  //console.log(Math.floor(time / 60) + ":" + time % 60);
   if (time <= 0)
   {
      alert('Game over. You got: ' + score + "/" + richPeople.length);
      reset();
      return;
   }
-  document.getElementById("timer").innerHTML= time + " secs";
+  if(time % 60 > 10)
+    document.getElementById("timer").innerHTML= Math.floor(time / 60) + ":" + time % 60;
+  else {
+    document.getElementById("timer").innerHTML= Math.floor(time / 60) + ":0" + time % 60;
+  }
 }
 
 function pause() {
@@ -34,7 +39,7 @@ function reset() {
   score = 0;
   clearTimeout(counter);
   document.getElementById("input").style.visibility = "hidden";
-  document.getElementById("timer").innerHTML= time + " secs";
+  document.getElementById("timer").innerHTML= "4:00";
   isRunning = false;
   for (var i = 0; i < richPeople.length; i++) {
     document.getElementById("rich" + [i+1]).innerHTML= "";
@@ -45,10 +50,11 @@ function check(){
   var in1 = document.getElementById("input");
   var i;
   for(i = 0; i < richPeople.length; i++){
-    if (richPeople[i].toLowerCase() == in1.value.toLowerCase()){
+    if (richPeople[i].toLowerCase() == in1.value.toLowerCase() && gotten.indexOf("" + richPeople[i]) == -1){
       document.getElementById("rich" + [i+1]).innerHTML= richPeople[i];
       document.getElementById("input").value = "";
       score =  score + 1;
+      gotten.push(richPeople[i]);
       if(score == richPeople.length){
         alert("You won!");
         reset();
@@ -57,7 +63,7 @@ function check(){
     console.log(score);
   }
 }
-
+var gotten = [];
 var richPeople = [
   "Bill Gates",
   "Amancio Ortega",

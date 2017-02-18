@@ -11,13 +11,13 @@
   <body onload= "disableText()">
     <div class = "intro">
       <h1>Quiz Game</h1>
-      <h2>Name the top 20 richest people in the world before the clock stops!</h2>
+      <h3>Name the top 20 richest people in the world before the clock stops!</h3>
     </div>
     <div class="content">
-      <h2 id = "timer" style="color:lime">240 secs</h2>
-      <button onclick="startTimer()">Start</button>
-      <button onclick="pause()">Pause</button>
-      <button onclick="reset()">Reset</button>
+      <h1 id = "timer">4:00</h1>
+      <button  class="btn" onclick="startTimer()"><span>Start</span></button>
+      <button  class="btn" onclick="pause()"><span>Pause</span></button>
+      <button  class="btn" onclick="reset()"><span>Reset</span></button>
       <div style="padding: 1em" id = "inputDiv">
         <input id = "input" onkeyup="check()">
       </div>

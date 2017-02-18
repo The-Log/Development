@@ -5,11 +5,11 @@ body {
   margin: 0 0 0 0;
   text-align: center;
 }
+input{
+  margin: 10px;
+}
 h1{
   color: lime;
-}
-h2 {
-  text-decoration: underline;
 }
 a {
   color: aqua;
@@ -27,7 +27,7 @@ a:hover {
 
 .content {
   background-color:#3F51B5;
-  padding: 2em 2em 10em;
+  padding: 2em 2em 5em;
 }
 
 .footer {
@@ -35,11 +35,74 @@ a:hover {
   padding: 1em 1em 1em;
 }
 
-button{
-  color: lime;
-  background-color: black;
-  font-size: 12px;
-  border-color: lime;
+.btn {
+  position: relative;
+
+  padding: 0;
+  font-size: 15px;
+  overflow: hidden;
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+  background-color: #2ecc71;
+  color: black;
+
+  transition: background-color .3s;
+}
+
+.btn:hover, .btn:focus {
+  background-color: #27ae60;
+}
+
+.btn span {
+  display: block;
+  padding: 5px;
+}
+
+.btn:before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 0;
+  padding-top: 0;
+
+  border-radius: 100%;
+
+  background-color: rgba(236, 240, 241, .3);
+
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.btn:active:before {
+  width: 120%;
+  padding-top: 120%;
+
+  transition: width .2s ease-out, padding-top .2s ease-out;
+}
+
+.btn.orange {
+  background-color: #e67e22;
+}
+
+.btn.orange:hover, .btn.orange:focus {
+  background-color: #d35400;
+}
+
+.btn.red {
+  background-color: #e74c3c;
+}
+
+.btn.red:hover, .btn.red:focus {
+  background-color: #c0392b;
 }
 
 table, th, td {
