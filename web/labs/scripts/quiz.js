@@ -21,7 +21,7 @@ function decrementTime()
      reset();
      return;
   }
-  if(time % 60 > 10)
+  if(time % 60 > 9)
     document.getElementById("timer").innerHTML= Math.floor(time / 60) + ":" + time % 60;
   else {
     document.getElementById("timer").innerHTML= Math.floor(time / 60) + ":0" + time % 60;

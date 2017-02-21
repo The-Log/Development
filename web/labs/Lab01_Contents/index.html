@@ -4,90 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
   <script type="text/javascript" src = '../scripts/quiz.js'></script>
   <title>Lab01 - Quiz Game</title>
 </head>
-  <body onload= "disableText()">
-    <div class = "intro">
-      <h1>Quiz Game</h1>
-      <h3>Name the top 20 richest people in the world before the clock stops!</h3>
+<body onload= "disableText()">
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Ankur's Web Projects</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="http://ankurmishra.ml">About</a></li>
+            <li><a href="http://ankurmishra.ml/blog/home">Blog</a></li>
+            <!-- <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact me <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Phone</a></li>
+            <li role="separator" class="divider"></li>
+          </ul>
+        </li> -->
+      </ul>
     </div>
-    <div class="content">
-      <h1 id = "timer">4:00</h1>
-      <button  class="btn" onclick="startTimer()"><span>Start</span></button>
-      <button  class="btn" onclick="pause()"><span>Pause</span></button>
-      <button  class="btn" onclick="reset()"><span>Reset</span></button>
-      <div style="padding: 1em" id = "inputDiv">
-        <input id = "input" onkeyup="check()">
-      </div>
-      <div class="table">
-        <table align = center>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Name</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td id = "rich1"></td>
-            <td>6</td>
-            <td id = "rich6"></td>
-            <td>11</td>
-            <td id = "rich11"></td>
-            <td>16</td>
-            <td id = "rich16"></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td id = "rich2"></td>
-            <td>7</td>
-            <td id = "rich7"></td>
-            <td>12</td>
-            <td id = "rich12"></td>
-            <td>17</td>
-            <td id = "rich17"></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td id = "rich3"></td>
-            <td>8</td>
-            <td id = "rich8"></td>
-            <td>13</td>
-            <td id = "rich13"></td>
-            <td>18</td>
-            <td id = "rich18"></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td id = "rich4"></td>
-            <td>9</td>
-            <td id = "rich9"></td>
-            <td>14</td>
-            <td id = "rich14"></td>
-            <td>19</td>
-            <td id = "rich19"></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td id = "rich5"></td>
-            <td>10</td>
-            <td id = "rich10"></td>
-            <td>15</td>
-            <td id = "rich15"></td>
-            <td>20</td>
-            <td id = "rich20"></td>
-          </tr>
-        </table>
-      </div>
+  </div>
+</nav>
+</div>
+<div class="container">
+
+  <div class = "page-header">
+    <h1>Quiz Game</h1>
+    <h3>Name the 20 richest people in the world before the clock stops!</h3>
+  </div>
+  <div class="jumbotron" style="background-color:#3F51B5; color:white">
+    <h2 id = "timer">4:00</h2>
+    <div class="btn-group">
+      <button  class="btn btn-info" onclick="startTimer()"><span>Start</span></button>
+      <button  class="btn btn-info" onclick="pause()"><span>Pause</span></button>
+      <button  class="btn btn-info" onclick="reset()"><span>Reset</span></button>
     </div>
-    <div class="footer">
-      <p>This site is maintained by <a href="https://github.com/the-log">The-Log.</a> </p>
+    <div style="padding: 1em" id = "inputDiv">
+      <input id = "input" class="input-mm" style="color:black" onkeyup="check()">
     </div>
-  </body>
+    <div>
+      <table align = center class="table-condensed" style="color:white">
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Name</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td id = "rich1"></td>
+          <td>6</td>
+          <td id = "rich6"></td>
+          <td>11</td>
+          <td id = "rich11"></td>
+          <td>16</td>
+          <td id = "rich16"></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td id = "rich2"></td>
+          <td>7</td>
+          <td id = "rich7"></td>
+          <td>12</td>
+          <td id = "rich12"></td>
+          <td>17</td>
+          <td id = "rich17"></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td id = "rich3"></td>
+          <td>8</td>
+          <td id = "rich8"></td>
+          <td>13</td>
+          <td id = "rich13"></td>
+          <td>18</td>
+          <td id = "rich18"></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td id = "rich4"></td>
+          <td>9</td>
+          <td id = "rich9"></td>
+          <td>14</td>
+          <td id = "rich14"></td>
+          <td>19</td>
+          <td id = "rich19"></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td id = "rich5"></td>
+          <td>10</td>
+          <td id = "rich10"></td>
+          <td>15</td>
+          <td id = "rich15"></td>
+          <td>20</td>
+          <td id = "rich20"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <footer>
+    <p>This site is maintained by <a href="https://github.com/the-log">The-Log.</a></p>
+  </footer>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src = '../bootstrap/js/bootstrap.min.js'></script>
+</body>
 </html>
