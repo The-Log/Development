@@ -41,6 +41,7 @@ function reset() {
   document.getElementById("input").style.visibility = "hidden";
   document.getElementById("timer").innerHTML= "4:00";
   isRunning = false;
+  gotten = [];
   for (var i = 0; i < richPeople.length; i++) {
     document.getElementById("rich" + [i+1]).innerHTML= "";
   }
