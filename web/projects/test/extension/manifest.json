@@ -1,0 +1,25 @@
+{
+  "name":"test",
+  "version":"1.0",
+  "manifest_version":2,
+  "description":"just a test",
+  "icons":{
+    "16":"/src/xd_16.png",
+    "48":"/src/xd_48.png",
+    "128":"/src/xd_128.png"
+  },
+  "background":{
+    "scripts":["/scripts/background.js"]
+  },
+  "browser_action":{
+    "default_title":"test",
+    "default_icon":"/src/xd_16.png"
+  },
+  "options_page":"options.html",
+  "permissions":[
+    "background",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
