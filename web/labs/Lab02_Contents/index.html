@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src = '../scripts/domTree.js'></script>
   <title>Lab02 - DOM Tree Navigation</title>
 </head>
-<body>
+<body id = "0" onclick="highlight(event)">
   <div class="container">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -39,13 +40,32 @@
           </div>
         </div>
       </nav>
-    </div>
+  </div>
   <div class="container">
     <div class="page-header">
       <h1>DOM Tree Navigation</h1>
     </div>
-    <div class="jumbotron style1">
-      <p></p>
+    <div class="jumbotron location" id = "1">
+      Zoo
+      <div class="jumbotron animal" id = "2">
+        Gi<span>raf</span>fe
+        <div class="jumbotron child" id = "3">Ga</div>
+        <div class="jumbotron child" id = "4">Gb</div>
+        <div class="jumbotron child" id = "5">Gc</div>
+        <div class="jumbotron child" id = "6">Gd</div>
+        <div class="jumbotron child" id = "7">Ge</div>
+      </div>
+    </div>
+    <div class="jumbotron location" id = "8">
+      Wild
+      <div class="jumbotron animal" id = "9">
+        Lion
+        <div class="jumbotron child" id = "10">La</div>
+        <div class="jumbotron child" id = "11">Lb</div>
+        <div class="jumbotron child" id = "12">Lc</div>
+        <div class="jumbotron child" id = "13">Ld</div>
+        <div class="jumbotron child" id = "14">Le</div>
+      </div>
     </div>
   </div>
   <footer>

@@ -1,11 +1,16 @@
 body{
-  background-color: cyan;
+  background-color: #b9e8f7;
 }
 input{
   border: 2px red solid;
 }
-div{
-  color: white;
-  background-color: purple;
+div {
+  background-color: #ccb8d6;
   font-family: "Courier New";
+  padding: 1em 1em 1em;
+}
+div div{
+  background-color: #b8d6b8;
+  margin: 1em;
+  padding: 1em 1em 1em;
 }

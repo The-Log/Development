@@ -1,0 +1,23 @@
+.jumbotron.animal{
+  background-color: #2196F3;
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  padding: 1em 1em 1em;
+}
+
+.jumbotron.location{
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  padding: 1em 1em 1em;
+}
+
+.jumbotron.child{
+  background-color: #3F51B5;
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  padding: 1em 1em 1em;
+}
