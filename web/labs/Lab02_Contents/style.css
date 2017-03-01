@@ -13,6 +13,12 @@
   text-align: left;
   padding: 1em 1em 1em;
 }
+.jumbotron.location span{
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
 
 .jumbotron.child{
   background-color: #3F51B5;

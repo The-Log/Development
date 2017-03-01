@@ -1,25 +1,23 @@
+
 {
-  "name":"test",
-  "version":"1.0",
-  "manifest_version":2,
-  "description":"just a test",
-  "icons":{
-    "16":"/src/xd_16.png",
-    "48":"/src/xd_48.png",
-    "128":"/src/xd_128.png"
+  "name": "Kyle Gerner",
+  "version": "3.0",
+  "homepage_url": "http://kylegerner.ga/y",
+  "description": "Replaces all images on a given page with pictures of Kylie Gerner.",
+  "icons": { "16"  : "/img/xd_16.png",
+             "48"  : "/img/xd_48.png",
+             "128" : "/img/xd_128.png"},
+  "browser_action": {
+    "default_icon": "xd_128.png",
+    "default_title": "<3 Kylie"
   },
-  "background":{
-    "scripts":["/scripts/background.js"]
+  "permissions": [
+    "activeTab",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": ["/scripts/background.js", "/scripts/replace.js"],
+    "persistent": false
   },
-  "browser_action":{
-    "default_title":"test",
-    "default_icon":"/src/xd_16.png"
-  },
-  "options_page":"options.html",
-  "permissions":[
-    "background",
-    "tabs",
-    "http://*/*",
-    "https://*/*"
-  ]
+  "manifest_version": 2
 }
