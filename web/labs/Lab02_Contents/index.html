@@ -10,45 +10,48 @@
   <script type="text/javascript" src = '../scripts/domTree.js'></script>
   <title>Lab02 - DOM Tree Navigation</title>
 </head>
-<body id = "0" onclick="highlight(event)">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="../index.html">Ankur's Web Projects</a>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="../index.html">Home <span class="sr-only">(current)</span></a></li>
-              <li><a href="http://ankurmishra.ml">About</a></li>
-              <li><a href="http://ankurmishra.ml/blog/home">Blog</a></li>
-               <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact me <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Email</a></li>
-                  <li><a href="#">Phone</a></li>
-                  <li role="separator" class="divider"></li>
-                </ul>
-              </li> -->
-            </ul>
-          </div>
+<body id = "0" onclick="highlight2(event)">
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Ankur's Web Projects</a>
         </div>
-      </nav>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="http://ankurmishra.ml">About</a></li>
+            <li><a href="http://ankurmishra.ml/blog/home">Blog</a></li>
+            <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact me <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Email</a></li>
+                <li><a href="#">Phone</a></li>
+                <li role="separator" class="divider"></li>
+              </ul>
+            </li> -->
+        </ul>
+      </div>
+      </div>
+    </nav>
   </div>
   <div class="container" id = "1">
     <div class="page-header">
       <h1>DOM Tree Navigation</h1>
     </div>
-    <ul style="list-style-type:circle; list-style-position: inside;">
-      <h2>Categories</h2>
-      <h3><li>Zoo</li></h3>
-      <h3><li>Wild</li></h3>
-    </ul>
+    <div class="jumbotron">
+      <ul style="list-style-type:circle; list-style-position: inside;">
+        <h2>Categories</h2>
+        <h3><li>Zoo</li></h3>
+        <h3><li>Wild</li></h3>
+      </ul>
+    </div>
     <div class="jumbotron location" id = "2">
       Zoo
       <div class="jumbotron animal" id = "3">
