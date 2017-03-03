@@ -1,4 +1,5 @@
 var l = [];
+var temp = 0;
 var target, parent, counter;
 var isRunning = false;
 function highlight2(event){
@@ -7,6 +8,7 @@ function highlight2(event){
     element = null;
     l = [];
   }
+  temp = 0;
   if(target == null)
     console.log("Out of area");
   clearTimeout(counter);
@@ -27,6 +29,14 @@ function highlight2(event){
 function call2(){
   console.log(l);
   var element = l.pop();
+  if(target.parentElement.parentElement.nextElementSibling != null && l.indexOf(target.parentElement.parentElement.nextElementSibling ) <= -1 && temp == 0){
+    l.push(target.parentElement.parentElement.nextElementSibling);
+    console.log("Being dumb");
+  }
+  if(target.parentElement.nextElementSibling != null && l.indexOf(target.parentElement.nextElementSibling) <= -1 && temp == 0){
+    l.push(target.parentElement.nextElementSibling);
+  }
+  temp = 1;
   if(l.length == 0 && element.children.length == 0 && element.nextElementSibling == null){
     element.style.border = "thick solid yellow";
     var counter2 = setInterval(function() {
