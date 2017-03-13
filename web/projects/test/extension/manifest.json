@@ -2,7 +2,7 @@
 {
   "name": "Kyle Gerner",
   "version": "3.0",
-  "homepage_url": "http://kylegerner.ga/y",
+  "homepage_url": "http://kylegerner.ga",
   "description": "Replaces all images on a given page with pictures of Kylie Gerner.",
   "icons": { "16"  : "/img/xd_16.png",
              "48"  : "/img/xd_48.png",

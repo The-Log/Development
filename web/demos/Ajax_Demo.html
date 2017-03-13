@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grab Weather Data</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            function getWeather(){
+                //get the current zip code from input
+                var zip = $("#zipIn").val();
+                console.log(zip)
+                //call ajax
+                var myURL = "http://api.openweathermap.org/data/2.5/weather"
+                var inputData={
+                    zip:zip+",us",
+                    appid:"1dc527a27fe660d07b72fab80b0e6452"
+                }
+                $.ajax({
+                    url:myURL,
+                    success:function(data){
+                        console.log(data);
+                        var tempInK = data.main.temp;
+                        var tempInF = 9/5*(tempInK-273)+32;
+                        $("#output").html(tempInF);
+                        displayTimes(data);
+                    },
+                    data:inputData
+                })
+            }
+            function displayTimes(obj){
+              var sunrise = obj.sys.sunrise;
+              console.log(sunrise);
+              var sunset = obj.sys.sunset;
+              var date1 = new Date(sunrise*1000);
+              var hours1 = date1.getHours();
+              var mins1 = date1.getMinutes();
+              var date2 = new Date(sunset*1000);
+              var hours2 = date2.getHours();
+              var mins2 = date2.getMinutes();
+              $("#sunrise").html(hours1 + ":" + mins1)
+              $("#sunset").html(hours2 + ":" + mins2)
+
+            }
+        </script>
+    </head>
+    <body>
+        <input type="number" id='zipIn'>
+        <button onclick="getWeather()">Click me to query weather!</button>
+        <div id='output'></div>
+        <div id='sunrise'></div>
+        <div id='sunset'></div>
+
+    </body>
+</html>
