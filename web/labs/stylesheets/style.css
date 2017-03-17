@@ -45,3 +45,10 @@ a:hover {
   left: 0;
   right: 0;
 }
+.fixed_button {
+    width: 300px !important;
+    height: 50px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 15px;
+}
