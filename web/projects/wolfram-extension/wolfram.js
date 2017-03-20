@@ -11,11 +11,8 @@ $("#select").on('click',sendRequest);
 function sendRequest(){
     //get the current zip code from input
     var input = "" + $("#input").val();
-    if(input == "Snowshal" || input == "Snowshal Reddy" || input == "Boshal"|| input == "Boshal Reddy"){
-        input = "Adolf Hitler";
-    }
     var inFormated = input.split(' ').join('%20');
-    var inFormated = input.split('+').join('plus');
+    inFormated = input.split('+').join('plus');
 
     console.log(inFormated);
     //call ajax
