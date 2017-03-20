@@ -7,15 +7,24 @@ body {
   text-align: center;
 }
 input{
-  margin: 10px;
   color: black;
 }
 
 a {
-  color: aqua;
+  color: #1976D2;
   text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
+}
+h1{
+  color: #3F51B5;
+}
+.form-control{
+  min-width: 250px;
+  max-width: 550px;
+}
+p{
+  font-family: 'Roboto Thin', sans-serif;
 }

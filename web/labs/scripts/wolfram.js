@@ -1,4 +1,12 @@
 console.log("Loaded");
+
+$("#input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        sendRequest();
+        console.log("xd");
+    }
+});
+
 function sendRequest(){
     //get the current zip code from input
     var input = "" + $("#input").val();
@@ -45,5 +53,5 @@ function displayResult(obj){
     image.alt = temp;
     $("#result" + i).html(image);
   }
-  $("#results").fadeIn(100).fadeOut(100).fadeIn(100);
+  $("#results").fadeOut(500).fadeIn(500);
 }

@@ -1,4 +1,11 @@
 console.log("Loaded");
+$("#input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        sendRequest();
+        console.log("xd");
+    }
+});
+
 $("#select").on('click',sendRequest);
 
 function sendRequest(){
@@ -14,7 +21,7 @@ function sendRequest(){
     //call ajax
     var myURL = "https://api.wolframalpha.com/v2/query"
     var inputData={
-        appid: "?appid=GHAVTU-GJGRU5393J",
+        appid: "?appid=RJK7TT-LX4QXPHE4A",
         input: "&input=" + inFormated,
         output: "&output=json"
     }
@@ -34,7 +41,6 @@ function sendRequest(){
 }
 
 function displayResult(obj){
-  document.getElementById("results").style.visibility = "visible";
   if ("pods" in obj.queryresult == false) {
     $("#results").html("Could not find answer! Try something else.");
     return;
@@ -53,5 +59,6 @@ function displayResult(obj){
     image.alt = temp;
     $("#result" + i).html(image);
   }
-  $("#results").fadeIn(100).fadeOut(100).fadeIn(100);
+  document.getElementById("results").style.visibility = "visible";
+  $("#results").fadeOut(500).fadeIn(500);
 }
