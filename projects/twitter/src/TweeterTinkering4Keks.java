@@ -129,7 +129,7 @@ class twitterFun {
         List<String> usernames = new ArrayList<>();
         List<String> messages = new ArrayList();
         List<File> files =  new ArrayList<>();
-        File dir = new File("/Volumes/Mac OSX SSD 120GB/Users/ankurM/Development/cs/AP CS/Unit 5 Collections/src/shillingEquipment/");
+        //File dir = new File("/Volumes/Mac OSX SSD 120GB/Users/ankurM/Development/cs/AP CS/Unit 5 Collections/src/shillingEquipment/");
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File child : directoryListing) {
