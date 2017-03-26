@@ -1,5 +1,5 @@
 import pickle
-
+from collections import Counter
 #noun2ids = dict()
 #id2synset = dict()
 noun2ids = pickle.load( open( "noun2ids.p", "rb" ) )
@@ -11,9 +11,7 @@ class wordNet:
 
     def read_synsets(self, sysnets):
         if len(noun2ids) != 0 and len(id2synset) != 0:
-            print("succ my wewe")
             return
-        print("I luv large dongers")
         open_file = open(sysnets, "r")
         for w in open_file:
             w = w.rstrip("\n")
@@ -21,25 +19,21 @@ class wordNet:
             idnum = int(tokens.pop(0))
             nouns = tokens.pop(0)
             id2synset[idnum] = nouns
-            #print(str(idnum) + id2synset[idnum])
-            nouns = nouns.split(" ")
+            for n in nouns.split(" "):
+                noun2ids[n] = idnum
         open_file.close()
 
     def read_hypernyms(self, hypernyms):
-        if len(noun2ids) != 0 and len(id2synset) != 0:
-            print("succ my wewe")
-            return
-        print("I luv large dongers")
-        open_file = open(sysnets, "r")
+        open_file = open(hypernyms, "r")
         for w in open_file:
             w = w.rstrip("\n")
             tokens = w.split(",")
             idnum = int(tokens.pop(0))
-            nouns = tokens.pop(0)
-            id2synset[idnum] = nouns
-            #print(str(idnum) + id2synset[idnum])
-            nouns = nouns.split(" ")
-        open_file.close()
+            root = id2synset[idnum]
+            edges = []
+            for t in tokens:
+                edges.append(id2synset[t])
+            print(str(root) + ':' + str(edges))
 
 
     def nouns(self):
@@ -57,10 +51,18 @@ class wordNet:
     def distance(noun1, noun2):
         pass
 
-wn = wordNet("synsets.txt", "hypernyms.txt")
-wn.read_sysnets("synsets.txt")
+class SCA:
+    def __init__(self):
+        pass
+    def length():
+        pass
+    def ancestor():
+        pass
 
-print(noun2ids["a"])
+
+wn = wordNet("synsets.txt", "hypernyms.txt")
+wn.read_synsets("synsets.txt")
+wn.read_hypernyms("hypernyms.txt")
 
 pickle.dump(noun2ids, open("noun2ids.p", "wb"))
 pickle.dump(id2synset, open("id2synset.p", "wb"))

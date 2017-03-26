@@ -12,7 +12,7 @@ function sendRequest(){
     //get the current zip code from input
     var input = "" + $("#input").val();
     var inFormated = input.split(' ').join('%20');
-    inFormated = input.split('+').join('plus');
+    inFormated = inFormated.split('+').join('plus');
 
     console.log(inFormated);
     //call ajax
