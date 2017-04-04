@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Components</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="vendors/react/js/react.js"></script>
+  <script src="vendors/react/js/react-dom.js"></script>
+  <script src="vendors/babel/js/browser.js"></script>
+  <script type="text/babel">
+    var Component = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string.isRequired,
+      },
+      render: function(){
+        return React.DOM.span(null, "My name is " + this.props.name);
+      }
+    });
+    ReactDOM.render(
+     React.createElement(Component,{
+       name: "Geoff",
+      //  name:123,
+     }),
+     document.getElementById("app")
+    );
+    // alternate way - a factory
+    // var ComponentFactory = React.createFactory(Component);
+    // ReactDOM.render(
+    //   ComponentFactory(),
+    //   // React.createElement("span", null, "I'm so custom!"), // another way!
+    //   document.getElementById("app")
+    // );
+  </script>
+  <script type="text/babel"></script>
+</body>
+</html>

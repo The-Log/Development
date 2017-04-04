@@ -16,7 +16,15 @@
       React.DOM.h1(
         {id: "my-heading"},
         React.DOM.span(null,
-          React.DOM.em(null,
+          React.DOM.em(
+            {
+              className:"hehe",
+              style: {
+                background: "black",
+                color: "blue",
+                fontSize:"50px"
+              },
+            },
             "Hell"
           ),
           "o"
@@ -27,9 +35,15 @@
     );
   </script> -->
   <script type="text/babel"> // JSX version
+    const style = {
+      background: "black",
+      color: "blue",
+      fontSize:"50px"
+    };
+    const cName = "hehe";
     ReactDOM.render(
       <h1 id = "my-heading">
-        <span><em>Hell</em>o</span> World!
+        <span><em className={cName} style={style}>Hell</em>o</span> World!
       </h1>,
       document.getElementById("app")
     );
