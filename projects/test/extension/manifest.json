@@ -1,0 +1,23 @@
+
+{
+  "name": "Kyle Gerner",
+  "version": "3.0",
+  "homepage_url": "http://kylegerner.ga",
+  "description": "Replaces all images on a given page with pictures of Kylie Gerner.",
+  "icons": { "16"  : "/img/xd_16.png",
+             "48"  : "/img/xd_48.png",
+             "128" : "/img/xd_128.png"},
+  "browser_action": {
+    "default_icon": "xd_128.png",
+    "default_title": "<3 Kylie"
+  },
+  "permissions": [
+    "activeTab",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": ["/scripts/background.js", "/scripts/replace.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}

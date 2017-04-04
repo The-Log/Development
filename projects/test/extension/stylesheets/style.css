@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: 'Roboto Thin', sans-serif;
+  margin: 0 0 0 0;
+  text-align: center;
+}
+input{
+  margin: 10px;
+}
+a {
+  color: aqua;
+  text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.jumbotron{
+  color:black;
+  font-size: 16px;
+}
+
+.jumbotron p {
+  font-size: 16px;
+  margin: 0cm 2.5cm;
+}
+
+.jumbotron.style1{
+  background-color: #3F51B5;
+  color: white;
+  font-size: 16px;
+  padding: 1em 1em 4em;
+}
+
+.jumbotron.footer{
+  padding: 1em 1em 1em;
+  background-color: #000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
