@@ -67,17 +67,17 @@ class graph():
              return 0
          return acos( sin(y1)*sin(y2) + cos(y1)*cos(y2)*cos(x2-x1) ) * R
 
-G = graph()
+# G = graph()
+# pickle.dump(G, open("graph.p", "wb"))
 
-pickle.dump(G, open("graph.p", "wb"))
-
+G = pickle.load(open("graph.p", "rb"))
 class node():
-    def __init__(self, parent = None, node = "1700665", goal = "1701128", depth = 0):
+    def __init__(self, parent = None, node = "1700665", goal = "1701128", edges = G.nte["1700665"], depth = 0):
         self.parent = parent
         self.goal = goal
         self.node = node
         self.depth = depth
-        self.edges = G[self.node]
+        self.edges = edges
         self.lat = G.ntc[node][1]
         self.long = G.ntc[node][0]
 
@@ -139,6 +139,7 @@ for n in open_test:
     start_time = time()
     searchDist = search(sn)
     end_time = time()
+    print(start + "\t\t\t" + end+ "\t\t\t" + str(searchDist) + "\t\t\t" +str(end_time - start_time) + "\n")
     write_solutions.write(start + "\t\t\t" + end+ "\t\t\t" + str(searchDist) + "\t\t\t" +str(end_time - start_time) + "\n")
 open_test.close()
 write_solutions.close()
