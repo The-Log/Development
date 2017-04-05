@@ -31,32 +31,23 @@
       componentWillUnmount: function() {
         this._log('componentWillUnmount', arguments);
       },
-    };
+    }
+    var Counter = React.createClass({
+      name:'Counter',
+      mixins:[logMixin],
+      propTypes:{
+        count: React.PropTypes.number.isRequired,
+      },
+      render: function(){
+        return React.DOM.span(null, this.props.count);
+      }
+    });
     var TextAreaCounter = React.createClass({
       name:'TextAreaCounter',
       mixins:[logMixin],
       propTypes: {
         defaultValue: React.PropTypes.string,
       },
-      //life cycle function: listens to changes of your component
-      //  _log: function(methodName, args) {
-      //    console.log(methodName, args);
-      //  },
-      //  componentWillUpdate: function() {
-      //    this._log('componentWillUpdate', arguments);
-      //  },
-      //  componentDidUpdate: function() {
-      //    this._log('componentDidUpdate', arguments);
-      //  },
-      //  componentWillMount: function() {
-      //    this._log('componentWillMount', arguments);
-      //  },
-      //  componentDidMount: function() {
-      //    this._log('componentDidMount', arguments);
-      //  },
-      //  componentWillUnmount: function() {
-      //    this._log('componentWillUnmount', arguments);
-      //  },
       getDefaultProps: function(){
         return{
           text:'',
@@ -73,23 +64,29 @@
         });
       },
       componentWillReceiveProps: function(newProps) {
-        // NOTE: doesn't do its job in response to outside interaction
         this.setState({
           text: newProps.defaultValue,
         });
       },
       render: function(){
+        var counter = null;
+        if(this.state.text.length > 0){
+          counter = React.DOM.h3(null,
+            React.createElement(Counter,{
+              count:this.state.text.length,
+            }),
+          );
+        }
         return React.DOM.div(null,
           React.DOM.textarea({
             value: this.state.text,
             onChange:this._textChange,
           }),
-          React.DOM.h3(null, this.state.text.length)
+          counter
         );
       }
     });
     var myTextAreaCounter = ReactDOM.render(
-      // NOTE: Should be able to access this from outside, as book says I should and it should work in theory
       React.createElement(TextAreaCounter,{
         defaultValue:'Geoff',
       }),
