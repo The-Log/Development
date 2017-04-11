@@ -6,7 +6,8 @@ var path = require('path');
 var natural = require("natural");
   TfIdf = natural.TfIdf,
   tfidf = new TfIdf();
-var wordnet = new natural.WordNet();
+var pos = require('pos');
+
 require('events').EventEmitter.prototype._maxListeners = 100;
 
 var stopWords = require('stopwords').english;
@@ -26,14 +27,26 @@ var numDocs = 0;
 request(url, function(error, response, html){
   if(!error && response.statusCode == 200){
     var $ = cheerio.load(html);
-    $("a").each(function(ix, element) {
-      //console.log(element.attribs.href);
-      suburl = element.attribs.href
-      if (suburl.startsWith("http")) {
-        examine(suburl);
-        console.log(tfidf);
+    $("p").each(function(ix, element) {
+      if (typeof element.children[0] != 'undefined' && typeof element.children[0].data != 'undefined') {
+        var cleanData = element.children[0].data.replace(/(\r\n|\n|\r|\t|    )/gm,"");
+        // console.log(cleanData);
+        cleanData = cleanData.toLowerCase();
+        if (!cleanData.startsWith("by") && cleanData.length > 0) {
+          cleanData = cleanData.replace(/[-—]/g," ");
+          cleanData = cleanData.replace(/[1234567890]/g," ");
+          console.log(cleanData);
+        }
       }
-    });
+    })
+    // $("a").each(function(ix, element) {
+    //   //console.log(element.attribs.href);
+    //   suburl = element.attribs.href
+    //   if (suburl.startsWith("http")) {
+    //     examine(suburl);
+    //     console.log(tfidf);
+    //   }
+    // });
   }
 });
 
