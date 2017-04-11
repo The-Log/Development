@@ -13,7 +13,7 @@ var NGrams = natural.NGrams;
 var stopWords = require('stopwords').english;
 require('events').EventEmitter.prototype._maxListeners = 100;
 
-var tempURL = "https://www.gutenberg.org/files/84/84-h/84-h.htm";//"https://www.gutenberg.org/files/1342/1342-h/1342-h.htm";
+var tempURL = "https://www.gutenberg.org/files/84/84-h/84-h.htm" //"https://www.gutenberg.org/files/1342/1342-h/1342-h.htm";
 var url = tempURL;
 var book = "";
 
@@ -36,27 +36,40 @@ request(url, function(error, response, html){
     book = book.replace(/[-—]/g," ");
     // book = book.toLowerCase();
 
+    diagramBook = NGrams.bigrams(book);
+
     var words = new pos.Lexer().lex(book);
     var tagger = new pos.Tagger();
     var taggedWords = tagger.tag(words);
 
     importantWords = "";
 
-    for (var i = 0; i < taggedWords.length; i++) {
-      var taggedWord = taggedWords[i];
-      var word = taggedWord[0];
-      var tag = taggedWord[1];
-      if (tag == ('NNS')) {
-        word = nounInflector.singularize(word)
+    for (var i = 0; i < taggedWords.length - 1; i++) {
+      var taggedWord1 = taggedWords[i];
+      var word1 = taggedWord1[0];
+      var tag1 = taggedWord1[1];
+      var taggedWord2 = taggedWords[i+1];
+      var word2 = taggedWord2[0];
+      var tag2 = taggedWord2[1];
+      word1 = nounInflector.singularize(word1)
+      word2 = nounInflector.singularize(word2)
+      if(word1.startsWith('Mr') || word1.startsWith('Miss') && tag2 == "NNP"){
+        word1 = word1 +". "+ word2;
       }
-      if(tag == 'NNP' && !word.startsWith('Mr') && !word.startsWith('Miss')){
-        if(charsToSig.has(word)){
-          var freq = charsToSig.get(word) + 1;
-          charsToSig.set(word, freq)
+      if(tag1 == 'NNP' && word1 != "Ill"){
+        if (charsToSig.has("Mr. " + word1)) {
+          word1 = "Mr. "+ word1;
+        }
+        if (charsToSig.has("Mrs. " + word1)) {
+          word1 = "Mrs. "+ word2;
+        }
+        if(charsToSig.has(word1)){
+          var freq = charsToSig.get(word1) + 1;
+          charsToSig.set(word1, freq);
         }
         else{
           var freq = 1;
-          charsToSig.set(word, freq)
+          charsToSig.set(word1, freq)
         }
       }
     }
@@ -82,7 +95,6 @@ request(url, function(error, response, html){
 
     console.log("The 5 most significant/locations characters are: " + characters);
 
-    diagramBook = NGrams.bigrams(book);
     trigramBook = NGrams.trigrams(book);
   }
 });
