@@ -1,0 +1,9 @@
+#sub-guide-item {
+	display: none;
+}
+ytd-guide-section-renderer ytd-guide-entry-renderer:nth-child(3) {
+	display: none;
+}
+#appbar-nav li:nth-child(3) {
+	display: none !important;
+}
