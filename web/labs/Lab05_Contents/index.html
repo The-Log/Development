@@ -4,9 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <!--  cdn for socket -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <!-- instantiating a socket element -->
+  <script type="text/javascript">
+   var io = io().connect();
+   io.on("connection", function(socket){
+     console.log("kek");
+   });
+    function recieveChat(){
+      io.on("sendBack", function(data){
+        var myDiv = document.getElementById("messages");
+        myDiv.innerHTML = "";
+        for (var i = 0; i < data.chatLog.length; i ++) {
+          var p = document.createElement("P");
+          var t = document.createTextNode(data.chatLog[i] + "\n");
+          var br = document.createElement("BR");
+          p.appendChild(t);
+          myDiv.appendChild(t);
+          myDiv.appendChild(br);
+        }
+      });
+    }
+    function emitAMessage(){
+      recieveChat();
+      var name = document.getElementById("name");
+      var text = document.getElementById("text");
+      if (name.value.length == 0 || text.value.length == 0) {
+        console.log("alert");
+        alert("Hey no empty names or messages!")
+        return;
+      }
+      // console.log(text);
+      // clickCount ++;
+      io.emit("buttonFromClient", {username:name.value, message:text.value});
+      document.getElementById("text").value = "";
+      recieveChat();
+    }
+    // setInterval(function(){
+    //   console.log(Date());
+    //   recieveChat();
+    // }, 1000);
+  </script>
+  <title>Chat client</title>
 </head>
 <body>
+    <h1>xd</h1>
+    <input type="textarea" id="name" placeholder="name"/>
+    <br>
+    <input type="textarea" id="text" placeholder="message"/>
+    <button onclick="emitAMessage()" name="button">send</button>
+    <div id ="messages">
 
+    </div>
 </body>
 </html>
