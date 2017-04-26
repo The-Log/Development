@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--  cdn for socket -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <!-- instantiating a socket element -->
+  <script type="text/javascript">
+    var socket = io();
+    var clickCount = 0;
+    function emitAMessage(){
+      clickCount ++;
+      socket.emit("buttonFromClient", {timesClicked:clickCount});
+    }
+  </script>
+  <title>Chat client</title>
+</head>
+<body>
+    <h1>xd</h1>
+    <button onclick="emitAMessage()" name="button"></button>
+</body>
+</html>
