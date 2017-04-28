@@ -11,14 +11,14 @@ app.get('/', function(req, res) {
 
 io.on("connection", function(socket){
   // console.log(socket);
-  socket.emit("sendBack", {chatLog:cLog});
+  socket.emit("connection", {chatLog:cLog});
   socket.on("buttonFromClient", function(data){
     u = data["username"];
     m = data["message"];
     s = u + " says: " + m;
     cLog.push(s);
-    // console.log(cLog);
-    socket.emit("sendBack", {chatLog:cLog});
+    console.log(s);
+    io.emit("sendBack", {chatLog:cLog});
   });
 });
 // app.set('port', (process.env.PORT || 8080));
