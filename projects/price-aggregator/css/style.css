@@ -8,6 +8,7 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0 0 0 0;
   text-align: center;
+  font-weight: lighter;
 }
 input{
   color: black;
@@ -15,11 +16,14 @@ input{
 
 a {
   color: #1976D2;
+  font-weight: lighter;
   text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #1976D2;
+    text-decoration: none;
+    font-weight:bold;
 }
 h1{
   color: #3F51B5;

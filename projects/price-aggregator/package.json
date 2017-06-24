@@ -1,0 +1,34 @@
+{
+  "name": "Price Aggregator",
+  "version": "0.0.1",
+  "description": "Aggregates Prices of Products",
+  "engines": {
+    "node": "7.2.1"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "4.13.3",
+    "http": "0.0.0",
+    "socket.io": "2.0.1",
+    "walmart" : "0.0.3",
+    "cheerio": "0.22.0",
+    "request":"2.81.0",
+    "sqlite3":"3.1.8",
+    "images-scraper":"2.0.11",
+    "path":"0.12.7"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/The-Log/price-aggregator"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}
