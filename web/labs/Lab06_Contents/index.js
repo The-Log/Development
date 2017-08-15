@@ -10,6 +10,7 @@ var cLog = [];
 var moves = 0;
 var game = []
 
+app.use("/media",  express.static(path.join(__dirname, '/media')));
 app.use("/css",  express.static(path.join(__dirname, '/css')));
 app.use("/js", express.static(path.join(__dirname, '/js')));
 app.get('/', function(req, res) {
