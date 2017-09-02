@@ -24,13 +24,11 @@ var lastShownOptions = [];
 function incomingMessageHandler(req, res) {
     console.log('Received incoming text message');
 
-    // This stuff is important for Nexmo API not to resend the message
     res.writeHead(200, {
         "Content-Type": "text/html"
     });
     res.end();
 
-    // When someone texts our number, we get a GET request with query params including the text message body
     if (req.method === 'GET') {
         var urlParts = url.parse(req.url, true);
         var phone = urlParts.query['msisdn'];
@@ -42,7 +40,6 @@ function incomingMessageHandler(req, res) {
             "phone": phone
         }, function(err, user) {
             if (!user) {
-                // Create new user and ask for sex/age
                 var user = new User();
                 user.date = Date.now();
                 user.phone = phone;
@@ -112,15 +109,6 @@ function incomingMessageHandler(req, res) {
 
                                     });
                                 });
-                                //console.log(bigparse)
-
-                                /*
-                                if (bigparser[0] == 'headache')
-                                    sendMessage('It is very likely that you are experiencing symptoms of the common cold. We recommend that you see a health professional as soon as possible.\n' + user.closestHospital[0].info);
-                                if (bigparser[0] == 'eye')
-                                    sendMessage('It is very likely that you are experiencing symptoms of pink eye. We recommend that you see a health professional as soon as possible.\n' + user.closestHospital[0].info);
-
-                                */
 
                                 return medapi.getDiagnosis(symptomIds, user.sex, user.age);
                             })
@@ -143,7 +131,6 @@ function incomingMessageHandler(req, res) {
                                 });
                             });
                     } else {
-                        // User should have responded with a number
                         if (typeof parseInt(textBody) === 'number' &&
                             !isNaN(parseInt(textBody)) &&
                             parseInt(textBody) <= lastShownOptions.length + 1) {
@@ -244,7 +231,6 @@ function symptomNamesToIds(textBody, user) {
                 if (res.length > 0) {
                     var id = res[0].id;
                     var minLength = res[0].name.length;
-                    // Get shortest length item that matches query
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].name.length < minLength) {
                             minLength = res[i].name.length;
