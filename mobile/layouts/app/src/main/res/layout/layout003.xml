@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+    />
+    <View
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:background="@color/colorAccent"
+        android:layout_alignParentTop="true"
+    />
+    <View
+        android:id="@+id/boshal2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        android:layout_toLeftOf="@id/boshal"
+        android:layout_above="@id/boshal"
+        />
+    <View
+        android:id="@+id/pinkboshal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/foo"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+    <View
+        android:id="@+id/boshal3"
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="300dp"
+        />
+    <View
+        android:id="@+id/boshal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+    
+</RelativeLayout>

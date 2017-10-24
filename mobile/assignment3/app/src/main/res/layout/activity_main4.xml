@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/et1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="Write something lol"/>
+        <!--android:textColor="@color/textColor"-->
+
+    <Button
+        android:id="@+id/bttnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me!"
+        android:layout_toRightOf="@id/et1"/>
+
+    <SeekBar
+        android:id="@+id/sb1"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+
+        android:layout_below="@id/et1"/>
+    <TextView
+        android:id="@+id/tvhello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World"
+        android:layout_below="@id/sb1" />
+
+</RelativeLayout>

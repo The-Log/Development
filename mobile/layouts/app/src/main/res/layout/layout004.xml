@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/bg4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+    />
+    <View
+        android:id="@+id/lowshal"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:background="@color/foo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_alignLeft="@id/lowshal2"
+        />
+    <TextView
+        android:id="@+id/lowshal2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lowshal"
+        android:textSize="40dp"
+        android:text="Lol I like memes!"
+        />
+    <TextView
+        android:id="@+id/lowshal3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/foo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lowshal2"
+        android:layout_alignLeft="@id/lowshal2"
+        android:textSize="40dp"
+        android:text="Dank memes are the best!"
+        />
+    <View
+        android:id="@+id/lowshal4"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lowshal3"
+        android:layout_alignLeft="@id/lowshal2"
+
+        />
+
+</RelativeLayout>

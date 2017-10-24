@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/background">
+    <Button
+        android:id="@+id/bttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Reset"
+        />
+    <TextView
+        android:id="@+id/onCreateCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        />
+
+    <TextView
+
+        android:id="@+id/onStartCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onCreateCounter"
+        />
+    <TextView
+
+        android:id="@+id/onResumeCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onStartCounter"
+        />
+
+    <TextView
+
+        android:id="@+id/onRestartCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onResumeCounter"
+        />
+
+    <TextView
+
+        android:id="@+id/onPauseCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onRestartCounter"
+        />
+
+    <TextView
+
+        android:id="@+id/onStopCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onPauseCounter"
+        />
+
+
+    <TextView
+        android:id="@+id/onDestroyCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/textColor"
+        android:textSize="15dp"
+        android:layout_below="@+id/onStopCounter"
+        />
+
+</RelativeLayout>

@@ -2,22 +2,22 @@ from sklearn import svm
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 import random
+import numpy as np
+
 #############################################################
 # cancer.py
 # in theory, detects if patient has a cancerous tumor
 #
-# Ankur Mishra: January 2017
+# Ankur Mishra: Sept 2017
 ############################################################
 
 def getData():
 	x = []
 	y = []
-	input = open("BreastCancerData.txt").read().split("\n")
-	for i in input:
-		inputArray = i.split(",")
-		outputArray = [inputArray[3], inputArray[4], inputArray[10]]
-		# according to science malignant tumors aren't uniform in shape or size and grow rapidly
-		exp = inputArray.pop(1)
+	input_array = np.genfromtxt('training.csv',delimiter=',')
+	for i in input_array:
+		exp = i[9]
+		outputArray = [i[0], i[6], i[1], i[2], i[7], i[8]]
 		x.append(outputArray)
 		y.append(exp)
 	return x,y
@@ -29,6 +29,8 @@ clf = svm.SVC(kernel='rbf')
 
 clf.fit(x_train, y_train)
 
-y_predict = clf.predict(x_test)
+test_array = np.genfromtxt('testing.csv',delimiter=',')
 
+y_predict = clf.predict(x_test)
+print(x_test)
 print(accuracy_score(y_test, y_predict))

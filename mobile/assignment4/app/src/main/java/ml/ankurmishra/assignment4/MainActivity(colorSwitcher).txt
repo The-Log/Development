@@ -1,0 +1,90 @@
+package ml.ankurmishra.assignment4;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.SeekBar;
+
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener  {
+
+    private  SeekBar msbR, msbG, msbB;
+    private  int mseekR, mseekG, mseekB;
+    private View mView;
+    private final static String PREFERENCES_FILE = "current_color";
+    private SharedPreferences sharedPref;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mView = findViewById(R.id.backgroundV);
+
+        msbR = (SeekBar)findViewById(R.id.sbR);
+        msbG = (SeekBar)findViewById(R.id.sbG);
+        msbB = (SeekBar)findViewById(R.id.sbB);
+
+        msbB.setMax(255);
+        msbR.setMax(255);
+        msbG.setMax(255);
+
+        msbR.setOnSeekBarChangeListener(this);
+        msbG.setOnSeekBarChangeListener(this);
+        msbB.setOnSeekBarChangeListener(this);
+
+        Context context = MainActivity.this;
+        sharedPref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        int red = sharedPref.getInt("R", 255);
+        int green = sharedPref.getInt("G", 255);
+        int blue = sharedPref.getInt("B", 255);
+
+        mView.setBackgroundColor(Color.rgb(red,blue,green));
+
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        switch (seekBar.getId()) {
+            case R.id.sbR:
+                mseekR = i;
+                break;
+            case R.id.sbG:
+                mseekG = i;
+                break;
+            case R.id.sbB:
+                mseekB = i;
+                break;
+        }
+        fuckWithColors();
+    }
+
+    private void fuckWithColors() {
+        int red = mseekR;
+        int green = mseekG;
+        int blue = mseekB;
+        mView.setBackgroundColor(Color.rgb(red,blue,green));
+
+
+        SharedPreferences.Editor prefsEditor = sharedPref.edit();
+
+        prefsEditor.putInt("R", red);
+        prefsEditor.putInt("G", green);
+        prefsEditor.putInt("B", blue);
+
+        prefsEditor.commit();
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+}
