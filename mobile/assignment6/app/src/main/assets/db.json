@@ -1,0 +1,69 @@
+{"movieList": [
+
+    {"title":"Mad Max: Fury Road",
+      "genre":"Action & Adventure",
+      "year":"2015"
+    },
+    {"title":"Inside Out",
+      "genre":"Animation, Kids & Family",
+      "year":"2015"
+    },
+    {"title":"Star Wars: Episode VII - The Force Awakens",
+      "genre":"Action",
+      "year":"2015"
+    },
+    {"title":"Shaun the Sheep",
+      "genre":"Animation",
+      "year":"2015"
+    },
+    {"title":"The Martian",
+      "genre":"Science Fiction & Fantasy",
+      "year":"2015"
+    },
+    {"title":"Mission: Impossible Rogue Nation",
+      "genre":"Action",
+      "year":"2015"
+    },
+    {"title":"Up",
+      "genre":"Animation",
+      "year":"2009"
+    },
+    {"title":"Star Trek",
+      "genre":"Science Fiction",
+      "year":"2009"
+    },
+    {"title":"The LEGO Movie",
+      "genre":"Animation",
+      "year":"2014"
+    },
+    {"title":"Iron Man",
+      "genre":"Action & Adventure",
+      "year":"2008"
+    },
+    {"title":"Aliens",
+      "genre":"Science Fiction",
+      "year":"1986"
+    },
+    {"title":"Chicken Run",
+      "genre":"Animation",
+      "year":"2000"
+    },
+    {"title":"Back to the Future",
+      "genre":"Science Fiction",
+      "year":"1985"
+    },
+    {"title":"Raiders of the Lost Ark",
+      "genre":"Action & Adventure",
+      "year":"1981"
+    },
+    {"title":"Goldfinger",
+      "genre":"Action & Adventure",
+      "year":"1965"
+    },
+    {
+      "title": "Guardians of the Galaxy",
+      "genre":"Science Fiction & Fantasy",
+      "year":"2014"
+    }
+  ]
+}
