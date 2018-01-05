@@ -81,7 +81,7 @@ def run_episode(e, environment):
     state = environment.reset()
     steps = 0
     while True:
-        #environment.render()
+        environment.render()
         action = select_action(FloatTensor([state]))
         next_state, reward, done, _ = environment.step(action[0, 0])
 

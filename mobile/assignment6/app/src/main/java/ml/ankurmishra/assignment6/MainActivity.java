@@ -28,8 +28,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private final String INTERNAL_STORAGE_FILE = "movies.json";
     private MovieContainer movieContainer = new MovieContainer(new ArrayList<Movie>());
