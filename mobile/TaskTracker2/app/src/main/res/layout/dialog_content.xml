@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <EditText
+        android:id="@+id/mname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:hint="Task Name"/>
+
+    <RelativeLayout
+        android:id="@+id/times"
+        android:layout_below="@+id/mname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingRight="24dp">
+
+
+        <EditText
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:00 AM" />
+
+        <EditText
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="12:00 PM"/>
+
+
+    </RelativeLayout>
+
+    <!-- Action area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="right"
+        android:layout_below="@+id/times"
+        >
+
+        <Button
+            android:id="@+id/neg_button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@android:color/transparent"
+            android:text="Cancel"
+            android:textColor="@color/colorAccent"
+            />
+
+        <Button
+            android:id="@+id/pos_button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginLeft="8dp"
+            android:background="@android:color/transparent"
+            android:text="ADD"
+            android:textColor="@color/colorAccent"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

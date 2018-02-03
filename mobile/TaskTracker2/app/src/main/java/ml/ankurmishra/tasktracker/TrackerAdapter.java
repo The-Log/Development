@@ -1,4 +1,4 @@
-package ml.ankurmishra.assignment9;
+package ml.ankurmishra.tasktracker;
 
 /**
  * Created by ankurM on 11/9/17.
@@ -6,7 +6,6 @@ package ml.ankurmishra.assignment9;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,32 +14,33 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
+public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.MyViewHolder> {
 
-    private List<Movie> moviesList;
+    private List<Tracker> moviesList;
     private MoviesAdapterInterface mCallback;
     private Context context;
-    public Movie currentItem;
+    public Tracker currentItem;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView title, duration;
+        public int pos = 0;
         private Context context;
+
         public MyViewHolder(View view, Context context) {
             super(view);
             this.context = context;
 
             title = (TextView) view.findViewById(R.id.title);
-            genre = (TextView) view.findViewById(R.id.genre);
-            year = (TextView) view.findViewById(R.id.year);
-
+            duration = (TextView) view.findViewById(R.id.duration);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    pos = getAdapterPosition();
 
                     // check if item still exists
-                    if(pos != RecyclerView.NO_POSITION){
+                    if (pos != RecyclerView.NO_POSITION) {
                         currentItem = moviesList.get(pos);
-                        Toast.makeText(v.getContext(), "You clicked " + currentItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "You clicked " + currentItem.getTask(), Toast.LENGTH_SHORT).show();
                         mCallback.setCurrentItem(currentItem);
                     }
                 }
@@ -50,7 +50,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     }
 
 
-    public MoviesAdapter(List<Movie> moviesList) {
+    public TrackerAdapter(List<Tracker> moviesList) {
         this.moviesList = moviesList;
         currentItem = moviesList.get(0);
     }
@@ -66,11 +66,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Movie movie = moviesList.get(position);
-        holder.title.setText(movie.getTitle());
-        holder.genre.setText(movie.getGenre());
-        holder.year.setText(movie.getYear());
+        Tracker tracker = moviesList.get(position);
+        holder.title.setText(tracker.getTask());
+        holder.duration.setText("" + tracker.getDuration());
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -78,6 +80,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     }
 
     public interface MoviesAdapterInterface {
-        void setCurrentItem(Movie currentItem);
+        void setCurrentItem(Tracker currentItem);
     }
 }

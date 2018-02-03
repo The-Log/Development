@@ -2,68 +2,84 @@
 
   {"title":"Mad Max: Fury Road",
     "genre":"Action & Adventure",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"Inside Out",
     "genre":"Animation, Kids & Family",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"Star Wars: Episode VII - The Force Awakens",
     "genre":"Action",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"Shaun the Sheep",
     "genre":"Animation",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"The Martian",
     "genre":"Science Fiction & Fantasy",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"Mission: Impossible Rogue Nation",
     "genre":"Action",
-    "year":"2015"
+    "year":"2015",
+    "rating":0
   },
   {"title":"Up",
     "genre":"Animation",
-    "year":"2009"
+    "year":"2009",
+    "rating":0
   },
   {"title":"Star Trek",
     "genre":"Science Fiction",
-    "year":"2009"
+    "year":"2009",
+    "rating":0
   },
   {"title":"The LEGO Movie",
     "genre":"Animation",
-    "year":"2014"
+    "year":"2014",
+    "rating":0
   },
   {"title":"Iron Man",
     "genre":"Action & Adventure",
-    "year":"2008"
+    "year":"2008",
+    "rating":0
   },
   {"title":"Aliens",
     "genre":"Science Fiction",
-    "year":"1986"
+    "year":"1986",
+    "rating":0
   },
   {"title":"Chicken Run",
     "genre":"Animation",
-    "year":"2000"
+    "year":"2000",
+    "rating":0
   },
   {"title":"Back to the Future",
     "genre":"Science Fiction",
-    "year":"1985"
+    "year":"1985",
+    "rating":0
   },
   {"title":"Raiders of the Lost Ark",
     "genre":"Action & Adventure",
-    "year":"1981"
+    "year":"1981",
+    "rating":0
   },
   {"title":"Goldfinger",
     "genre":"Action & Adventure",
-    "year":"1965"
+    "year":"1965",
+    "rating":0
   },
   {
     "title": "Guardians of the Galaxy",
     "genre":"Science Fiction & Fantasy",
-    "year":"2014"
+    "year":"2014",
+    "rating":0
   }
 ]
 }

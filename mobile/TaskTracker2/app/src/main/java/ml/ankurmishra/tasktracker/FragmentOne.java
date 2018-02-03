@@ -1,4 +1,4 @@
-package ml.ankurmishra.assignment9;
+package ml.ankurmishra.tasktracker;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,10 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,10 +29,11 @@ public class FragmentOne extends Fragment {
     private Button mButton;
     private int mClickCounter = 0;
     public TextView mLabel;
-    private MovieContainer movieContainer;
+    private TrackerContainer trackerContainer;
     public RecyclerView mRecyclerView;
-    private MoviesAdapter mAdapter;
-    private Movie currentItem ;
+    public TrackerAdapter mAdapter;
+    private Tracker currentItem ;
+
     public FragmentOne() {
     }
 
@@ -48,6 +47,8 @@ public class FragmentOne extends Fragment {
         super.onAttach(context);
         try {
             mCallback = (FragmentOneInterface) context;
+            trackerContainer = mCallback.getContainer();
+
             if (this.getUserVisibleHint()) {
                 // NOTIFY ACTIVITY THAT THIS IS THE ACTIVE FRAGMENT
                 mCallback.setFragmentOneActive();
@@ -66,6 +67,7 @@ public class FragmentOne extends Fragment {
         if (isVisibleToUser) {
             Log.i("setUserVisibleHint", "fragment visibility: true");
             try {
+
                 mCallback.setFragmentOneActive();
             } catch (Exception e) {
                 // errors callback not created yet
@@ -83,28 +85,33 @@ public class FragmentOne extends Fragment {
 
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
         Gson gson = new GsonBuilder().create();
-        movieContainer = gson.fromJson(mCallback.getStringAsset("db.json"), MovieContainer.class);
-        Log.i("lol","mc" + movieContainer.getList());
+        trackerContainer = mCallback.getTrackerContainer();
+        Log.i("lol","mc" + trackerContainer.getList());
 
-        mAdapter = new MoviesAdapter(movieContainer.getList());
+        mAdapter = new TrackerAdapter(trackerContainer.getList());
         currentItem = mAdapter.currentItem;
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
-        mCallback.prepareMovieData();
+        mCallback.prepareTrackerData();
         mAdapter.notifyDataSetChanged();
+
 
         return mRootView;
     }
-
-
+    public void updateData(Tracker tracker){
+        trackerContainer.add(tracker);
+        mAdapter.notifyDataSetChanged();
+    }
 
     public interface FragmentOneInterface {
         String getStringAsset(String s);
-        void prepareMovieData();
-        void setMovie(Movie m);
+        void prepareTrackerData();
+        void setTracker(Tracker m);
         void setFragmentOneActive();
+        TrackerContainer getContainer();
+        TrackerContainer getTrackerContainer();
     }
 }
 

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,6 +32,7 @@ public class FragmentTwo extends Fragment {
     private FragmentTwoInterface mCallback;
     private TextView mTextView;
     private Movie m;
+    private RatingBar simpleRatingBar;
 
     public FragmentTwo() {
     }
@@ -51,9 +53,16 @@ public class FragmentTwo extends Fragment {
             // IF onAttach HAS NOT BEEN CALLED YET.
             // - FOR THAT REASON, WE CALL setFragmentTwoActive IN ON ATTACH, if and only if
             // THE FRAGMENT IS ACTIVE
+            m.setRating(simpleRatingBar.getRating());
 
             try {
                 mCallback.setFragmentTwoActive();
+                m = mCallback.getMovie();
+                if (m != null) {
+                    mTextView.setText(m.getTitle());
+                    simpleRatingBar.setRating(m.getRating());
+                    Log.i("Frag2", m.toString());
+                }
             } catch (Exception e) {
                 // errors callback not created yet
             }
@@ -74,6 +83,7 @@ public class FragmentTwo extends Fragment {
             if (this.getUserVisibleHint()) {
                 // NOTIFY ACTIVITY THAT THIS IS THE ACTIVE FRAGMENT
                 mCallback.setFragmentTwoActive();
+
             }
 
         } catch (ClassCastException e) {
@@ -88,10 +98,11 @@ public class FragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_two, container, false);
         mTextView = (TextView) mRootView.findViewById(R.id.mname);
-
-        Movie m = mCallback.getMovie();
+        simpleRatingBar = (RatingBar) mRootView.findViewById(R.id.rating); // initiate a rating bar
+        m = mCallback.getMovie();
         Log.i("onCreateViewF2", m.toString());
         mTextView.setText(m.getTitle());
+        simpleRatingBar.setRating(m.getRating());
         return mRootView;
     }
 

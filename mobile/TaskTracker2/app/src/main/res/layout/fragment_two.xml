@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ml.ankurmishra.tasktracker.MainActivity">
+    <EditText
+        android:id="@+id/mname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:text="Task Name"/>
+
+    <ImageView
+        android:id="@+id/miv"
+        android:layout_below="@+id/mname"
+        android:layout_centerHorizontal="true"
+        android:layout_width="500px"
+        android:layout_height="500px" />
+
+    <EditText
+        android:id="@+id/start"
+        android:layout_below="@+id/miv"
+        android:layout_width="600px"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:layout_height="120px"
+        android:layout_toStartOf="@+id/mname"
+        android:text="12:00 AM" />
+
+    <EditText
+        android:id="@+id/end"
+        android:layout_width="600px"
+        android:layout_height="120px"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/miv"
+        android:layout_toEndOf="@+id/mname"
+        android:text="12:00 PM"/>
+    <!--<RatingBar-->
+        <!--android:id="@+id/duration"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+
+</RelativeLayout>

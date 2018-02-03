@@ -1,0 +1,16 @@
+{"trackerList": [
+
+  {
+    "task":"Played a Game",
+    "duration": "0:30",
+    "startTime":"12:00 AM",
+    "endTime":"12:30 AM"
+  },
+  {
+    "task":"Studied Calculus",
+    "duration": "1:00",
+    "startTime":"2:00 AM",
+    "endTime":"3:00 AM"
+  }
+
+]}

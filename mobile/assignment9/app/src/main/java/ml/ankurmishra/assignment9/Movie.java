@@ -6,14 +6,16 @@ package ml.ankurmishra.assignment9;
 
 public class Movie {
     private String title, genre, year;
+    private float rating;
 
     public Movie() {
     }
 
-    public Movie(String title, String genre, String year) {
+    public Movie(String title, String genre, String year, int rating) {
         this.title = title;
         this.genre = genre;
         this.year = year;
+        this.rating = rating;
     }
 
     public String getTitle() {
@@ -38,5 +40,23 @@ public class Movie {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "title:'" + title + '\'' +
+                ", genre:'" + genre + '\'' +
+                ", year:'" + year + '\'' +
+                ", rating:" + rating +
+                '}';
     }
 }

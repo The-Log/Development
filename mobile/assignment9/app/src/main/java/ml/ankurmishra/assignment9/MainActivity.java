@@ -29,10 +29,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentOne.FragmentOneInterface, FragmentTwo.FragmentTwoInterface {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentOne.FragmentOneInterface, FragmentTwo.FragmentTwoInterface, MoviesAdapter.MoviesAdapterInterface {
 
     private MovieContainer movieContainer = new MovieContainer(new ArrayList<Movie>());
-    private MoviesAdapter mAdapter;
     private Movie pm;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         movieContainer = gson.fromJson(getStringAsset("db.json"), MovieContainer.class);
         Log.i("","" + movieContainer);
         pm = movieContainer.get(0);
-//        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -125,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public Movie getMovie() {
         return pm;
+    }
+
+    @Override
+    public void setCurrentItem(Movie currentItem) {
+        pm = currentItem;
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

@@ -1,0 +1,19 @@
+#+TITLE: Notes
+#+AUTHOR: Ankur Mishra
+#+DATE: 1/22/2018 -1/29/2017
+** Classifiers
+*** Data Driven Approach
+- Collect data from internet
+- Use ML to train an Model
+- Evaluate Model with test data
+*** Nearest Neighbor Classifier
+- Finds objects that are similar using various functions such as Manhattan/Euclidean Distances and it finds shortest distance from them
+- Manahattan (L1) Distance: finds absolute value difference between test and training images
+- Euclidean (L2) Distance: finds distance by summing up square of difference between images
+- Distances are hyperparameters
+**** k-Nearest Neighbor
+- Finds k nearest images, which has a vote for the label
+- k is a hyperparameters
+- Never used on images as it has awful test time and distance metrics are unintuitive
+*** Linear Classification
+

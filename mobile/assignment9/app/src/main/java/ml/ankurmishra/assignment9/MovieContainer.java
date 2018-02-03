@@ -25,4 +25,14 @@ public class MovieContainer {
     public int size(){
         return movieList.size();
     }
+    public String toString() {
+        String s = "{\"slideShowList\" : [";
+        for (int i = 0; i < movieList.size(); i++) {
+            s += movieList.get(i).toString();
+            if (i + 1 < movieList.size())
+                s += ", \n";
+        }
+        s +=  "]}";
+        return s;
+    }
 }

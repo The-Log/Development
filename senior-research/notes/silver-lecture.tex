@@ -1,4 +1,4 @@
-% Created 2017-09-26 Tue 15:30
+% Created 2018-01-22 Mon 23:38
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -22,7 +22,7 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 25.1.1 (Org mode 8.2.10)}}
+  pdfcreator={Emacs 25.2.2 (Org mode 8.2.10)}}
 \begin{document}
 
 \maketitle
@@ -55,9 +55,9 @@ M = \{S, T\}
 \end{itemize}
 \subsection{Markov Reward Process}
 \label{sec-1-2}
-M = \{S, T, R\}
+M = \{S, T, r\}
 \begin{itemize}
-\item MRP is a tuple of (S is a finite set of states, P is a state of the transitionprobability matrix, Reward Function R, dicount factor $\gamma$)
+\item MRP is a tuple of (S is a finite set of states, P is a state of the transition probability matrix, Reward Function R, dicount factor $\gamma$)
 \item R = E[R$_{\text{(t+1)}}$ | S$_{\text{t}}$ = s]
 \end{itemize}
 R$_{\text{(t+1)}}$ is the amount of reward we get from state s
@@ -82,16 +82,23 @@ The Bellman Equation determines value of a state. It is comprised of immediate r
 It is a linear quation and can be solved. 
 \subsection{Markov Decison Process}
 \label{sec-1-3}
-M = \{S, A, T, R\}
+M = \{S, A, T, r\}
 \begin{itemize}
 \item MDP is the same as MRP except with the addition of A (the action space)
 \end{itemize}
-\subsubsection{Policy}
+\subsubsection{partially observed MDP}
 \label{sec-1-3-1}
+M = \{S, A , O , T, E, r\}
+\begin{itemize}
+\item O observation space
+\item E emission probability
+\end{itemize}
+\subsubsection{Policy}
+\label{sec-1-3-2}
 $\pi$(a|s) = P[A$_{\text{t}}$ = a | S$_{\text{t}}$ = s]
 \begin{itemize}
 \item A policy defines the behavior of an agent. It picks the actions that get the most reward.
 \item 
 \end{itemize}
-% Emacs 25.1.1 (Org mode 8.2.10)
+% Emacs 25.2.2 (Org mode 8.2.10)
 \end{document}
