@@ -1,0 +1,3 @@
+/home/ankur/Development/cv/coins/CMakeFiles/rebuild_cache.dir
+/home/ankur/Development/cv/coins/CMakeFiles/DisplayImage.dir
+/home/ankur/Development/cv/coins/CMakeFiles/edit_cache.dir
