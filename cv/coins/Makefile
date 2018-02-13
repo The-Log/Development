@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named DisplayImage
+# Target rules for targets named CountCoins
 
 # Build rule for target.
-DisplayImage: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 DisplayImage
-.PHONY : DisplayImage
+CountCoins: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CountCoins
+.PHONY : CountCoins
 
 # fast build rule for target.
-DisplayImage/fast:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/build
-.PHONY : DisplayImage/fast
+CountCoins/fast:
+	$(MAKE) -f CMakeFiles/CountCoins.dir/build.make CMakeFiles/CountCoins.dir/build
+.PHONY : CountCoins/fast
 
-DisplayImage.o: DisplayImage.cpp.o
+CountCoins.o: CountCoins.cpp.o
 
-.PHONY : DisplayImage.o
+.PHONY : CountCoins.o
 
 # target to build an object file
-DisplayImage.cpp.o:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.o
-.PHONY : DisplayImage.cpp.o
+CountCoins.cpp.o:
+	$(MAKE) -f CMakeFiles/CountCoins.dir/build.make CMakeFiles/CountCoins.dir/CountCoins.cpp.o
+.PHONY : CountCoins.cpp.o
 
-DisplayImage.i: DisplayImage.cpp.i
+CountCoins.i: CountCoins.cpp.i
 
-.PHONY : DisplayImage.i
+.PHONY : CountCoins.i
 
 # target to preprocess a source file
-DisplayImage.cpp.i:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.i
-.PHONY : DisplayImage.cpp.i
+CountCoins.cpp.i:
+	$(MAKE) -f CMakeFiles/CountCoins.dir/build.make CMakeFiles/CountCoins.dir/CountCoins.cpp.i
+.PHONY : CountCoins.cpp.i
 
-DisplayImage.s: DisplayImage.cpp.s
+CountCoins.s: CountCoins.cpp.s
 
-.PHONY : DisplayImage.s
+.PHONY : CountCoins.s
 
 # target to generate assembly for a file
-DisplayImage.cpp.s:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.s
-.PHONY : DisplayImage.cpp.s
+CountCoins.cpp.s:
+	$(MAKE) -f CMakeFiles/CountCoins.dir/build.make CMakeFiles/CountCoins.dir/CountCoins.cpp.s
+.PHONY : CountCoins.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... DisplayImage"
+	@echo "... CountCoins"
 	@echo "... edit_cache"
-	@echo "... DisplayImage.o"
-	@echo "... DisplayImage.i"
-	@echo "... DisplayImage.s"
+	@echo "... CountCoins.o"
+	@echo "... CountCoins.i"
+	@echo "... CountCoins.s"
 .PHONY : help
 
 

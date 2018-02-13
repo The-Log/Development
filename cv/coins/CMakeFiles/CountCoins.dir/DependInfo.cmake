@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ankur/Development/cv/coins/DisplayImage.cpp" "/home/ankur/Development/cv/coins/CMakeFiles/DisplayImage.dir/DisplayImage.cpp.o"
+  "/home/ankur/Development/cv/coins/CountCoins.cpp" "/home/ankur/Development/cv/coins/CMakeFiles/CountCoins.dir/CountCoins.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
