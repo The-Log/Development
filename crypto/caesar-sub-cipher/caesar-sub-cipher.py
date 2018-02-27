@@ -121,8 +121,6 @@ def frequent_double_letters(text, alphabet):
     return c.most_common(4)
 
 
-
-
 print("\n---Testing Keyword Substitution-------")
 plaintext = "To be or not to be, that is the question"
 keyword = "SHAKESPEARE"

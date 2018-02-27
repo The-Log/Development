@@ -35,6 +35,17 @@ def frequent_trigraphs(text, alphabet):
     c = Counter(bigraphs)
     return c.most_common(4)
 
+def frequent_ngraphs(text, alphabet, n):
+    """ return a list of tuples of most common trigraphs in 'text'"""
+    #text = prepare_string(text, alphabet)
+    bigraphs = []
+    for index in range(len(text) - 1):
+        if ' ' not in text[index:index + n]:
+            bigraphs.append(text[index:index + n])
+    c = Counter(bigraphs)
+    return c.most_common(10)
+
+
 def frequent_double_letters(text, alphabet):
     """ return a list of tuples of most common double letters in 'text'"""
     text = prepare_string(text, alphabet)
@@ -55,19 +66,43 @@ print('')
 fl = frequent_letters(ciphertext, alphabet)
 print(fl)
 print(frequent_trigraphs(ciphertext, alphabet))
-
+print(frequent_ngraphs(ciphertext, alphabet, 5))
 print('')
-ct1 = ct1.replace('zfn', 'THE ')
 
 ct1 = ct1.replace('z', 'T')
 ct1 = ct1.replace('f', 'H')
 ct1 = ct1.replace('n', 'E')
 
 ct1 = ct1.replace('a', 'V')
+#bzf sth
+ct1 = ct1.replace('b', 'S')
+ct1 = ct1.replace('f', 'H')
 
 ct1 = ct1.replace('j', 'I')
 ct1 = ct1.replace('w', 'N')
 ct1 = ct1.replace('y', 'G')
+ct1 = ct1.replace('o', 'K')
+ct1 = ct1.replace('k', 'R')
+ct1 = ct1.replace('l', 'A')
+
+ct1 = ct1.replace('u', 'Y')
+ct1 = ct1.replace('h', 'U')
+
+ct1 = ct1.replace('t', 'B')
+
+
+ct1 = ct1.replace('d', 'O')
+ct1 = ct1.replace('q', 'W')
+
+ct1 = ct1.replace('g', 'P')
+ct1 = ct1.replace('s', 'D')
+ct1 = ct1.replace('r', 'F')
+
+ct1 = ct1.replace('c', 'L')
+ct1 = ct1.replace('e', 'M')
+ct1 = ct1.replace('p', 'C')
+ct1 = ct1.replace('x', 'J')
+
 
 
 plaintext = ct1 
@@ -77,7 +112,7 @@ print("")
 '''
 Exercise 2.
 
-AJM PQMCIY QVJ, XJR HCYBQ TNGG QBCP N OCQ BNMS.  NP CQ QRMIP JRQ, C TNI YJ N GJIY VNX VCQBJRQ RPCIY NIX JA QBNQ QBCIY KJPQS AMJH JRM RPRNG GNXJRQ NQ NGG.
+ct1 = 'AJM PQMCIY QVJ, XJR HCYBQ TNGG QBCP N OCQ BNMS.  NP CQ QRMIP JRQ, C TNI YJ N GJIY VNX VCQBJRQ RPCIY NIX JA QBNQ QBCIY KJPQS AMJH JRM RPRNG GNXJRQ NQ NGG.'
 
 ct1 = ct1.replace('p', 'S')
 ct1 = ct1.replace('n', 'A')
@@ -97,11 +132,13 @@ ct1  = ct1.replace('r', "U")
 ct1  = ct1.replace('t', "C")
 ct1  = ct1.replace('x', "Y")
 ct1  = ct1.replace('h', "M")
+'''
 
-Exercise 4.
 
-ANUYJKHNFL JLNBL, NBENJK YNK KHNKIONS: \'JNYNHYJ - SNJKONS, INHKONS, JNHDSNJ ONBRNJ!\'
+#Exercise 4.
 
+ct1 = 'ANUYJKHNFL JLNBL, NBENJK YNK KHNKIONS: \'JNYNHYJ - SNJKONS, INHKONS, JNHDSNJ ONBRNJ!\''
+ct1 = ct1.lower()
 ct1 = ct1.replace('o', 'F')
 ct1 = ct1.replace('n', 'U')
 ct1 = ct1.replace('s', 'L')
@@ -118,5 +155,6 @@ ct1 = ct1.replace('e', 'J')
 ct1 = ct1.replace('a', 'D')
 ct1 = ct1.replace('u', 'M')
 ct1 = ct1.replace('f', 'C')
-'''
+print(ct1)
+
 

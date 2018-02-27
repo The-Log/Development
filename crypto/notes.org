@@ -1,0 +1,53 @@
+#+TITLE: Ciphers
+#+AUTHOR: Ankur Mishra
+#+DATE: 1/22/2018, 2/6/2017
+* Columnar Transposition Ciphers
+** Simple Columnar Transposition Cipher
+General Process: Rearranging letters based on numeric key.\\
+*** Encoding
+To encode, put text in to a matrix, which has $c$ columns, where $c$ = key. 
+Then copy each column from left to right to create your a new encoded message.
+*** Decoding
+To decode, first approximate the number of rows (r) by dividing the length of the decoded message by the key. 
+Then write each letter of the encoded message from up to down, till the row length is reached. 
+Keep in mind, if there is a reminder($x$) when calculating the number of rows, leave $x$ spaces blank in the last row.
+*** Example
+Example: \\
+Text: "REARRANGING LETTERS" | Key: 5 \\
+$18 / 5 = 4 R 2$
+\begin{equation}
+\begin{bmatrix}
+    1 & 2 & 3 & 4 & 5 \\
+    \\
+    R & E & A & R & R \\
+    A & N & G & I & N \\
+    G & L & E & T & T \\
+    E & R & S & _ & _ \\
+\end{bmatrix}
+\end{equation}
+Encoded: RAGEENLRAGESRIT RNT 
+** Keyword Columnar Transposition Cipher
+General Process: Rearranging letters based on a keyword and each keyword letter's alphabetical order.
+*** Encoding
+To encode, put text in to a matrix, which has
+$c$ columns, where $c$ = the length of the keyword. Keep each letter of your keyword above each column of the matrix.
+Then copy each column from based on your keyword's alphabetical order to create your a new encoded message.\\ 
+*** Decoding
+*** Example
+\begin{equation}
+\begin{bmatrix}
+    C & R & Y & P & T & O \\
+    \\
+    S & L & I & G & H & T \\
+    L & Y & M & O & R & E \\
+    C & O & M & P & L & I \\
+    C & A & T & E & D & _ \\
+\end{bmatrix}
+\end{equation}
+
+* Playfair Cipher and Railfence Cipher
+** Playfair Cipher
+** Railfence Cipher
+* ADFGVX Cipher and Vigenere Cipher
+** ADFGVX Cipher
+** Vigenere Cipher
