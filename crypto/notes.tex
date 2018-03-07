@@ -1,0 +1,176 @@
+% Created 2018-02-28 Wed 17:49
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Ankur Mishra}
+\date{2/28/2018}
+\title{Unit 1 Notes}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 25.2.2 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Columnar Transposition Ciphers}
+\label{sec-1}
+\subsection{Simple Columnar Transposition Cipher}
+\label{sec-1-1}
+General Process: Rearranging letters based on numeric key.\\
+\subsubsection{Encoding}
+\label{sec-1-1-1}
+To encode, put text in to a matrix, which has $c$ columns, where $c$ = key. 
+Then copy each column from left to right to create your a new encoded message.
+\subsubsection{Decoding}
+\label{sec-1-1-2}
+To decode, first approximate the number of rows (r) by dividing the length of the decoded message by the key. 
+Then write each letter of the encoded message from up to down, till the row length is reached. 
+Keep in mind, if there is a reminder($x$) when calculating the number of rows, leave $x$ spaces blank in the last row.
+\subsubsection{Example}
+\label{sec-1-1-3}
+Text: "REARRANGING LETTERS" | Key: 5 \\
+$18 / 5 = 4 R 2$
+\begin{equation}
+\begin{bmatrix}
+    1 & 2 & 3 & 4 & 5 \\
+    \\
+    R & E & A & R & R \\
+    A & N & G & I & N \\
+    G & L & E & T & T \\
+    E & R & S & _ & _ \\
+\end{bmatrix}
+\end{equation}
+Encoded: RAGEENLRAGESRIT RNT 
+\subsection{Keyword Columnar Transposition Cipher}
+\label{sec-1-2}
+General Process: Rearranging letters based on a keyword and each keyword letter's alphabetical order.
+\subsubsection{Encoding}
+\label{sec-1-2-1}
+To encode, put text in to a matrix, which has
+$c$ columns, where $c$ = the length of the keyword. Keep each letter of your keyword above each column of the matrix.
+Then copy each column from based on your keyword's alphabetical order to create your a new encoded message.\\
+\subsubsection{Decoding}
+\label{sec-1-2-2}
+To decode, first find the length of the ciphered text, then divide it by the length of the keyword, which will return the number of rows $r$.
+If it has a remainder $x$, round the number of rows up and you will have $x$ blank spaces in the text. Fill each column out based on the alphabetial order of
+the keyword and by copying every $r$ letters from the ciphered text into the column. Finally copy each row and you will get your plaintext back.
+\subsubsection{Example}
+\label{sec-1-2-3}
+Text: "SLIGHTLY MORE COMPLICATED" | Keyword: CRYPTO \\
+\begin{equation}
+\begin{bmatrix}
+    C & R & Y & P & T & O \\
+    \\
+    S & L & I & G & H & T \\
+    L & Y & M & O & R & E \\
+    C & O & M & P & L & I \\
+    C & A & T & E & D & _ \\
+\end{bmatrix}
+\end{equation}
+Encoded: SLCCTEI GOPELYOAHRLDIMMT
+\section{Playfair Cipher and Railfence Cipher}
+\label{sec-2}
+\subsection{Playfair Cipher}
+\label{sec-2-1}
+\subsubsection{Encoding}
+\label{sec-2-1-1}
+To encode, first create a 5x5 matrix with first the keyword and then followed by the rest of the letters of the alphabet, while omitting any
+later repeats in the phrase. Then use these three rules to encode the plaintext:
+
+\begin{center}
+ \begin{tabular}{|c|c|} 
+ \hline
+ different rows and columns & \rightleftharpoons \\
+ \hline
+ only same row & \rightarrow \rightarrow  \\
+ \hline
+ only same col & \Downarrow \\ & \Downarrow  \\
+ \hline
+ \end{tabular}
+\end{center}
+If two of the same letters occur consecutively, add a space character such as X or Z. Loop to the begining or end if at edges.
+\subsubsection{Decoding with Cribs}
+\label{sec-2-1-2}
+It's a shaft. Have fun!
+\subsection{Railfence Cipher}
+\label{sec-2-2}
+\subsubsection{Encoding}
+\label{sec-2-2-1}
+Write the text in three rows like a railfence. Then copy each row, which will create your ciphered text.
+\begin{equation}
+\begin{bmatrix}
+    T & _ & _ & _ & C & _ & _ & _ & E & _ &\\
+    _ & H & _ & S & _ & I & _ & H & _ & R &\\
+    _ & _ & I & _ & _ & _ & P & _ & _ & _ &\\
+\end{bmatrix}
+\end{equation}
+Encoded: TCEHSIHRIP
+\subsubsection{Decoding}
+\label{sec-2-2-2}
+To decode, round, divide the length of the ciphered text by 2 and ignore any remainders. This will be the length 
+of the 2nd row, and the first and third row will be half of it. Then copy it down accordingly to create the fence, which can be rewritten
+as the plaintext.
+\section{ADFGVX Cipher and Vigenere Cipher}
+\label{sec-3}
+\subsection{ADFGVX Cipher}
+\label{sec-3-1}
+\subsubsection{Encoding}
+\label{sec-3-1-1}
+To encode, put it through a ADFGVX which is formatted like this:
+\emph{/ /}
+and find the row and column letter corresponding to it, which will be A, D, F, G, V, or X. Then encode this with Keyword Columnar Transform, which will result in the encoded message.
+\subsubsection{Decoding}
+\label{sec-3-1-2}
+First part to decoding is to decode the Keyword Columnar Transform. 
+Then find the letter corresponding to every two consecutive letters which will be its row and column. To this process over the
+entire ciphertext and then you are done.
+\subsection{Vigenere Cipher}
+\label{sec-3-2}
+\subsubsection{Encoding}
+\label{sec-3-2-1}
+To encode, either attain or make a keyword. Then find the index of each letter of the plaintext and the keyword and the sum of the two mod 26 will
+result in your ciphered letter.
+\subsubsection{Decoding}
+\label{sec-3-2-2}
+To decode, attain  keyword. Then find the index of each letter of the ciphertext and the keyword and the difference between the two will
+result in your plaintext letter. 
+\subsubsection{Friedman Test}
+\label{sec-3-2-3}
+\subsubsection{Kasiki Test}
+\label{sec-3-2-4}
+\begin{enumerate}
+\item Find the most common trigraphs in the ciphertext and the difference between them
+\label{sec-3-2-4-1}
+\item The GCD of all the differences is the length of the keyword.
+\label{sec-3-2-4-2}
+\end{enumerate}
+\subsubsection{Steps to Decrypt}
+\label{sec-3-2-5}
+\begin{enumerate}
+\item Use Friedman and Kasiki Test to attain length of your keyword $n$.
+\label{sec-3-2-5-1}
+\item Split your ciphertext in to $n$ cosets.
+\label{sec-3-2-5-2}
+\item For each coset, compare their relative frequencies in the cosets to their relative frequencies in the coset. The one's with smallest differences between the two are likely to be the letters for the keyword.
+\label{sec-3-2-5-3}
+\item Based on this form your keyword and then decode.
+\label{sec-3-2-5-4}
+\end{enumerate}
+% Emacs 25.2.2 (Org mode 8.2.10)
+\end{document}
