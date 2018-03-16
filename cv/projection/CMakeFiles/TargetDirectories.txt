@@ -1,0 +1,3 @@
+/home/ankur/Development/cv/projection/CMakeFiles/rebuild_cache.dir
+/home/ankur/Development/cv/projection/CMakeFiles/cubeProjection.dir
+/home/ankur/Development/cv/projection/CMakeFiles/edit_cache.dir
