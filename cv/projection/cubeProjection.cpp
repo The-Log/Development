@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -51,7 +52,12 @@ int main(int argc, char** argv){
   String source = argv[1];
   std::cout  << "Source File: " << source << std::endl;
   VideoCapture sauce(source);
-  VideoWriter outputVideo;
+  VideoWriter outputVideo("output-" + source, 
+               sauce.get(CV_CAP_PROP_FOURCC),
+               sauce.get(CV_CAP_PROP_FPS),
+               cv::Size(sauce.get(CV_CAP_PROP_FRAME_WIDTH),
+               sauce.get(CV_CAP_PROP_FRAME_HEIGHT)));
+
   if (!sauce.isOpened()){
     std::cout  << "Could not open the input video: " << source << std::endl;
     return -1;
@@ -88,7 +94,7 @@ int main(int argc, char** argv){
       axis.push_back(cv::Point3f(0.0, 0, 0)); axis.push_back(cv::Point3f(0.0,4.0,0.0)); axis.push_back(cv::Point3f(4,4,0)); axis.push_back(cv::Point3d(4,0,0));
       axis.push_back(cv::Point3f(0,0,-4)); axis.push_back(cv::Point3f(0,4,-4)); axis.push_back(cv::Point3f(4,4,-4));axis.push_back(cv::Point3f(4,0,-4));
 
-      op = Create3DChessboardCorners(board_sz, 4.5);
+      op = Create3DChessboardCorners(board_sz, 2.5);
       cv::Mat o_points = cv::Mat(op);
 
       Mat distCoeffs = Mat::zeros(4,1,DataType<double>::type);
@@ -105,7 +111,9 @@ int main(int argc, char** argv){
       
       cout << projectedPoints << endl;
       Mat img = draw(frame, projectedPoints);
-      imshow( "Img", img );
+      //imshow( "Img", img );
+      outputVideo.write(img);
+      
     }
     else{
       cout << "board not found" << endl;
