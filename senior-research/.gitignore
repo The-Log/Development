@@ -3,3 +3,5 @@
 # ignore directory
 /ssd.pytorch
 /pytorch-yolo2
+/cartpole-tests
+

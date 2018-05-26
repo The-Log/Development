@@ -3,531 +3,79 @@ import requests
 import re
 url_start =  'https://text-to-speech-demo.ng.bluemix.net/api/synthesize?text='
 url_end = '&voice=en-US_AllisonVoice&accept=audio%2Fmp3'
-text = """
-and heave a finished bottle into the woods. In his 
-goodnight kiss we smelled the cloying 
-sweetness of Clorets, the mints he chewed to camouf
-lage his dragon's breath. 
-I can summon up that kiss right now by recalling Th
-eodore Roethke's lines about his own 
-father: 
-The whiskey on your breath Could make a small boy d
-izzy; But I hung on like death: 
-Such waltzing was not easy. 
-Such waltzing was hard, terribly hard, for with a b
-oy's scrawny arms I was trying to hold 
-my tipsy father upright. 
-For years, the chief source of those incriminating 
-bottles and cans was a grimy store a 
-mile from us, a cinderblock place called Sly's, wit
-h two gas pumps outside and a mangy 
-dog asleep in the window. Inside, on rusty metal sh
-elves or in wheezing coolers, you 
-could find pop and Popsicles, cigarettes, potato ch
-ips, canned soup, raunchy postcards, 
-fishing gear, Twinkies, wine, and beer. When Father
- drove anywhere on errands, Mother 
-would send us along as guards, warning us not to le
-t him out of our sight. And so with 
-one or more of us on board, Father would cruise up 
-to Sly's, pump a dollar's worth of gas 
-or plump the tires with air, and then, telling us t
-o wait in the car, he would head for the 
-doorway. 
-Dutiful and panicky, we cried, "Let us go with you!
-" 
-"No," he answered. "I'll be back in two shakes." 
-"Please!" 
-"No!" he roared. "Don't you budge or I'll jerk a kn
-ot in your tails!" 
-So we stayed put, kicking the seats, while he ducke
-d inside. Often, when he had parked 
-the car at a careless angle, we gazed in through th
-e window and saw Mr. Sly fetching 
-down from the shelf behind the cash register two gr
-een pints of Gallo wine. Father 
-swigged one of them right there at the counter, stu
-ffed the other in his pocket, and then 
-out he came, a bulge in his coat, a flustered look 
-on his reddened face.  
-Because the mom and pop who ran the dump were neigh
-bors of ours, living just down the 
-tar-blistered road, I hated them all the more for p
-oisoning my father. I wanted to sneak in 
-their store and smash the bottles and set fire to t
-he place. I also hated the Gallo brothers, 
-Ernest and Julio, whose jovial faces beamed from th
-e labels of their wine, labels I would 
-find, torn and curled, when I burned the trash. I n
-oted the Gallo brothers' address in 
-California and studied the road atlas to see how fa
-r that was from Ohio, because I meant 
-to go out there and tell Ernest and Julio what they
- were doing to my father, and then, if 
-they showed no mercy, I would kill them. 
-5
-While growing up on the back roads and in the count
-ry schools and cramped Methodist 
-churches of Ohio and Tennessee, I never heard the w
-ord alcoholic, never happened 
-across it in books or magazines. In the nearby town
-s, there were no addiction-treatment 
-programs, no community mental-health centers, no Al
-coholics Anonymous chapters, no 
-therapists. Left alone with our grievous secret, we
- had no way of understanding Father's 
-drinking except as an act of will, a deliberate fol
-ly or cruelty, a moral weakness, a sin. He 
-drank because he chose to, pure and simple. Why our
- father, so playful and competent 
-and kind when sober, would choose to ruin himself a
-nd punish his family we could not 
-fathom. 
-Our neighborhood was high on the Bible, and the Bib
-le was hard on drunkards. "Woe to 
-those who are heroes at drinking wine and valiant m
-en in mixing strong drink," wrote 
-Isaiah. "The priest and the prophet reel with stron
-g drink, they are confused with wine, 
-they err in vision, they stumble in giving judgment
-. For all tables are full of vomit, no 
-place is without filthiness." We children had seen 
-those fouled tables at the local 
-truckstop where the notorious boozers hung out, our
- father occasionally among them. 
-"Wine and new wine take away the understanding," de
-clared the prophet Hosea. We had 
-also seen evidence of that in our father, who could
- multiply seven-digit numbers in his 
-head when sober but when drunk could not help us wi
-th fourth-grade math. Proverbs 
-warned: "Do not look at wine when it is red, when i
-t sparkles in the cup and goes down 
-smoothly. At the last it bites like a serpent and s
-tings like an adder. Your eyes will see 
-strange things, and your mind utter perverse things
-." Woe, woe. 
-Dismayingly often, these biblical drunkards stirred
- up trouble for their own kids. Noah 
-made fresh wine after the flood, drank too much of 
-it, fell asleep without any clothes on, 
-and was glimpsed in the buff by his son Ham, whom N
-oah promptly cursed. In one 
-passage--it was so shocking we had to read it under
- our blankets with flashlights--the 
-patriarch Lot fell down drunk and slept with his da
-ughters. The sins of the fathers set 
-their children's teeth on edge. 
-Our ministers were fond of quoting St. Paul's prono
-uncement that drunkards would not 
-inherit the kingdom of God. These grave preachers a
-ssured us that the wine referred to in 
-the Last Supper was in fact grape juice. Bible and 
-sermons and hymns combined to give 
-us the impression that Moses should have brought do
-wn from the mountain another stone 
-tablet, bearing the Eleventh Commandment: Thou shal
-t not drink. 
-The scariest and most illuminating Bible story apro
-pos of drunkards was the one about 
-the lunatic and the swine. We knew it by heart: Whe
-n Jesus climbed out of his boat one 
-day, this lunatic came charging up from the graveya
-rd, stark naked and filthy, frothing at 
-the mouth, so violent that he broke the strongest c
-hains. Nobody would go near him. 
-Night and day for years, this madman had been waili
-ng among the tombs and bruising 
-himself with stones. Jesus took one look at him and
- said, "Come out of the man, you 
-unclean spirits!" for he could see that the lunatic
- was possessed by demons. Meanwhile, 
-some hogs were conveniently rooting nearby. "If we 
-have to come out," begged the 
-demons, "at least let us go into those swine." Jesu
-s agreed, the unclean spirits entered the 
-hogs, and the hogs raced straight off a cliff and p
-lunged into a lake. Hearing the story in 
-6
-Sunday school, my friends thought mainly of the pig
-s. (How big a splash did they make? 
-Who paid for the lost pork?) But I thought of the r
-edeemed lunatic, who bathed himself 
-and put on clothes and calmly sat at the feet of Je
-sus, restored--so the Bible said--to "his 
-right mind." 
-When drunk, our father was clearly in his wrong min
-d. He became a stranger, as fearful 
-to us as any graveyard lunatic, not quite frothing 
-at the mouth but fierce enough, quick-
-tempered, explosive; or else he grew maudlin and we
-epy, which frightened us nearly as 
-much. In my boyhood despair, I reasoned that maybe 
-he wasn't to blame for turning into 
-an ogre: Maybe, like the lunatic, he was possessed 
-by demons. 
-If my father was indeed possessed, who would exorci
-se him? If he was a sinner, who 
-would save him? If he was ill, who would cure him? 
-If he suffered, who would ease his 
-pain? Not ministers or doctors, for we could not br
-ing ourselves to confide in them; not 
-the neighbors, for we pretended they had never seen
- him drunk; not Mother, who fussed 
-and pleaded but could not budge him; not my brother
- and sister, who were only kids. 
-That left me. It did not matter that I, too, was on
-ly a child, and a bewildered one at that. I 
-could not excuse myself. 
-On first reading a description of delirium tremens-
--in a book on alcoholism I smuggled 
-from a university library--I thought immediately of
- the frothing lunatic and the frenzied 
-swine. When I read stories or watched films about g
-risly metamorphoses--Dr. Jekyll 
-becoming Mr. Hyde, the mild husband changing into a
- werewolf, the kindly neighbor 
-inhabited by a brutal alien--I could not help but s
-ee my own father's mutation from sober 
-to drunk. Even today, knowing better, I am attracte
-d by the demonic theory of drink, for 
-when I recall my father's transformation, the emerg
-ence of his ugly second self, I find it 
-easy to believe in being possessed by unclean spiri
-ts. We never knew which version of 
-Father would come home from work, the true or the t
-ainted, nor could we guess how far 
-down the slope toward cruelty he would slide.  
-How far a man could slide we gauged by observing ou
-r back-road neighbors--the out-of-
-work miners who had dragged their families to our c
-orner of Ohio from the desolate 
-hollows of Appalachia, the tightfisted farmers, the
- surly mechanics, the balked and 
-broken men. There was, for example, whiskey-soaked 
-Mr. Jenkins, who beat his wife and 
-kids so hard we could hear their screams from the r
-oad. There was Mr. Lavo the wino, 
-who fell asleep smoking time and again, until one n
-ight his disgusted wife bundled up the 
-children and went outside and left him in his easy 
-chair to burn; he awoke on his own, 
-staggered out coughing into the yard, and pounded h
-er flat while the children looked on 
-and the shack turned to ash. There was the truck dr
-iver, Mr. Sampson, who tripped over 
-his son's tricycle one night while drunk and got ma
-d, jumped into his semi, and drove 
-away, shifting through the dozen gears, and never c
-ame back. We saw the bruised 
-children of these fathers clump onto our school bus
-, we saw the abandoned children 
-huddle in the pews at church, we saw the stunned an
-d battered mothers begging for help 
-at our doors. 
-7
-Our own father never beat us, and I don't think he 
-beat Mother, but he threatened often. 
-The Old Testament Yahweh was not more terrible in H
-is rage. Eyes blazing, voice 
-booming, Father would pull out his belt and swear t
-o give us a whipping, but he never 
-followed through, never needed to, because we could
- imagine it so vividly. He shoved us, 
-pawed us with the back of his hand, not to injure, 
-just to clear a space. I can see him 
-grabbing Mother by the hair as she cowers on a chai
-r during a nightly quarrel. He twists 
-her neck back until she gapes up at him, and then h
-e lifts over her skull a glass quart 
-bottle of milk, the milk spilling down his forearm,
- and he yells at her, "Say just one more 
-word, one goddamn word, and I'll shut you up!" I fe
-ar she will prick him with her sharp 
-tongue, but she is terrified into silence, and so a
-m I, and the leaking bottle quivers in the 
-air, and milk seeps through the red hair of my fath
-er's uplifted arm, and the entire scene is 
-there to this moment, the head jerked back, the clu
-b raised. 
-When the drink made him weepy, Father would pack, k
-iss each of us children on the 
-head, and announce from the front door that he was 
-moving out. "Where to?" we 
-demanded, fearful each time that he would leave for
- good, as Mr. Simpson had roared 
-away for good in his diesel truck. "Someplace where
- I won't get hounded every minute," 
-Father would answer, his jaw quivering. He stabbed 
-a look at Mother, who might say, 
-"Don't run into the ditch before you get there," or
- "Good riddance," and then he would 
-slink away. Mother watched him go with arms crossed
- over her chest, her face closed like 
-the lid on a box of snakes. We children bawled. Whe
-re could he go? To the truck stop, 
-that den of iniquity? To one of those dark, ratty f
-lophouses in town? Would he wind up 
-sleeping under a railroad bridge or on a park bench
- or in a cardboard box, mummied in 
-rags like the bums we had seen on our trips to Clev
-eland and Chicago? We bawled and 
-bawled, wondering if he would ever come back. He al
-ways did come back, a day or a 
-week later, but each time there was a sliver less o
-f him. 
-In Kafka's METAMORPHOSIS, which opens famously with
- Gregor Samsa waking up 
-from uneasy dreams to find himself transformed into
- an insect, Gregor's family keep 
-reassuring themselves that things will be just fine
- again "when he comes back to us." 
-Each time alcohol transformed our father we held ou
-t the same hope, that he would really 
-and truly come back to us, our authentic father, th
-e tender and playful and competent 
-man, and then all things would be fine. We had grou
-nds for such hope. After his tearful 
-departures and chapfallen returns, he would sometim
-es go weeks, even months, without 
-drinking. Those were glad times. Every day without 
-the furtive glint of bottles, every 
-meal without a fight, every bedtime without sobs en
-couraged us to believe that such bliss 
-might go on forever.  
-Mother was fooled by such a hope all during the for
-ty-odd years she knew Greeley Ray 
-Sanders. Soon after she met him in a Chicago delica
-tessen on the eve of World War II 
-and fell for his butter-melting Mississippi drawl a
-nd his wavy red hair, she learned that he 
-drank heavily. But then so did a lot of men. She wo
-uld soon coax or scold him into 
-breaking the nasty habit. She would point out to hi
-m how ugly and foolish it was, this 
-bleary drinking, and then he would quit. He refused
- to quit during their engagement, 
-however, still refused during the first years of ma
-rriage, refused until my older sister 
-came along. The shock of fatherhood sobered him, an
-d he remained sober through my 
-8
-birth at the end of the war and right on through un
-til we moved in 1951 to the Ohio 
-arsenal. The arsenal had more than its share of alc
-oholics, drug addicts, and other 
-varieties of escape artists. There I turned six and
- started school and woke into a child's 
-flickering awareness, just in time to see my father
- begin sneaking swigs in the garage. 
-He sobered up again for most of a year at the heigh
-t of the Korean War, to celebrate the 
-birth of my brother. But aside from that dry spell,
- his only breaks from drinking before I 
-graduated from high school were just long enough to
- raise and then dash our hopes. Then 
-during the fall of my senior year--the time of the 
-Cuban Missile Crisis, when it seemed 
-that the nightly explosions at the munitions dump a
-nd the nightly rages in our household 
-might spread to engulf the globe--Father collapsed.
- His liver, kidneys, and heart all 
-conked out. The doctors saved him, but only by a ha
-ir. He stayed in the hospital for 
-weeks, going through a withdrawal so terrible that 
-Mother would not let us visit him. If 
-he wanted to kill himself, the doctors solemnly war
-ned him, all he had to do was hit the 
-bottle again. One binge would finish him. 
-Father must have believed them, for he stayed dry t
-he next fifteen years. It was an answer 
-to prayer, Mother said, it was a miracle. I believe
- it was a reflex of fear, which he 
-sustained over the years through courage and pride.
- He knew a man could die from drink, 
-for his brother Roscoe had. We children never laid 
-eyes on doomed Uncle Roscoe, but in 
-the stories Mother told us he became a fairy-tale f
-igure, like a boy who took the wrong 
-turn in the woods and was gobbled up by the wolf. 
-The fifteen-year dry spell came to an end with Fath
-er's retirement in the spring of 1978. 
-Like many men, he gave up his identity along with h
-is job. One day he was a boss at the 
-factory, with a brass plate on his door and a reput
-ation to uphold; the next day he was a 
-nobody at home. He and Mother were leaving Ontario,
- the last of the many places to 
-which his job had carried them, and they were movin
-g to a new house in Mississippi, his 
-childhood stomping ground. As a boy in Mississippi,
- Father sold Coca-Cola during 
-dances while the moonshiners peddled their brew in 
-the parking lot; as a young blade, he 
-fought in bars and in the ring, winning a state Gol
-den Gloves championship; he gambled 
-at poker, hunted pheasant, raced motorcycles and ca
-rs, played semiprofessional baseball, 
-and, along with all his buddies--in the Black Cat S
-aloon, behind the cotton gin, in the 
-woods--he drank hard. It was a perilous youth to dr
-eam of recovering. 
-After his final day of work, Mother drove on ahead 
-with a car full of begonias and 
-violets, while Father stayed behind to oversee the 
-packing. When the van was loaded, the 
-sweaty movers broke open a six-pack and offered him
- a beer.  
-"Let's drink to retirement!" they crowed. "Let's dr
-ink to freedom! to fishing! hunting! 
-loafing! Let's drink to a guy who's going home!" 
-At least I imagine some such words, for that is all
- I can do, imagine, and I see Father's 
-hand trembling in midair as he thinks about the fif
-teen sober years and about the doctors' 
-warning, and he tells himself, Goddamnit, I am a fr
-ee man, and Why can't a free man 
-drink one beer after a lifetime of hard work? and I
- see his arm reaching, his fingers 
-9
-closing, the can tilting to his lips. I even supply
- a label for the beer, a swaggering brand 
-that promises on television to deliver the essence 
-of life. I watch the amber liquid pour 
-down his throat, the alcohol steal into his blood, 
-the key turn in his brain. 
-Soon after my parents moved back to Father's treach
-erous stomping ground, my wife and 
-I visited them in Mississippi with our four-year-ol
-d daughter. Mother had been too 
-distraught to warn me about the return of the demon
-s. So when I climbed out of the car 
-that bright July morning and saw my father napping 
-in the hammock, I felt uneasy, and 
-when he lurched upright and blinked his bloodshot e
-yes and greeted us in a syrupy voice, 
-I was hurled back into childhood. 
-"What's the matter with Papaw?" our daughter asked.
-"Nothing," I said. "Nothing!" 
-Like a child again, I pretended not to see him in h
-is stupor, and behind my phony smile I 
-grieved. On that visit and on the few that remained
- before his death, once again I found 
-bottles in the workbench, bottles in the woods. Aga
-in his hands shook too much for him 
-to run a saw, to make his precious miniature furnit
-ure, to drive straight down back roads. 
-Again he wound up in the ditch, in the hospital, in
- jail, in the treatment center. Again he 
-shouted and wept. Again he lied. "I never touched a
- drop," he swore. "Your mother's 
-making it up." 
-I no longer fancied I could reason with the men who
-se names I found on the bottles--Jim 
-Beam, Jack Daniel's--but I was able now to recall t
-he cold statistics about alcoholism: ten 
-million victims, fifteen million, twenty. And yet, 
-in spite of my age, I reacted in the same 
-blind way as I had in childhood, by vainly seeking 
-to erase through my efforts whatever 
-drove him to drink. I worked on their place twelve 
-and sixteen hours a day, in the swelter 
-of Mississippi summers, digging ditches, running el
-ectrical wires, planting trees, mowing 
-grass, building sheds, as though what nagged at him
- was some list of chores, as though 
-by taking his worries upon my shoulders I could red
-eem him. I was flung back into 
-boyhood, acting as though my father would not drink
- himself to death if only I were 
-perfect. 
-I failed of perfection; he succeeded in dying. To t
-he end, he considered himself not sick 
-but sinful. "Do you want to kill yourself?" I asked
- him. "Why not?" he answered. "Why 
-the hell not? What's there to save?" To the end, he
- would not speak about his feelings, 
-would not or could not give a name to the beast tha
-t was devouring him.  
-In silence, he went rushing off the cliff. Unlike t
-he biblical swine, however, he left 
-behind a few of the demons to haunt his children. L
-ife with him and the loss of him 
-twisted us into shapes that will be familiar to oth
-er sons and daughters of alcoholics. My 
-brother became a rebel, my sister retreated into sh
-yness, I played the stalwart and dutiful 
-son who would hold the family together. If my fathe
-r was unstable, I would be a rock. If 
-he squandered money on drink, I would pinch every p
-enny. If he wept when drunk--and 
-only when drunk--I would not let myself weep at all
-. If he roared at the Little League 
-10
-umpire for calling my pitches balls, I would throw 
-nothing but strikes. Watching him 
-flounder and rage, I came to dread the loss of cont
-rol. I would go through life without 
-making anyone mad. I vowed never to put in my mouth
- or veins any chemical that would 
-banish my everyday self. I would never make a scene
-, never lash out at the ones I loved, 
-never hurt a soul. Through hard work, relentless wo
-rk, I would achieve something 
-dazzling--in the classroom, on the basketball court
-, in the science lab, in the pages of 
-books--and my achievement would distract the world'
-s eyes from his humiliation. I would 
-become a worthy sacrifice, and the smoke of my burn
-ing would please God. 
-It is far easier to recognize these twists in my ch
-aracter than to undo them. Work has 
-become an addiction for me, as drink was an addicti
-on for my father. Knowing this, my 
-daughter gave me a placard for the wall: Workaholic
-. The labor is endless and futile, for I 
-can no more redeem myself through work than I could
- redeem my father. I still panic in 
-the face of other people's anger, because his drunk
-en temper was so terrible. I shrink from 
-causing sadness or disappointment even to strangers
-, as though I were still concealing the 
-family shame. I still notice every twitch of emotio
-n in those faces around me, having 
-learned as a child to read the weather in faces, an
-d I blame myself for their least pang of 
-unhappiness or anger. In certain moods I blame myse
-lf for everything. Guilt burns like 
-acid in my veins. 
-I am moved to write these pages now because my own 
-son, at the age of ten, is taking on 
-himself the griefs of the world, and in particular 
-the griefs of his father. He tells me that 
-when I am gripped by sadness, he feels responsible;
- he feels there must be something he 
-can do to spring me from depression, to fix my life
-. And that crushing sense of 
-responsibility is exactly what I felt at the age of
- ten in the face of my father's drinking. 
-My son wonders if I, too, am possessed. I write, th
-erefore, to drag into the light what eats 
-at me--the fear, the guilt, the shame--so that my o
-wn children may he spared.  
-I still shy away from nightclubs, from bars, from p
-arties where the solvent is alcohol. My 
-friends puzzle over this, but it is no more peculia
-r than for a man to shy away from the 
-lions' den after seeing his father torn apart. I to
-ok my own first drink at the age of twenty-
-one, half a glass of burgundy. I knew the odds of m
-y becoming an alcoholic were four 
-times higher than for the children of nonalcoholic 
-fathers. So I sipped warily. 
-I still do--once a week, perhaps, a glass of wine, 
-a can of beer, nothing stronger, nothing 
-more. I listen for the turning of a key in my brain
-. 
-"""
+text ="""
+Most people who bother with the matter at all would admit that the English language is in a bad way, but it is generally assumed that we cannot by conscious action do anything about it. Our civilization is decadent and our language — so the argument runs — must inevitably share in the general collapse. It follows that any struggle against the abuse of language is a sentimental archaism, like preferring candles to electric light or hansom cabs to aeroplanes. Underneath this lies the half-conscious belief that language is a natural growth and not an instrument which we shape for our own purposes.
+
+Now, it is clear that the decline of a language must ultimately have political and economic causes: it is not due simply to the bad influence of this or that individual writer. But an effect can become a cause, reinforcing the original cause and producing the same effect in an intensified form, and so on indefinitely. A man may take to drink because he feels himself to be a failure, and then fail all the more completely because he drinks. It is rather the same thing that is happening to the English language. It becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts. The point is that the process is reversible. Modern English, especially written English, is full of bad habits which spread by imitation and which can be avoided if one is willing to take the necessary trouble. If one gets rid of these habits one can think more clearly, and to think clearly is a necessary first step toward political regeneration: so that the fight against bad English is not frivolous and is not the exclusive concern of professional writers. I will come back to this presently, and I hope that by that time the meaning of what I have said here will have become clearer. Meanwhile, here are five specimens of the English language as it is now habitually written.
+
+These five passages have not been picked out because they are especially bad — I could have quoted far worse if I had chosen — but because they illustrate various of the mental vices from which we now suffer. They are a little below the average, but are fairly representative examples. I number them so that I can refer back to them when necessary:
+
+    1. I am not, indeed, sure whether it is not true to say that the Milton who once seemed not unlike a seventeenth-century Shelley had not become, out of an experience ever more bitter in each year, more alien [sic] to the founder of that Jesuit sect which nothing could induce him to tolerate.
+
+    Professor Harold Laski (Essay in Freedom of Expression)
+
+    2. Above all, we cannot play ducks and drakes with a native battery of idioms which prescribes egregious collocations of vocables as the Basic put up with for tolerate, or put at a loss for bewilder.
+
+    Professor Lancelot Hogben (Interglossia)
+
+    3. On the one side we have the free personality: by definition it is not neurotic, for it has neither conflict nor dream. Its desires, such as they are, are transparent, for they are just what institutional approval keeps in the forefront of consciousness; another institutional pattern would alter their number and intensity; there is little in them that is natural, irreducible, or culturally dangerous. But on the other side, the social bond itself is nothing but the mutual reflection of these self-secure integrities. Recall the definition of love. Is not this the very picture of a small academic? Where is there a place in this hall of mirrors for either personality or fraternity?
+
+    Essay on psychology in Politics (New York)
+
+    4. All the ‘best people’ from the gentlemen's clubs, and all the frantic fascist captains, united in common hatred of Socialism and bestial horror at the rising tide of the mass revolutionary movement, have turned to acts of provocation, to foul incendiarism, to medieval legends of poisoned wells, to legalize their own destruction of proletarian organizations, and rouse the agitated petty-bourgeoise to chauvinistic fervor on behalf of the fight against the revolutionary way out of the crisis.
+
+    Communist pamphlet
+
+    5. If a new spirit is to be infused into this old country, there is one thorny and contentious reform which must be tackled, and that is the humanization and galvanization of the B.B.C. Timidity here will bespeak canker and atrophy of the soul. The heart of Britain may be sound and of strong beat, for instance, but the British lion's roar at present is like that of Bottom in Shakespeare's A Midsummer Night's Dream — as gentle as any sucking dove. A virile new Britain cannot continue indefinitely to be traduced in the eyes or rather ears, of the world by the effete languors of Langham Place, brazenly masquerading as ‘standard English’. When the Voice of Britain is heard at nine o'clock, better far and infinitely less ludicrous to hear aitches honestly dropped than the present priggish, inflated, inhibited, school-ma'amish arch braying of blameless bashful mewing maidens!
+
+    Letter in Tribune
+
+Each of these passages has faults of its own, but, quite apart from avoidable ugliness, two qualities are common to all of them. The first is staleness of imagery; the other is lack of precision. The writer either has a meaning and cannot express it, or he inadvertently says something else, or he is almost indifferent as to whether his words mean anything or not. This mixture of vagueness and sheer incompetence is the most marked characteristic of modern English prose, and especially of any kind of political writing. As soon as certain topics are raised, the concrete melts into the abstract and no one seems able to think of turns of speech that are not hackneyed: prose consists less and less of words chosen for the sake of their meaning, and more and more of phrases tacked together like the sections of a prefabricated hen-house. I list below, with notes and examples, various of the tricks by means of which the work of prose-construction is habitually dodged.
+
+DYING METAPHORS. A newly invented metaphor assists thought by evoking a visual image, while on the other hand a metaphor which is technically ‘dead’ (e. g. iron resolution) has in effect reverted to being an ordinary word and can generally be used without loss of vividness. But in between these two classes there is a huge dump of worn-out metaphors which have lost all evocative power and are merely used because they save people the trouble of inventing phrases for themselves. Examples are: Ring the changes on, take up the cudgel for, toe the line, ride roughshod over, stand shoulder to shoulder with, play into the hands of, no axe to grind, grist to the mill, fishing in troubled waters, on the order of the day, Achilles’ heel, swan song, hotbed. Many of these are used without knowledge of their meaning (what is a ‘rift’, for instance?), and incompatible metaphors are frequently mixed, a sure sign that the writer is not interested in what he is saying. Some metaphors now current have been twisted out of their original meaning without those who use them even being aware of the fact. For example, toe the line is sometimes written as tow the line. Another example is the hammer and the anvil, now always used with the implication that the anvil gets the worst of it. In real life it is always the anvil that breaks the hammer, never the other way about: a writer who stopped to think what he was saying would avoid perverting the original phrase.
+
+OPERATORS OR VERBAL FALSE LIMBS. These save the trouble of picking out appropriate verbs and nouns, and at the same time pad each sentence with extra syllables which give it an appearance of symmetry. Characteristic phrases are render inoperative, militate against, make contact with, be subjected to, give rise to, give grounds for, have the effect of, play a leading part (role) in, make itself felt, take effect, exhibit a tendency to, serve the purpose of, etc., etc. The keynote is the elimination of simple verbs. Instead of being a single word, such as break, stop, spoil, mend, kill, a verb becomes a phrase, made up of a noun or adjective tacked on to some general-purpose verb such as prove, serve, form, play, render. In addition, the passive voice is wherever possible used in preference to the active, and noun constructions are used instead of gerunds (by examination of instead of by examining). The range of verbs is further cut down by means of the -ize and de- formations, and the banal statements are given an appearance of profundity by means of the not un- formation. Simple conjunctions and prepositions are replaced by such phrases as with respect to, having regard to, the fact that, by dint of, in view of, in the interests of, on the hypothesis that; and the ends of sentences are saved by anticlimax by such resounding commonplaces as greatly to be desired, cannot be left out of account, a development to be expected in the near future, deserving of serious consideration, brought to a satisfactory conclusion, and so on and so forth.
+
+PRETENTIOUS DICTION. Words like phenomenon, element, individual (as noun), objective, categorical, effective, virtual, basic, primary, promote, constitute, exhibit, exploit, utilize, eliminate, liquidate, are used to dress up a simple statement and give an air of scientific impartiality to biased judgements. Adjectives like epoch-making, epic, historic, unforgettable, triumphant, age-old, inevitable, inexorable, veritable, are used to dignify the sordid process of international politics, while writing that aims at glorifying war usually takes on an archaic colour, its characteristic words being: realm, throne, chariot, mailed fist, trident, sword, shield, buckler, banner, jackboot, clarion. Foreign words and expressions such as cul de sac, ancien regime, deus ex machina, mutatis mutandis, status quo, gleichschaltung, weltanschauung, are used to give an air of culture and elegance. Except for the useful abbreviations i. e., e. g. and etc., there is no real need for any of the hundreds of foreign phrases now current in the English language. Bad writers, and especially scientific, political, and sociological writers, are nearly always haunted by the notion that Latin or Greek words are grander than Saxon ones, and unnecessary words like expedite, ameliorate, predict, extraneous, deracinated, clandestine, subaqueous, and hundreds of others constantly gain ground from their Anglo-Saxon numbers(1). The jargon peculiar to Marxist writing (hyena, hangman, cannibal, petty bourgeois, these gentry, lackey, flunkey, mad dog, White Guard, etc.) consists largely of words translated from Russian, German, or French; but the normal way of coining a new word is to use Latin or Greek root with the appropriate affix and, where necessary, the size formation. It is often easier to make up words of this kind (deregionalize, impermissible, extramarital, non-fragmentary and so forth) than to think up the English words that will cover one's meaning. The result, in general, is an increase in slovenliness and vagueness.
+
+MEANINGLESS WORDS. In certain kinds of writing, particularly in art criticism and literary criticism, it is normal to come across long passages which are almost completely lacking in meaning(2). Words like romantic, plastic, values, human, dead, sentimental, natural, vitality, as used in art criticism, are strictly meaningless, in the sense that they not only do not point to any discoverable object, but are hardly ever expected to do so by the reader. When one critic writes, ‘The outstanding feature of Mr. X's work is its living quality’, while another writes, ‘The immediately striking thing about Mr. X's work is its peculiar deadness’, the reader accepts this as a simple difference opinion. If words like black and white were involved, instead of the jargon words dead and living, he would see at once that language was being used in an improper way. Many political words are similarly abused. The word Fascism has now no meaning except in so far as it signifies ‘something not desirable’. The words democracy, socialism, freedom, patriotic, realistic, justice have each of them several different meanings which cannot be reconciled with one another. In the case of a word like democracy, not only is there no agreed definition, but the attempt to make one is resisted from all sides. It is almost universally felt that when we call a country democratic we are praising it: consequently the defenders of every kind of regime claim that it is a democracy, and fear that they might have to stop using that word if it were tied down to any one meaning. Words of this kind are often used in a consciously dishonest way. That is, the person who uses them has his own private definition, but allows his hearer to think he means something quite different. Statements like Marshal Petain was a true patriot, The Soviet press is the freest in the world, The Catholic Church is opposed to persecution, are almost always made with intent to deceive. Other words used in variable meanings, in most cases more or less dishonestly, are: class, totalitarian, science, progressive, reactionary, bourgeois, equality.
+
+Now that I have made this catalogue of swindles and perversions, let me give another example of the kind of writing that they lead to. This time it must of its nature be an imaginary one. I am going to translate a passage of good English into modern English of the worst sort. Here is a well-known verse from Ecclesiastes:
+
+    I returned and saw under the sun, that the race is not to the swift, nor the battle to the strong, neither yet bread to the wise, nor yet riches to men of understanding, nor yet favour to men of skill; but time and chance happeneth to them all.
+
+Here it is in modern English:
+
+    Objective considerations of contemporary phenomena compel the conclusion that success or failure in competitive activities exhibits no tendency to be commensurate with innate capacity, but that a considerable element of the unpredictable must invariably be taken into account.
+
+This is a parody, but not a very gross one. Exhibit (3) above, for instance, contains several patches of the same kind of English. It will be seen that I have not made a full translation. The beginning and ending of the sentence follow the original meaning fairly closely, but in the middle the concrete illustrations — race, battle, bread — dissolve into the vague phrases ‘success or failure in competitive activities’. This had to be so, because no modern writer of the kind I am discussing — no one capable of using phrases like ‘objective considerations of contemporary phenomena’ — would ever tabulate his thoughts in that precise and detailed way. The whole tendency of modern prose is away from concreteness. Now analyze these two sentences a little more closely. The first contains forty-nine words but only sixty syllables, and all its words are those of everyday life. The second contains thirty-eight words of ninety syllables: eighteen of those words are from Latin roots, and one from Greek. The first sentence contains six vivid images, and only one phrase (‘time and chance’) that could be called vague. The second contains not a single fresh, arresting phrase, and in spite of its ninety syllables it gives only a shortened version of the meaning contained in the first. Yet without a doubt it is the second kind of sentence that is gaining ground in modern English. I do not want to exaggerate. This kind of writing is not yet universal, and outcrops of simplicity will occur here and there in the worst-written page. Still, if you or I were told to write a few lines on the uncertainty of human fortunes, we should probably come much nearer to my imaginary sentence than to the one from Ecclesiastes.
+
+As I have tried to show, modern writing at its worst does not consist in picking out words for the sake of their meaning and inventing images in order to make the meaning clearer. It consists in gumming together long strips of words which have already been set in order by someone else, and making the results presentable by sheer humbug. The attraction of this way of writing is that it is easy. It is easier — even quicker, once you have the habit — to say In my opinion it is not an unjustifiable assumption that than to say I think. If you use ready-made phrases, you not only don't have to hunt about for the words; you also don't have to bother with the rhythms of your sentences since these phrases are generally so arranged as to be more or less euphonious. When you are composing in a hurry — when you are dictating to a stenographer, for instance, or making a public speech — it is natural to fall into a pretentious, Latinized style. Tags like a consideration which we should do well to bear in mind or a conclusion to which all of us would readily assent will save many a sentence from coming down with a bump. By using stale metaphors, similes, and idioms, you save much mental effort, at the cost of leaving your meaning vague, not only for your reader but for yourself. This is the significance of mixed metaphors. The sole aim of a metaphor is to call up a visual image. When these images clash — as in The Fascist octopus has sung its swan song, the jackboot is thrown into the melting pot — it can be taken as certain that the writer is not seeing a mental image of the objects he is naming; in other words he is not really thinking. Look again at the examples I gave at the beginning of this essay. Professor Laski (1) uses five negatives in fifty three words. One of these is superfluous, making nonsense of the whole passage, and in addition there is the slip — alien for akin — making further nonsense, and several avoidable pieces of clumsiness which increase the general vagueness. Professor Hogben (2) plays ducks and drakes with a battery which is able to write prescriptions, and, while disapproving of the everyday phrase put up with, is unwilling to look egregious up in the dictionary and see what it means; (3), if one takes an uncharitable attitude towards it, is simply meaningless: probably one could work out its intended meaning by reading the whole of the article in which it occurs. In (4), the writer knows more or less what he wants to say, but an accumulation of stale phrases chokes him like tea leaves blocking a sink. In (5), words and meaning have almost parted company. People who write in this manner usually have a general emotional meaning — they dislike one thing and want to express solidarity with another — but they are not interested in the detail of what they are saying. A scrupulous writer, in every sentence that he writes, will ask himself at least four questions, thus: What am I trying to say? What words will express it? What image or idiom will make it clearer? Is this image fresh enough to have an effect? And he will probably ask himself two more: Could I put it more shortly? Have I said anything that is avoidably ugly? But you are not obliged to go to all this trouble. You can shirk it by simply throwing your mind open and letting the ready-made phrases come crowding in. The will construct your sentences for you — even think your thoughts for you, to a certain extent — and at need they will perform the important service of partially concealing your meaning even from yourself. It is at this point that the special connection between politics and the debasement of language becomes clear.
+
+In our time it is broadly true that political writing is bad writing. Where it is not true, it will generally be found that the writer is some kind of rebel, expressing his private opinions and not a ‘party line’. Orthodoxy, of whatever colour, seems to demand a lifeless, imitative style. The political dialects to be found in pamphlets, leading articles, manifestos, White papers and the speeches of undersecretaries do, of course, vary from party to party, but they are all alike in that one almost never finds in them a fresh, vivid, homemade turn of speech. When one watches some tired hack on the platform mechanically repeating the familiar phrases — bestial, atrocities, iron heel, bloodstained tyranny, free peoples of the world, stand shoulder to shoulder — one often has a curious feeling that one is not watching a live human being but some kind of dummy: a feeling which suddenly becomes stronger at moments when the light catches the speaker's spectacles and turns them into blank discs which seem to have no eyes behind them. And this is not altogether fanciful. A speaker who uses that kind of phraseology has gone some distance toward turning himself into a machine. The appropriate noises are coming out of his larynx, but his brain is not involved, as it would be if he were choosing his words for himself. If the speech he is making is one that he is accustomed to make over and over again, he may be almost unconscious of what he is saying, as one is when one utters the responses in church. And this reduced state of consciousness, if not indispensable, is at any rate favourable to political conformity.
+
+In our time, political speech and writing are largely the defence of the indefensible. Things like the continuance of British rule in India, the Russian purges and deportations, the dropping of the atom bombs on Japan, can indeed be defended, but only by arguments which are too brutal for most people to face, and which do not square with the professed aims of the political parties. Thus political language has to consist largely of euphemism, question-begging and sheer cloudy vagueness. Defenceless villages are bombarded from the air, the inhabitants driven out into the countryside, the cattle machine-gunned, the huts set on fire with incendiary bullets: this is called pacification. Millions of peasants are robbed of their farms and sent trudging along the roads with no more than they can carry: this is called transfer of population or rectification of frontiers. People are imprisoned for years without trial, or shot in the back of the neck or sent to die of scurvy in Arctic lumber camps: this is called elimination of unreliable elements. Such phraseology is needed if one wants to name things without calling up mental pictures of them. Consider for instance some comfortable English professor defending Russian totalitarianism. He cannot say outright, ‘I believe in killing off your opponents when you can get good results by doing so’. Probably, therefore, he will say something like this:
+
+    ‘While freely conceding that the Soviet regime exhibits certain features which the humanitarian may be inclined to deplore, we must, I think, agree that a certain curtailment of the right to political opposition is an unavoidable concomitant of transitional periods, and that the rigors which the Russian people have been called upon to undergo have been amply justified in the sphere of concrete achievement.’
+
+The inflated style itself is a kind of euphemism. A mass of Latin words falls upon the facts like soft snow, blurring the outline and covering up all the details. The great enemy of clear language is insincerity. When there is a gap between one's real and one's declared aims, one turns as it were instinctively to long words and exhausted idioms, like a cuttlefish spurting out ink. In our age there is no such thing as ‘keeping out of politics’. All issues are political issues, and politics itself is a mass of lies, evasions, folly, hatred, and schizophrenia. When the general atmosphere is bad, language must suffer. I should expect to find — this is a guess which I have not sufficient knowledge to verify — that the German, Russian and Italian languages have all deteriorated in the last ten or fifteen years, as a result of dictatorship.
+
+But if thought corrupts language, language can also corrupt thought. A bad usage can spread by tradition and imitation even among people who should and do know better. The debased language that I have been discussing is in some ways very convenient. Phrases like a not unjustifiable assumption, leaves much to be desired, would serve no good purpose, a consideration which we should do well to bear in mind, are a continuous temptation, a packet of aspirins always at one's elbow. Look back through this essay, and for certain you will find that I have again and again committed the very faults I am protesting against. By this morning's post I have received a pamphlet dealing with conditions in Germany. The author tells me that he ‘felt impelled’ to write it. I open it at random, and here is almost the first sentence I see: ‘[The Allies] have an opportunity not only of achieving a radical transformation of Germany's social and political structure in such a way as to avoid a nationalistic reaction in Germany itself, but at the same time of laying the foundations of a co-operative and unified Europe.’ You see, he ‘feels impelled’ to write — feels, presumably, that he has something new to say — and yet his words, like cavalry horses answering the bugle, group themselves automatically into the familiar dreary pattern. This invasion of one's mind by ready-made phrases (lay the foundations, achieve a radical transformation) can only be prevented if one is constantly on guard against them, and every such phrase anaesthetizes a portion of one's brain.
+
+I said earlier that the decadence of our language is probably curable. Those who deny this would argue, if they produced an argument at all, that language merely reflects existing social conditions, and that we cannot influence its development by any direct tinkering with words and constructions. So far as the general tone or spirit of a language goes, this may be true, but it is not true in detail. Silly words and expressions have often disappeared, not through any evolutionary process but owing to the conscious action of a minority. Two recent examples were explore every avenue and leave no stone unturned, which were killed by the jeers of a few journalists. There is a long list of flyblown metaphors which could similarly be got rid of if enough people would interest themselves in the job; and it should also be possible to laugh the not un- formation out of existence(3), to reduce the amount of Latin and Greek in the average sentence, to drive out foreign phrases and strayed scientific words, and, in general, to make pretentiousness unfashionable. But all these are minor points. The defence of the English language implies more than this, and perhaps it is best to start by saying what it does not imply.
+
+To begin with it has nothing to do with archaism, with the salvaging of obsolete words and turns of speech, or with the setting up of a ‘standard English’ which must never be departed from. On the contrary, it is especially concerned with the scrapping of every word or idiom which has outworn its usefulness. It has nothing to do with correct grammar and syntax, which are of no importance so long as one makes one's meaning clear, or with the avoidance of Americanisms, or with having what is called a ‘good prose style’. On the other hand, it is not concerned with fake simplicity and the attempt to make written English colloquial. Nor does it even imply in every case preferring the Saxon word to the Latin one, though it does imply using the fewest and shortest words that will cover one's meaning. What is above all needed is to let the meaning choose the word, and not the other way around. In prose, the worst thing one can do with words is surrender to them. When you think of a concrete object, you think wordlessly, and then, if you want to describe the thing you have been visualising you probably hunt about until you find the exact words that seem to fit it. When you think of something abstract you are more inclined to use words from the start, and unless you make a conscious effort to prevent it, the existing dialect will come rushing in and do the job for you, at the expense of blurring or even changing your meaning. Probably it is better to put off using words as long as possible and get one's meaning as clear as one can through pictures and sensations. Afterward one can choose — not simply accept — the phrases that will best cover the meaning, and then switch round and decide what impressions one's words are likely to make on another person. This last effort of the mind cuts out all stale or mixed images, all prefabricated phrases, needless repetitions, and humbug and vagueness generally. But one can often be in doubt about the effect of a word or a phrase, and one needs rules that one can rely on when instinct fails. I think the following rules will cover most cases:
+
+    Never use a metaphor, simile, or other figure of speech which you are used to seeing in print.
+    Never use a long word where a short one will do.
+    If it is possible to cut a word out, always cut it out.
+    Never use the passive where you can use the active.
+    Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
+    Break any of these rules sooner than say anything outright barbarous.
+
+These rules sound elementary, and so they are, but they demand a deep change of attitude in anyone who has grown used to writing in the style now fashionable. One could keep all of them and still write bad English, but one could not write the kind of stuff that I quoted in those five specimens at the beginning of this article.
+
+I have not here been considering the literary use of language, but merely language as an instrument for expressing and not for concealing or preventing thought. Stuart Chase and others have come near to claiming that all abstract words are meaningless, and have used this as a pretext for advocating a kind of political quietism. Since you don't know what Fascism is, how can you struggle against Fascism? One need not swallow such absurdities as this, but one ought to recognise that the present political chaos is connected with the decay of language, and that one can probably bring about some improvement by starting at the verbal end. If you simplify your English, you are freed from the worst follies of orthodoxy. You cannot speak any of the necessary dialects, and when you make a stupid remark its stupidity will be obvious, even to yourself. Political language — and with variations this is true of all political parties, from Conservatives to Anarchists — is designed to make lies sound truthful and murder respectable, and to give an appearance of solidity to pure wind. One cannot change this all in a moment, but one can at least change one's own habits, and from time to time one can even, if one jeers loudly enough, send some worn-out and useless phrase — some jackboot, Achilles’ heel, hotbed, melting pot, acid test, veritable inferno, or other lump of verbal refuse — into the dustbin where it belongs."""#input('text? \n')
 
 text = re.sub(r'\s+', '+', text)
 text = re.sub(r'[^\x00-\x7F]+','', text)

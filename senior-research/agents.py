@@ -38,6 +38,17 @@ class BaseAgent(object):
             elif center[0] < int(entity[1]):
                 self.env.make_action(self.actions[4])
 
+    def closest_entity(self, entities, center):
+        enemy = entities[-1]
+        distance = center[0] - int(enemy[1])
+            
+        for i in entities:
+            temp_d  = center[0] - int(i[1])
+            if distance > temp_d:
+                enemy = i
+                distance = temp_d
+        return enemy, distance
+    
     def action(self, state):
         n = state.number
         v = state.game_variables
@@ -58,17 +69,26 @@ class BaseAgent(object):
         health = state.game_variables[1]
         enemies = [i for i in entities if i[0] in common_enemies]
 
+        
+        
         env_med = [i for i in entities if i[0] in ['CustomMedikit']]
         env_ammo = [i for i in entities if i[0] in ['Clip']]
-        if health < 35 and len(env_med) > 0 and len(enemies) <= 1:
+
+        x = int(center[0])
+        y = int(center[1]) + 20
+        cd = db[y, x]
+        
+        if health < 35 and len(env_med) > 0 and len(enemies) == 0:
             kit = env_med[-1]
             self.aim_at(kit, state)
             self.env.make_action(self.actions[3])
         elif len(enemies) > 0 and ammo > 0:
-            enemy = enemies[-1]
-            distance = center[0] - int(enemy[1])
+            enemy, distance = self.closest_entity(enemies, center)
             if (abs(distance) < int(enemy[3]) / 4):
-                self.env.make_action(self.actions[8])
+                if db[y,x] >= 50:
+                    self.env.make_action(self.actions[3])
+                else:
+                    self.env.make_action(self.actions[8])
             else:
                 self.aim_at(enemy, state)
         elif ammo < 5 and len(env_ammo) > 0:
@@ -77,15 +97,15 @@ class BaseAgent(object):
             self.aim_at(a, state)
             self.env.make_action(self.actions[3])
         else:
-            x = int(center[0])
-            y = int(center[1]) + 20
-            cd = db[y, x]
             if (db[y, x] <= 5 and db[y, x + 50] <=5 and db[y, x - 50] <=5 ):
                 self.env.make_action(self.actions[6])
+                if len(entities) > 0:
+                    ent = self.closest_entity(entities, center)
+                    self.aim_at(ent, state)
             elif(db[y,x] <=5 and db[y, x - 50] <=5):
-                self.env.make_action(self.actions[5])
-            elif(db[y,x] <=5 and db[y, x + 50] <=5):
                 self.env.make_action(self.actions[4])
+            elif(db[y,x] <=5 and db[y, x + 50] <=5):
+                self.env.make_action(self.actions[5])
             self.env.make_action(self.actions[3])
 
 

@@ -7,7 +7,14 @@ from agents import *
 game = DoomGame()
 game.set_doom_scenario_path('scenarios/D3-tx_battle_99maps.wad')
 # game.set_doom_scenario_path("scenarios/basic.wad")
-game.set_doom_map("MAP01")
+
+# game.set_doom_map("MAP01")
+
+map_num = random.randint(0, 100)
+if map_num < 10:
+    map_num = "0" + str(map_num)
+game.set_doom_map('MAP' + str(map_num))
+
 # game.set_screen_resolution(ScreenResolution.RES_640X480)
 game.set_screen_resolution(ScreenResolution.RES_1920X1080)
 game.set_screen_format(ScreenFormat.RGB24)

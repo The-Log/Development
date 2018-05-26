@@ -1,0 +1,210 @@
+% Created 2018-05-12 Sat 09:40
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Ankur Mishra}
+\date{5/11/2018}
+\title{Presentation Notes}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 25.2.2 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Neural Networks}
+\label{sec-1}
+\subsection{Backpropagation}
+\label{sec-1-1}
+Way of computing the influence of every value on a computational graph by recursively using multivariable chain 
+rule through the graph. \\ \\
+Chain Rule: $dL/dx = dL/dz * dz/dx$ \\ \\
+You can break your backprop into other functions and find their derivatives. An example of this is breaking 
+$\frac{1}{1+e^{-(w_0x_0+w_1x_1+w_2)}}$ into the sigmoid function: $\frac{1}{1+e^{-x}}$
+\begin{itemize}
+\item plus (+) gate distrubutes gradients equally
+\item max gate routes gradient to max
+\item multiply (*) switches inputs and multiplies each by global gradient, equal inputs are picked arbitrarily
+\end{itemize}
+If two gradients combine when backpropagating --> add their gradients
+Linear Score Function: $f = W*x$ \\
+Two Layer Neural Network: $f = W_2 *max(0,W_1*x)$ \\ or Three Layers N-Network $f = W_3*max(W_2*max(0,W_1*x))$ \\
+Bigger Networks are more powerful.\\
+\subsection{Image Pre-processing}
+\label{sec-1-2}
+Commonly pre-processing of images is done by mean centering. This either means to to subtract the mean
+value of each pixel by a [32,32,3] array, or to find the per-channel mean, which is subtract the mean from each
+pixel's RGB channels.
+\subsection{Weight Initialization}
+\label{sec-1-3}
+Setting weights to 0 will return 0 throughout network. Even .01 returns near zero values over the last few 
+layers of a network in both forward and backward pass, which is known as vanishing gradient. Setting weight to 1, will supersaturate network, as all neurons come out as -1 or 1. The solution is Xavier initialization.
+\subsubsection{Xavier Initialization}
+\label{sec-1-3-1}
+W = np.random.randn(fan$_{\text{in}}$, fan$_{\text{out}}$) / np.sqrt(fan$_{\text{in}}$) for tanh(x). This breaks when using ReLU, so use
+W = np.random.randn(fan$_{\text{in}}$, fan$_{\text{out}}$) / np.sqrt(fan$_{\text{in}}$ / 2) for ReLU.
+\subsection{Batch Normalization}
+\label{sec-1-4}
+This is to normalize data where you apply this equation to each layer:
+$$\hat{x}^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{(Var(x^{(k)}))}}$$ 
+Which is a vanilla differentiable function. What it does is it computes the mean of every feature and then divides by it.
+$$ y^{(k)} = \gamma^{(k)} \hat{x}^{(k)} + \beta^{(k)}$$
+After this the function scaled by $\gamma$ and then is shifted by $\beta$, which changes the range if the network wants to. Through learning the network can either learn
+to take it out or take advantage of it. \\
+The general process of this is first the  mini-batch mean is computed, then its variance. 
+Using these two things, the values are normalized and finally are scaled and shifted.
+\subsubsection{Perks of Using It}
+\label{sec-1-4-1}
+\begin{enumerate}
+\item Improves Gradient Flow
+\label{sec-1-4-1-1}
+\item Allows for High Learning Rates
+\label{sec-1-4-1-2}
+\item Reduces dependence on strong weight initialization
+\label{sec-1-4-1-3}
+\item Acts like regularization and slightly reduces need for dropout
+\label{sec-1-4-1-4}
+\end{enumerate}
+\section{Convolutional Neural Networks}
+\label{sec-2}
+\subsection{Basics}
+\label{sec-2-1}
+Convolutions have height, width, and depth. Convolutional layer is the building block to a CNN.
+Take a filter and slide it accross the image, while computing dot products (convolve). This creates an
+activation map, whose dimensions are calculated by the number of distinct position it crosses. This is repeated
+for each filter and the the number of repeats will result in your new depth. If there is another the convolutional layer,
+then each filters depth will be the same as the new depth of the activation map. \\
+Over each level of convolution a group of interesting pieces will be developed, and deeper levels will create templates for features
+found in the image. \\
+In the activiation map, white corresponds to high activiations and blacker shades mean lower activations.
+\subsubsection{General Process}
+\label{sec-2-1-1}
+An image is processed by a convolutional layer, then a RELU layer and then it is repeated. After that, you pool it. Then after a certain number of convolutional layers, there is a fully connected layer at the end that will
+score the image accordingly.
+\begin{enumerate}
+\item Takes Volume of Size $W_1 x H_1 x D_1$
+\label{sec-2-1-1-1}
+\item Takes Four Hyper Parameters
+\label{sec-2-1-1-2}
+\begin{enumerate}
+\item Number of Filters K
+\label{sec-2-1-1-2-1}
+\item Their Spatial Extent F
+\label{sec-2-1-1-2-2}
+\item The Stride S
+\label{sec-2-1-1-2-3}
+\item The amount of 0 Padding P
+\label{sec-2-1-1-2-4}
+\end{enumerate}
+\item Produces Volume of Size $W_2 x H_2 x D_2$
+\label{sec-2-1-1-3}
+\begin{enumerate}
+\item $W_2 = \frac{W_1 + F + 2P}{S} + 1$
+\label{sec-2-1-1-3-1}
+\item $H_2 = \frac{H_1 + F + 2P}{S} + 1$
+\label{sec-2-1-1-3-2}
+\item $D_2 = K$
+\label{sec-2-1-1-3-3}
+\end{enumerate}
+\item The number of parameters = (filter dimensions + 1$_{\text{(for bias)}}$) * (number of filters)
+\label{sec-2-1-1-4}
+\end{enumerate}
+\subsection{Spatial Dimensions}
+\label{sec-2-2}
+\subsubsection{Strides}
+\label{sec-2-2-1}
+$Output Size = \frac{N-F}{stride} + 1$
+\subsubsection{Padding}
+\label{sec-2-2-2}
+Adding zero padded border for convenience as each layer stays the same dimensions and also the dimensions dont get smaller.
+\subsection{Pooling Layers}
+\label{sec-2-3}
+Make input volume smaller and more managable, by down sampling.
+
+\section{Markov Processes}
+\label{sec-3}
+\begin{itemize}
+\item Where the environmnent fully observable
+\item Almost all RL problems can be characterized as MDPs
+\end{itemize}
+\subsection{Markov Property}
+\label{sec-3-1}
+\begin{itemize}
+\item P[S$_{\text{(t+1)}}$ | S$_{\text{t]}}$ = P[S$_{\text{(t+1)}}$| S$_{\text{1}}$, \ldots{}., S$_{\text{t]}}$
+\item Future is irrelavent of past, only related to present
+\item Given S$_{\text{(t)}}$, you don't need anything else to find to find next state s'
+\item Transition Matrix P defines probabilites for all successive states S'
+\end{itemize}
+\subsection{Markov Chains}
+\label{sec-3-2}
+M = \{S, T\}
+\begin{itemize}
+\item Episodes are random sequences that are sampled.
+\item S = State Space
+\item T = Transition Probability or the probabililty of entering the next state
+\end{itemize}
+\subsection{Markov Reward Process}
+\label{sec-3-3}
+M = \{S, T, r\}
+\begin{itemize}
+\item MRP is a tuple of (S is a finite set of states, P is a state of the transition probability matrix, Reward Function R, dicount factor $\gamma$)
+\item R = E[R$_{\text{(t+1)}}$ | S$_{\text{t}}$ = s]
+\end{itemize}
+R$_{\text{(t+1)}}$ is the amount of reward we approximate for the next state given state s
+\begin{itemize}
+\item We care about the cumulative reward
+\end{itemize}
+\subsubsection{Return (goal)}
+\label{sec-3-3-1}
+Definition: total discounted reward from time-step t
+\begin{itemize}
+\item G$_{\text{t}}$ = R$_{\text{(t+1)}}$ + $\gamma$ * (R$_{\text{(t+1)}}$) +  \ldots{}
+\item Made finite by the $\gamma$
+\item $\gamma$ is going to have to be [0,1]; 0 discounted factor means you only care about present Reward, 1 factor means you care about all of them
+\item Discount factor is used because we don't have a perfect model, avoids infinite returns, and animals show a preference for immediate reward
+\end{itemize}
+\subsubsection{Bellman Equation}
+\label{sec-3-3-2}
+The Bellman Equation determines value of a state. It is comprised of immediate reward (R$_{\text{(t+1)}}$) and value of next state ($\gamma$*v(S$_{\text{(t+1)}}$))
+\begin{itemize}
+\item Equation: v(s) = E[G$_{\text{t}}$ | S$_{\text{t}}$ =s] = E[R$_{\text{(t+1)}}$ + $\gamma$ * v(S$_{\text{(t+1)}}$) | S$_{\text{t}}$ = s]
+\end{itemize}
+It is a linear quation and can be solved. 
+\subsection{Markov Decison Process}
+\label{sec-3-4}
+M = \{S, A, T, r\}
+\begin{itemize}
+\item MDP is the same as MRP except with the addition of A (the action space)
+\end{itemize}
+\subsubsection{partially observed MDP}
+\label{sec-3-4-1}
+M = \{S, A , O , T, E, r\}
+\begin{itemize}
+\item O observation space
+\item E emission probability
+\end{itemize}
+\subsubsection{Policy}
+\label{sec-3-4-2}
+$\pi$(a|s) = P[A$_{\text{t}}$ = a | S$_{\text{t}}$ = s]
+\begin{itemize}
+\item A policy defines the behavior of an agent. It picks the actions that get the most reward.
+\item 
+\end{itemize}
+% Emacs 25.2.2 (Org mode 8.2.10)
+\end{document}

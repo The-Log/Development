@@ -272,7 +272,7 @@ for i in range(episodes):
         j = j + 1
         #cv2.imshow('labels',state.labels_buffer)
         #cv2.imshow('depth',state.depth_buffer)
-        #cv2.imshow('entities',show_entities(sc,lb))
+        cv2.imshow('entities',show_entities(sc,lb))
         #cv2.imwrite("training-data/training"+ str(image_number) +".png", sc)
         
         # cv2.imshow('map',state.automap_buffer)

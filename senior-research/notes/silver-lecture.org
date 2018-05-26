@@ -1,26 +1,25 @@
-#+TITLE: Journal
+#+TITLE: Basic Markov
 #+AUTHOR: Ankur Mishra
 #+DATE: 09/4/2017 - 9/15/2017
-* RL Notes
-** Markov Processes
+* Markov Processes
 - Where the environmnent fully observable
 - Almost all RL problems can be characterized as MDPs
-*** Markov Property
+** Markov Property
 - P[S_(t+1) | S_t] = P[S_(t+1)| S_1, ...., S_t]
 - Future is irrelavent of past, only related to present
 - Given S_(t), you don't need anything else to find to find next state s'
 - Transition Matrix P defines probabilites for all successive states S'
-*** Markov Chains
+** Markov Chains
 M = {S, T}
 - Episodes are random sequences that are sampled.
 - S = State Space
 - T = Transition Probability or the probabililty of entering the next state
-- 
+  - 
 ** Markov Reward Process
 M = {S, T, r}
 - MRP is a tuple of (S is a finite set of states, P is a state of the transition probability matrix, Reward Function R, dicount factor \gamma)
 - R = E[R_(t+1) | S_t = s]
-R_(t+1) is the amount of reward we get from state s
+R_(t+1) is the amount of reward we approximate for the next state given state s
 - We care about the cumulative reward
 *** Return (goal)
 Definition: total discounted reward from time-step t
