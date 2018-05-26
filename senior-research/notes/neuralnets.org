@@ -87,7 +87,7 @@ After this the function scaled by \gamma and then is shifted by \beta, which cha
 to take it out or take advantage of it. \\
 The general process of this is first the  mini-batch mean is computed, then its variance. 
 Using these two things, the values are normalized and finally are scaled and shifted.
-*** Perks of Using It:
+*** Perks of Using It
 **** Improves Gradient Flow
 **** Allows for High Learning Rates
 **** Reduces dependence on strong weight initialization
@@ -101,20 +101,67 @@ a loss/cost goes to 0 and accuracy is 100%.
 ** Parameter Updates
 *** Simple Gradient Descent
 Get Batch, Calculate Loss with Forward Pass, then Calculate Gradient with Backward Pass, and then perform parameter update. 
-This however is the slowest way of training.
+This however is the slowest way of training, as it has trouble progressing as it gets deeper in its training.
 *** Momentum
-A way of fixing this is to use momentum that uses v, which equals $\mu * v - \text{(learning rate)}dx$. A physical representation
-of this is to think of it like a ball traveling down a U-shaped ramp. The learning rate is the ball's acceleration, 
-and $\mu·v - text{(learning rate)}dx$ is the ball's total velocity, which slowing down as the loss should be improving over time. \\
-In general this usually overshoots and then converges to the expected loss. The velocity starts at 0.
+Momentum improves in the spot where SGD fails, by giving the update "momentum." It uses a fraction $\mu$ to slow down and converge to its goal.
+The equation for it is: $$v_t = \mu * v_{t-1} - \alpha \nabla f(\theta_{t-1})$$
+$$Physical Representation$$
+In general this usually overshoots and then converges to the expected loss. The velocity starts at 0 and it builds up.
 *** Nesterov Accelerated Gradient
+Like regular momentum update, but it does a look ahead gradient step from the position of the momentum gradient
+which results in faster convergence. The velocity function looks like this: $$v_(t) = \mu  v_{t-1} - \alpha \nabla f(\theta_{t-1} _ \mu v_{t-1})$$
 *** AdaGrad
+In AdaGrad, there is a cache being built up for each element, which is the sum of all seen the gradients squared, which is sometimes referred as the uncentered 2nd moment.
+Then the parameter is performed like SGD except it is divided by the root of the cache of the current element. IT is called a per-parameter update as each dimension has its own 
+special learning rate scaled by all the gradients it has seen. This cache decays the learning rate to 0 over time, which isn't optimal for a neural network. The equation of the parameter update is:
+$$
 *** RMSProp
+Adagrad with a leaky cache that has decay rate, which makes it slightly better than AdaGrad. Also usually with NN, adagrad has tendency to stop earlier due to it ending learning.
 *** Adam
-Good for default cases. 
+Combination of Momentum and RMSProp. Good for default cases.
 *** Hessian and L-BFGS
+All of the previous updates use a learning rate hyperparameter; these don't.
+** Learning Rates
+A good learning rate starts off very high, but becomes pretty low after the intial training.
+*** Step Decay 
+Learning rate is halved, every few epochs.
+*** Exponential Decay
+$$\alpha = \alpha_0 e^{-kt}$$
+*** 1/t Decay
+$$\alpha = \frac{\alpha_0}{1+kt} $$
 ** Regularization: Drop-out
 * Convolutional Neural Networks
-
-
+** Basics
+Convolutions have height, width, and depth. Convolutional layer is the building block to a CNN.
+Take a filter and slide it accross the image, while computing dot products (convolve). This creates an
+activation map, whose dimensions are calculated by the number of distinct position it crosses. This is repeated
+for each filter and the the number of repeats will result in your new depth. If there is another the convolutional layer,
+then each filters depth will be the same as the new depth of the activation map. \\
+Over each level of convolution a group of interesting pieces will be developed, and deeper levels will create templates for features
+found in the image. \\
+In the activiation map, white corresponds to high activiations and blacker shades mean lower activations.
+*** General Process
+An image is processed by a convolutional layer, then a RELU layer and then it is repeated. After that, you pool it. Then after a certain number of convolutional layers, there is a fully connected layer at the end that will
+score the image accordingly.
+**** Takes Volume of Size $W_1 x H_1 x D_1$
+**** Takes Four Hyper Parameters
+***** Number of Filters K
+***** Their Spatial Extent F
+***** The Stride S
+***** The amount of 0 Padding P
+**** Produces Volume of Size $W_2 x H_2 x D_2$
+***** $W_2 = \frac{W_1 + F + 2P}{S} + 1$
+***** $H_2 = \frac{H_1 + F + 2P}{S} + 1$
+***** $D_2 = K$
+**** The number of parameters = (filter dimensions + 1_(for bias)) * (number of filters)
+** Spatial Dimensions
+*** Strides
+$Output Size = \frac{N-F}{stride} + 1$
+*** Padding
+Adding zero padded border for convenience as each layer stays the same dimensions and also the dimensions dont get smaller.
+** Pooling Layers
+Make input volume smaller and more managable, by down sampling.
+*** Max Pooling
+Takes the max of each filtered section and downsizes. Also can use average where it finds the average of each section and downsizes.
+** Fully Connected Layers
 

@@ -1,4 +1,4 @@
-% Created 2018-03-06 Tue 10:22
+% Created 2018-04-01 Sun 18:24
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -148,7 +148,7 @@ After this the function scaled by $\gamma$ and then is shifted by $\beta$, which
 to take it out or take advantage of it. \\
 The general process of this is first the  mini-batch mean is computed, then its variance. 
 Using these two things, the values are normalized and finally are scaled and shifted.
-\subsubsection{Perks of Using It:}
+\subsubsection{Perks of Using It}
 \label{sec-2-6-1}
 \begin{enumerate}
 \item Improves Gradient Flow
@@ -176,25 +176,105 @@ a loss/cost goes to 0 and accuracy is 100\%.
 \subsubsection{Simple Gradient Descent}
 \label{sec-2-8-1}
 Get Batch, Calculate Loss with Forward Pass, then Calculate Gradient with Backward Pass, and then perform parameter update. 
-This however is the slowest way of training.
+This however is the slowest way of training, as it has trouble progressing as it gets deeper in its training.
 \subsubsection{Momentum}
 \label{sec-2-8-2}
-A way of fixing this is to use momentum that uses v, which equals $\mu * v - \text{(learning rate)}dx$. A physical representation
-of this is to think of it like a ball traveling down a U-shaped ramp. The learning rate is the ball's acceleration, 
-and $\mu·v - text{(learning rate)}dx$ is the ball's total velocity, which slowing down as the loss should be improving over time. \\
-In general this usually overshoots and then converges to the expected loss. The velocity starts at 0.
+Momentum improves in the spot where SGD fails, by giving the update "momentum." It uses a fraction $\mu$ to slow down and converge to its goal.
+The equation for it is: $$v_t = \mu * v_{t-1} - \alpha \nabla f(\theta_{t-1})$$
+$$Physical Representation$$
+In general this usually overshoots and then converges to the expected loss. The velocity starts at 0 and it builds up.
 \subsubsection{Nesterov Accelerated Gradient}
 \label{sec-2-8-3}
+Like regular momentum update, but it does a look ahead gradient step from the position of the momentum gradient
+which results in faster convergence. The velocity function looks like this: $$v_(t) = \mu  v_{t-1} - \alpha \nabla f(\theta_{t-1} _ \mu v_{t-1})$$
 \subsubsection{AdaGrad}
 \label{sec-2-8-4}
+In AdaGrad, there is a cache being built up for each element, which is the sum of all seen the gradients squared, which is sometimes referred as the uncentered 2nd moment.
+Then the parameter is performed like SGD except it is divided by the root of the cache of the current element. IT is called a per-parameter update as each dimension has its own 
+special learning rate scaled by all the gradients it has seen. This cache decays the learning rate to 0 over time, which isn't optimal for a neural network. The equation of the parameter update is:
+\$\$
 \subsubsection{RMSProp}
 \label{sec-2-8-5}
+Adagrad with a leaky cache that has decay rate, which makes it slightly better than AdaGrad. Also usually with NN, adagrad has tendency to stop earlier due to it ending learning.
 \subsubsection{Adam}
 \label{sec-2-8-6}
-Good for default cases. 
+Combination of Momentum and RMSProp. Good for default cases.
 \subsubsection{Hessian and L-BFGS}
 \label{sec-2-8-7}
-\subsection{Regularization: Drop-out}
+All of the previous updates use a learning rate hyperparameter; these don't.
+\subsection{Learning Rates}
 \label{sec-2-9}
+A good learning rate starts off very high, but becomes pretty low after the intial training.
+\subsubsection{Step Decay}
+\label{sec-2-9-1}
+Learning rate is halved, every few epochs.
+\subsubsection{Exponential Decay}
+\label{sec-2-9-2}
+$$\alpha = \alpha_0 e^{-kt}$$
+\subsubsection{1/t Decay}
+\label{sec-2-9-3}
+$$\alpha = \frac{\alpha_0}{1+kt} $$
+\subsection{Regularization: Drop-out}
+\label{sec-2-10}
+\section{Convolutional Neural Networks}
+\label{sec-3}
+\subsection{Basics}
+\label{sec-3-1}
+Convolutions have height, width, and depth. Convolutional layer is the building block to a CNN.
+Take a filter and slide it accross the image, while computing dot products (convolve). This creates an
+activation map, whose dimensions are calculated by the number of distinct position it crosses. This is repeated
+for each filter and the the number of repeats will result in your new depth. If there is another the convolutional layer,
+then each filters depth will be the same as the new depth of the activation map. \\
+Over each level of convolution a group of interesting pieces will be developed, and deeper levels will create templates for features
+found in the image. \\
+In the activiation map, white corresponds to high activiations and blacker shades mean lower activations.
+\subsubsection{General Process}
+\label{sec-3-1-1}
+An image is processed by a convolutional layer, then a RELU layer and then it is repeated. After that, you pool it. Then after a certain number of convolutional layers, there is a fully connected layer at the end that will
+score the image accordingly.
+\begin{enumerate}
+\item Takes Volume of Size $W_1 x H_1 x D_1$
+\label{sec-3-1-1-1}
+\item Takes Four Hyper Parameters
+\label{sec-3-1-1-2}
+\begin{enumerate}
+\item Number of Filters K
+\label{sec-3-1-1-2-1}
+\item Their Spatial Extent F
+\label{sec-3-1-1-2-2}
+\item The Stride S
+\label{sec-3-1-1-2-3}
+\item The amount of 0 Padding P
+\label{sec-3-1-1-2-4}
+\end{enumerate}
+\item Produces Volume of Size $W_2 x H_2 x D_2$
+\label{sec-3-1-1-3}
+\begin{enumerate}
+\item $W_2 = \frac{W_1 + F + 2P}{S} + 1$
+\label{sec-3-1-1-3-1}
+\item $H_2 = \frac{H_1 + F + 2P}{S} + 1$
+\label{sec-3-1-1-3-2}
+\item $D_2 = K$
+\label{sec-3-1-1-3-3}
+\end{enumerate}
+\item The number of parameters = (filter dimensions + 1$_{\text{(for bias)}}$) * (number of filters)
+\label{sec-3-1-1-4}
+\end{enumerate}
+\subsection{Spatial Dimensions}
+\label{sec-3-2}
+\subsubsection{Strides}
+\label{sec-3-2-1}
+$Output Size = \frac{N-F}{stride} + 1$
+\subsubsection{Padding}
+\label{sec-3-2-2}
+Adding zero padded border for convenience as each layer stays the same dimensions and also the dimensions dont get smaller.
+\subsection{Pooling Layers}
+\label{sec-3-3}
+Make input volume smaller and more managable, by down sampling.
+\subsubsection{Max Pooling}
+\label{sec-3-3-1}
+Takes the max of each filtered section and downsizes. Also can use average where it finds the average of each section and downsizes.
+\subsection{Fully Connected Layers}
+\label{sec-3-4}
 % Emacs 25.2.2 (Org mode 8.2.10)
 \end{document}

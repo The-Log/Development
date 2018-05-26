@@ -1,0 +1,5 @@
+# ignore all datasets
+*.h5
+# ignore directory
+/ssd.pytorch
+/pytorch-yolo2

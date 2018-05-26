@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -23,6 +22,7 @@ std::vector<cv::Point3f> Create3DChessboardCorners(cv::Size boardSize, float squ
  
   return corners;
 }
+
 Mat draw(Mat img, vector<Point2f> projectedPoints ){
   line(img, projectedPoints.at(0), projectedPoints.at(1), Scalar(0,255,0), 3);
   line(img, projectedPoints.at(1), projectedPoints.at(2), Scalar(0,255,0), 3);
@@ -61,8 +61,9 @@ int main(int argc, char** argv){
   if (!sauce.isOpened()){
     std::cout  << "Could not open the input video: " << source << std::endl;
     return -1;
-  }  
-  while(1){
+  }
+  
+  while(true){
     Mat frame;
     Mat imgGray;
 
@@ -73,15 +74,19 @@ int main(int argc, char** argv){
 
     flip(frame, frame, 0);
 
-    cvtColor( frame, imgGray, CV_BGR2GRAY );
+    cvtColor(frame, imgGray, CV_BGR2GRAY);
     
     Size board_sz = Size(7, 7);
     vector<Point2f> corners;
-    
+    vector<Point3f> axis;
+    float x_shift = 5;
+    float y_shift = 5;
+    axis.push_back(cv::Point3f(0. + x_shift, 0 + y_shift, 0)); axis.push_back(cv::Point3f(0 + x_shift, 4 + y_shift, 0)); axis.push_back(cv::Point3f(4 + x_shift, 4 + y_shift, 0)); axis.push_back(cv::Point3d(4 + x_shift, 0 + y_shift, 0));
+    axis.push_back(cv::Point3f(0 + x_shift, 0 + y_shift, -4)); axis.push_back(cv::Point3f(0 + x_shift, 4 + y_shift, -4)); axis.push_back(cv::Point3f(4 + x_shift, 4 + y_shift, -4)); axis.push_back(cv::Point3f(4 + x_shift, 0 + y_shift, -4));
+          
     bool found = findChessboardCorners(imgGray, board_sz, corners, CV_CALIB_CB_ADAPTIVE_THRESH + CV_CALIB_CB_NORMALIZE_IMAGE + CV_CALIB_CB_FAST_CHECK );
     if(found){
-      cornerSubPix(imgGray, corners, Size(11, 11), Size(-1, -1),
-                   TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
+      cornerSubPix(imgGray, corners, Size(11, 11), Size(-1, -1), TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
       
       cv::Mat i_points = cv::Mat(corners);
 
@@ -89,10 +94,6 @@ int main(int argc, char** argv){
       Mat cameraMatrix =  (Mat_<double>(3,3) <<  1.2195112968898779e+003, 0., 3.6448211117862780e+002, 0., 1.2414409169216196e+003, 2.4321803868732076e+002, 0., 0., 1.);
       
       vector<Point3f> op;
-
-      vector<Point3f> axis;
-      axis.push_back(cv::Point3f(0.0, 0, 0)); axis.push_back(cv::Point3f(0.0,4.0,0.0)); axis.push_back(cv::Point3f(4,4,0)); axis.push_back(cv::Point3d(4,0,0));
-      axis.push_back(cv::Point3f(0,0,-4)); axis.push_back(cv::Point3f(0,4,-4)); axis.push_back(cv::Point3f(4,4,-4));axis.push_back(cv::Point3f(4,0,-4));
 
       op = Create3DChessboardCorners(board_sz, 2.5);
       cv::Mat o_points = cv::Mat(op);
@@ -109,22 +110,18 @@ int main(int argc, char** argv){
       std::vector<cv::Point2f> projectedPoints;
       projectPoints(axis, r_vec, t_vec, cameraMatrix, distCoeffs, projectedPoints);
       
-      cout << projectedPoints << endl;
       Mat img = draw(frame, projectedPoints);
-      //imshow( "Img", img );
-      outputVideo.write(img);
-      
+      outputVideo.write(img);      
     }
     else{
       cout << "board not found" << endl;
     }
     
-    char c=(char)waitKey(25);
+    char c= (char) waitKey(25);
     if(c==27)
       break;
-  }
-  
-  std::cout  << "read!" << std::endl;
+  } 
+  std::cout  << "done!" << std::endl;
   
   return 0;
 }
