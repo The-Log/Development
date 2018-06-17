@@ -3,28 +3,29 @@ from math import gcd
 from random import randint
 from time import time
 
-def miller_rabin(n, k): 
-    d = n-1
+def miller_rabin(n, k):
+    ''' miller_rabin(n, k): given number n, it tests if the number is composite or prime, k times True if Prime, False if Composite'''
+    d = n - 1
     s = 0
-    while(d % 2 == 0):
+    while(d % 2 == 0): # 1st Step: find n - 1 = 2^s * m
         s = s + 1
         d = d // 2
-    for i in range(k):
-        if(miller_rabin_trial(n, s, d) == False):
+    for i in range(k): # for accuracy 
+        if(miller_rabin_trial(n, s, d) == False): # 2nd and 3rd Steps
             return False
     return True
 
 def miller_rabin_trial(n, s, d):
-    a = randint(2, n-1)
-    x = pow(a, d, n)
-    if(x == 1):
+    a = randint(2, n-1) # 2nd Step: find an a such that 1 < a < n -1
+    b = pow(a, d, n) # 3rd Step: find b_0 = 2^s mod(n)
+    if(b == 1):
         return True
     r = 0
-    while(r <= s-1):
-        if(x == n-1):
+    while(r <= s-1): # find a b_i such that (b_{i-1})^2 = (2^s)^2 mod (n)
+        if(b == n-1): # if b reaches n-1, it is prime
             return True
         r = r + 1
-        x = pow(x,2,n)
+        b = pow(b, 2, n)
     return False
 
 def isPrime(n, k = 10):
@@ -65,12 +66,10 @@ def inv_mod(b, n):
             return x % n
 
 def encrypt(plaintext, e, m):
-    
     cipher = pow(plaintext, e, m)
     return cipher
 
 def decrypt(ciphertext, d, m):
-
     plain = pow(ciphertext, d, m)
     return plain
 
@@ -93,9 +92,9 @@ def int_to_string(num, mod, alphabet):
     s = ''
     length = get_length(mod, alphabet)
     for i in range(length):
-        s = i2c(num % len(alpha), alpha) + s
+        s = i2c(num % len(alphabet), alphabet) + s
         # print(s)
-        num = num // len(alpha)
+        num = num // len(alphabet)
     return s
 
 def get_length(m, alpha):
@@ -132,72 +131,112 @@ def break_message(pin, power):
         #print(s)
     if len(s) > 0:
         num_of_junk = power - len(s)
-        s = s + num_of_junk * ('Z')
+        s = s + num_of_junk * ('Z') ##### change to Z #####
         subs.append(s)
     return subs
-                              
-lower = 511 #input('Your choice of low bound is two to the following power: ')
-upper = 512 #input('Your choice of upper bound is two to the following power: ')
 
-start = time()
-p = find_prime(upper)
-q = find_prime(upper)
-end = time()
-#print(p, '\n', q, '\n time', end-start) 
-print('Your two primes are:', p, '\t', q)
-mod = p * q
-totient = (p-1) * (q-1)
-print('The mod is: ', mod, ' and the totient is:', totient)
-e = 65537 #random.randrange(1, totient)
+def main():
+    lower = 511 #input('Your choice of low bound is two to the following power: ')
+    upper = 512 #input('Your choice of upper bound is two to the following power: ')
 
-g = gcd(e, totient)
-while g != 1:
-    e = random.randrange(1, totient)
+    start = time()
+    p = 605626429300532055681678497537 #find_prime(upper)
+    q = 424941193007525678030099023937 #find_prime(upper)
+    end = time()
+    #print(p, '\n', q, '\n time', end-start) 
+    print('Your two primes are:', p, '\t', q)
+    mod = p * q
+    totient = (p-1) * (q-1)
+    print('The mod is: ', mod, ' and the totient is:', totient)
+    e = 65537 #random.randrange(1, totient)
+
     g = gcd(e, totient)
+    while g != 1:
+        e = random.randrange(1, totient)
+        g = gcd(e, totient)
 
-d = inv_mod(e, totient)
+    #d = inv_mod(e, totient)
 
-print('e is:', e,' and d is:', d,'  and if this worked, this is 1:', g)
+    #print('e is:', e,' and d is:', d,'  and if this worked, this is 1:', g)
 
 
-mod = 86518090693274675997659602491100577531533754010700509154528344441940601224095324422125553057242351043318194679920491892277959530603450993201302033735875557376123181661192976369045464156485406279786972992209311952026576666887883809461884399575753907317074031213357918245764515060159825399540741539851315401023
+    # mod = 86518090693274675997659602491100577531533754010700509154528344441940601224095324422125553057242351043318194679920491892277959530603450993201302033735875557376123181661192976369045464156485406279786972992209311952026576666887883809461884399575753907317074031213357918245764515060159825399540741539851315401023
 
-inp = 'Jaden wants to go to the moon! Invest in GERN ASAP.'
-alpha = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz.;-, !'
+    
+    inp = 'This is a sentence with completely normal formatting and as you can see as long as you include every character in your alphabet, it will decode perfectly with no issues whatsoever, isn\'t that exciting!'
+    alpha = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz.;-, !\''
 
-print('Your input is:', inp)
-print('Your alphabet is:', alpha)
+    '''
+    print('Your input is:', inp)
+    print('Your alphabet is:', alpha)
 
-pin = prepare_string(inp, alpha)
+    pin = prepare_string(inp, alpha)
 
-print('Prepared input is:', pin)
+    print('Prepared input is:', pin)
 
-power = get_length(mod, alpha)
+    power = get_length(mod, alpha)
 
-print('Alphabet length is', len(alpha), 'and the highest power is', power)
+    print('Alphabet length is', len(alpha), 'and the highest power is', power)
 
-subs = break_message(pin, power)
-print('Broken into substrings:', subs) #['ALLWORKANDNOPLAYMA', 'KESJACKADULLBOYZZZ']
+    subs = break_message(pin, power)
+    print('Broken into substrings:', subs) #['ALLWORKANDNOPLAYMA', 'KESJACKADULLBOYZZZ']
 
-nums = []
-for i in subs:
-    nums.append(string_to_int(i, alpha))
-print('Become numbers:', nums) #[499601639309585058582440, 11543479610964610505070887]
+    nums = []
+    for i in subs:
+        nums.append(string_to_int(i, alpha))
+    print('Become numbers:', nums) #[499601639309585058582440, 11543479610964610505070887]
+    
+    ciphered = []
+    for i in nums:
+        ciphered.append(encrypt(i, e, mod))
+    print('Encoded to:', ciphered) # [150083385613546728423935828, 103604182818684587686420333]
+    '''
 
-ciphered = []
-for i in nums:
-    ciphered.append(encrypt(i, e, mod))
-print('Encoded to:', ciphered) # [150083385613546728423935828, 103604182818684587686420333]
+    alpha = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz., !0123456789'
+    ciphered = [156175952521284255722157324843446061662387093917686026751108, 161213655142621199869921126599399686027924808360328865727342, 15691233018276555681674524287511023807685146327718243090907, 149724071042390942172850338956858434857309040011013679437481, 76480969744121351171040026278225596504381219907430176026890]
 
-'''
-decoded = []
-for i in ciphered:
-    decoded.append(decrypt(i, d, mod))
-print('Decoded to:', decoded) # [499601639309585058582440, 11543479610964610505070887]
+    d = inv_mod(e, totient)
+    
+    decoded = []
+    for i in ciphered:
+        decoded.append(decrypt(i, d, mod))
+    print('Decoded to:', decoded) # [499601639309585058582440, 11543479610964610505070887]
+    
+    temp_m = []
+    for i in decoded:
+        temp_m.append(int_to_string(i, mod, alpha))
+    print('Back to text:', ''.join(temp_m)) ### ALLWORKANDNOPLAYMAKESJACKADULLBOYZZZ
 
-temp_m = []
-for i in decoded:
-    temp_m.append(int_to_string(i, mod, alpha))
-print('Back to text:', ''.join(temp_m)) ### ALLWORKANDNOPLAYMAKESJACKADULLBOYZZZ
-'''
+
+    e = 65537
+    mod = 147690143426417720543026043890448472042375285573365468767128662033037446713246419100204917883446300400801225405192554010954725249626347314234029446068634707387105420955618605845881594400970904496218962357799602434736918859856803813645781043520129383769019885018939343481635017846708963422603112278784470086259
+    
+    inp = input()
+    print('Your input is:', inp)
+    print('Your alphabet is:', alpha)
+
+    pin = prepare_string(inp, alpha)
+
+    print('Prepared input is:', pin)
+
+    power = get_length(mod, alpha)
+
+    print('Alphabet length is', len(alpha), 'and the highest power is', power)
+
+    subs = break_message(pin, power)
+    print('Broken into substrings:', subs) #['ALLWORKANDNOPLAYMA', 'KESJACKADULLBOYZZZ']
+
+    nums = []
+    for i in subs:
+        nums.append(string_to_int(i, alpha))
+    print('Become numbers:', nums) #[499601639309585058582440, 11543479610964610505070887]
+    
+    ciphered = []
+    for i in nums:
+        ciphered.append(encrypt(i, e, mod))
+    print('Encoded to:', ciphered) # [150083385613546728423935828, 103604182818684587686420333]
+    
+
+if __name__ == '__main__':
+    main()
 
